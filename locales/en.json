@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "language": {
+      "code": "English"
+    }
+  },
+  "common": {
+    "error": "Error",
+    "alert": "Warning",
+    "success": "Success",
+    "info": "Information"
+  },
+  "navigation": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "save": "Save",
+    "saved": "The configuration was saved successfully.",
+    "others": {
+      "title": "Others",
+      "language": {
+        "title": "Language"
+      }
+    }
+  }
+}

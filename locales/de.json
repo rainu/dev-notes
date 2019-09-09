@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "language": {
+      "code": "Deutsch"
+    }
+  },
+  "common": {
+    "error": "Fehler",
+    "alert": "Warnung",
+    "success": "Erfolgreich",
+    "info": "Information"
+  },
+  "navigation": {
+    "home": "Start",
+    "settings": "Einstellungen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "save": "Speichern",
+    "saved": "Die Einstellungen wurden erfolgreich gespeichert.",
+    "others":{
+      "title": "Andere",
+      "language": {
+        "title": "Sprache"
+      }
+    }
+  }
+
+}

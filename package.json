@@ -1,0 +1,22 @@
+{
+  "name": "RayNote",
+  "version": "1.0.0",
+  "description": "A progressive web application (PWA) for notes.",
+  "author": "rainu",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@mdi/font": "^4.2.95",
+    "nuxt": "^2.0.0",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "localforage": "^1.7.3",
+    "material-design-icons-iconfont": "^5.0.1",
+    "vue-i18n": "^8.14.0",
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
