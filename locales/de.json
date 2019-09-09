@@ -14,6 +14,12 @@
     "home": "Start",
     "settings": "Einstellungen"
   },
+  "note": {
+    "type": {
+      "text": "Text",
+      "picture": "Bild"
+    }
+  },
   "settings": {
     "title": "Einstellungen",
     "save": "Speichern",
