@@ -38,6 +38,17 @@
 </template>
 
 <script>
+  let arraysEqual = (a, b) => {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
+
   export default {
     name: "TagPicker",
     props: {
@@ -76,6 +87,8 @@
         this.availableTags.sort()
 
         this.chosenTags.push(this.dialog.tag)
+        this.onChange()
+
         this.dialog.tag = null
       },
       onChange(){
@@ -83,17 +96,17 @@
       }
     },
     watch: {
-      tags(newTags){
-        if(!newTags) {
+      tags(newTags) {
+        if (!newTags) {
           this.availableTags = []
-        }else if(newTags.length !== this.availableTags.length){
+        } else if (!arraysEqual(newTags, this.availableTags)) {
           this.availableTags = newTags.sort()
         }
       },
       value(value) {
         if (!value) {
           this.chosenTags = []
-        } else if (value.length !== this.chosenTags.length) {
+        } else if (!arraysEqual(value, this.chosenTags)) {
           this.chosenTags = value.sort()
         }
       }

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row align="center">
-      <v-col cols="12" sm="6" md="3" v-for="note of notes" :key="note.id">
+      <v-col cols="12" sm="6" md="3" v-for="note of filteredNotes" :key="note.id">
 
         <NoteCardText v-if="note.type === 'text'" :note="note"
                       @onCopy="onCopyNote"
@@ -84,6 +84,18 @@
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
+          <v-menu offset-y top max-height="50%" :close-on-content-click="false">
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on">
+                <v-icon>search</v-icon>
+              </v-btn>
+            </template>
+            <v-list v-if="availableTags && availableTags.length > 0">
+              <v-list-item v-for="tag in availableTags" :key="tag">
+                <v-switch :label="tag" v-model="filter[tag]" color="success"></v-switch>
+              </v-list-item>
+            </v-list>
+          </v-menu>
           <v-menu offset-y top>
             <template v-slot:activator="{ on }">
               <v-btn v-on="on">
@@ -106,7 +118,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapGetters, mapState, mapMutations } from 'vuex';
+import Vue from 'vue'
 import copy from 'copy-to-clipboard';
 import uuid4 from 'uuid4';
 import NoteCardText from "../components/note/card/Text";
@@ -135,6 +148,8 @@ export default {
         }
       },
 
+      filter: {},
+
       snackbar: {
         copied: false,
         saved: false,
@@ -150,9 +165,23 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      availableTags: 'note/getAvailableTags'
+    }),
     ...mapState({
       notes: state => state.note.notes,
     }),
+    filteredNotes(){
+      return this.notes.filter(note => {
+        for(let tag of note.tags) {
+          if(this.filter[tag]) {
+            return true
+          }
+        }
+
+        return false
+      })
+    }
   },
   methods: {
     ...mapMutations({
@@ -199,7 +228,22 @@ export default {
       this.snackbar.copied = false
       copy(content)
       this.snackbar.copied = true
+    },
+    applyTags(tags){
+      for(let tag of tags) {
+        if(!this.filter.hasOwnProperty(tag)){
+          Vue.set(this.filter, tag, true)
+        }
+      }
+    },
+  },
+  watch: {
+    availableTags(tags) {
+      this.applyTags(tags)
     }
+  },
+  mounted() {
+    this.applyTags(this.availableTags)
   }
 }
 </script>
