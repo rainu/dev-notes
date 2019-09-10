@@ -21,13 +21,13 @@
           <span class="headline">{{$t(dialog.new.type.text)}}</span>
         </v-card-title>
         <v-card-text>
-          <NoteFormText form-id="note-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
-          <NoteFormPicture form-id="note-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
+          <NoteFormText form-id="note-new-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
+          <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
           <v-btn color="error" @click="dialog.new.open = false">{{$t('note.actions.abort')}}</v-btn>
-          <v-btn color="primary" type="submit" form="note-form">{{$t('note.actions.save')}}</v-btn>
+          <v-btn color="primary" type="submit" form="note-new-form">{{$t('note.actions.save')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -38,13 +38,13 @@
           <span class="headline">EDIT</span>
         </v-card-title>
         <v-card-text>
-          <NoteFormText form-id="note-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
-          <NoteFormPicture form-id="note-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
+          <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
+          <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
           <v-btn color="error" @click="dialog.edit.open = false">{{$t('note.actions.abort')}}</v-btn>
-          <v-btn color="primary" type="submit" form="note-form">{{$t('note.actions.save')}}</v-btn>
+          <v-btn color="primary" type="submit" form="note-edit-form">{{$t('note.actions.save')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
