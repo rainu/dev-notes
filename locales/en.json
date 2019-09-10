@@ -39,6 +39,9 @@
     },
     "tags": {
       "title": "Tags",
+      "filter": {
+        "without": "Without Tags"
+      },
       "action": {
         "add": {
           "title": "Add tag",

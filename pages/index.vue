@@ -91,8 +91,11 @@
               </v-btn>
             </template>
             <v-list v-if="availableTags && availableTags.length > 0">
+              <v-list-item>
+                <v-switch :label="$t('note.tags.filter.without')" v-model="filter.showWithoutTag" color="success"></v-switch>
+              </v-list-item>
               <v-list-item v-for="tag in availableTags" :key="tag">
-                <v-switch :label="tag" v-model="filter[tag]" color="success"></v-switch>
+                <v-switch :label="tag" v-model="filter.tags[tag]" color="success"></v-switch>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -148,7 +151,10 @@ export default {
         }
       },
 
-      filter: {},
+      filter: {
+        tags: {},
+        showWithoutTag: true,
+      },
 
       snackbar: {
         copied: false,
@@ -172,11 +178,19 @@ export default {
       notes: state => state.note.notes,
     }),
     filteredNotes(){
+      if(!this.availableTags || this.availableTags.length === 0){
+        return this.notes
+      }
+
       return this.notes.filter(note => {
         for(let tag of note.tags) {
-          if(this.filter[tag]) {
+          if(this.filter.tags[tag]) {
             return true
           }
+        }
+
+        if((!note.tags || note.tags.length === 0) && this.filter.showWithoutTag){
+          return true
         }
 
         return false
@@ -230,9 +244,10 @@ export default {
       this.snackbar.copied = true
     },
     applyTags(tags){
+      //add missing
       for(let tag of tags) {
-        if(!this.filter.hasOwnProperty(tag)){
-          Vue.set(this.filter, tag, true)
+        if(!this.filter.tags.hasOwnProperty(tag)){
+          Vue.set(this.filter.tags, tag, true)
         }
       }
     },

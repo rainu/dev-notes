@@ -39,6 +39,9 @@
     },
     "tags": {
       "title": "Schlagwörter",
+      "filter": {
+        "without": "Ohne Schlagwörter"
+      },
       "action": {
         "add": {
           "title": "Schlagwort hinzufügen",
