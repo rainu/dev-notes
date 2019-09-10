@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <v-row align="center">
       <v-col cols="12" sm="6" md="3" v-for="note of notes" :key="note.id">
 
         <NoteCardText v-if="note.type === 'text'" :note="note"
