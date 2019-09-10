@@ -8,16 +8,47 @@
     "error": "Error",
     "alert": "Warning",
     "success": "Success",
-    "info": "Information"
+    "info": "Information",
+    "confirmation": {
+      "title": "Warning",
+      "agree": "Yes",
+      "disagree": "Abort"
+    },
+    "form": {
+      "validation": {
+        "required": "This field is mandatory!"
+      }
+    }
   },
   "navigation": {
     "home": "Home",
     "settings": "Settings"
   },
   "note": {
-    "type": {
-      "text": "Text",
-      "picture": "Picture"
+    "title": "Title",
+    "text": {
+      "title": "Text",
+      "content": "Content",
+      "markdown": "Markdown"
+    },
+    "picture": {
+      "title": "Picture",
+      "url": {
+        "placeholder": "http://example.com/picture.png"
+      }
+    },
+    "actions": {
+      "save": "Save",
+      "abort": "Cancel"
+    },
+    "copy": {
+      "successful": "Content was copied to clipboard."
+    },
+    "saved": {
+      "successful": "Content was saved successfully."
+    },
+    "delete": {
+      "confirmation": "Are you sure to delete this note?"
     }
   },
   "settings": {

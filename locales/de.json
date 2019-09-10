@@ -8,16 +8,47 @@
     "error": "Fehler",
     "alert": "Warnung",
     "success": "Erfolgreich",
-    "info": "Information"
+    "info": "Information",
+    "confirmation": {
+      "title": "Warnung",
+      "agree": "Ja",
+      "disagree": "Abbrechen"
+    },
+    "form": {
+      "validation": {
+        "required": "Dies ist ein Pflichtfeld!"
+      }
+    }
   },
   "navigation": {
     "home": "Start",
     "settings": "Einstellungen"
   },
   "note": {
-    "type": {
-      "text": "Text",
-      "picture": "Bild"
+    "title": "Titel",
+    "text": {
+      "title": "Text",
+      "content": "Inhalt",
+      "markdown": "Markdown"
+    },
+    "picture": {
+      "title": "Bild",
+      "url": {
+        "placeholder": "http://test.de/bild.png"
+      }
+    },
+    "actions": {
+      "save": "Speichern",
+      "abort": "Abbrechen"
+    },
+    "copy": {
+      "successful": "Inhalt wurde kopiert."
+    },
+    "saved": {
+      "successful": "Inhalt wurde gespeichert."
+    },
+    "delete": {
+      "confirmation": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?"
     }
   },
   "settings": {
