@@ -37,6 +37,17 @@
         "placeholder": "http://example.com/picture.png"
       }
     },
+    "tags": {
+      "title": "Tags",
+      "action": {
+        "add": {
+          "title": "Add tag",
+          "tag": "Tag",
+          "ok": "Add",
+          "cancel": "Cancel"
+        }
+      }
+    },
     "actions": {
       "save": "Save",
       "abort": "Cancel"

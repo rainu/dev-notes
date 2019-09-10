@@ -37,6 +37,17 @@
         "placeholder": "http://test.de/bild.png"
       }
     },
+    "tags": {
+      "title": "Schlagwörter",
+      "action": {
+        "add": {
+          "title": "Schlagwort hinzufügen",
+          "tag": "Schlagwort",
+          "ok": "Hinzufügen",
+          "cancel": "Abbrechen"
+        }
+      }
+    },
     "actions": {
       "save": "Speichern",
       "abort": "Abbrechen"

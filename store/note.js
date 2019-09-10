@@ -38,6 +38,18 @@ export const mutations = {
 export const getters = {
   getNoteById(state, id) {
     return state.notes.filter(n => n.id === id)[0]
+  },
+  getAvailableTags(state) {
+    let tagMap = {}
+    for(let note of state.notes) {
+      if(note.tags) {
+        for(let curTag of note.tags) {
+          tagMap[curTag] = true
+        }
+      }
+    }
+
+    return Object.keys(tagMap).sort()
   }
 }
 

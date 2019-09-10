@@ -11,14 +11,20 @@
         <v-col cols="6">
           <v-switch v-model="note.markdown" :label="$t('note.text.markdown')" color="primary"></v-switch>
         </v-col>
+        <v-col cols="12">
+          <TagPicker v-model="note.tags" :tags="availableTags"></TagPicker>
+        </v-col>
       </v-row>
     </v-container>
   </v-form>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+  import TagPicker from "./TagPicker";
   export default {
     name: "NoteFormText",
+    components: {TagPicker},
     props: {
       formId: {
         type: String,
@@ -27,17 +33,19 @@
       data: {
         type: Object,
         required: false,
-      }
+      },
     },
     data() {
       let note = {
         title: "",
+        tags: [],
         content: "",
         markdown: false
       }
 
       if(this.data) {
         note.title = this.data.title
+        note.tags = this.data.tags
         note.markdown = !!this.data.content.markdown
         note.content = note.markdown ? this.data.content.markdown : this.data.content.text
       }
@@ -49,6 +57,9 @@
       }
     },
     computed: {
+      ...mapGetters({
+        availableTags: 'note/getAvailableTags'
+      }),
       ruleRequired(){
         return [
           v => !!v || this.$t('common.form.validation.required')
@@ -61,6 +72,7 @@
 
         let data = {}
         data.title = this.note.title
+        data.tags = this.note.tags
         data.content = {}
         if(this.note.markdown) data.content.markdown = this.note.content
         else data.content.text = this.note.content
@@ -71,6 +83,7 @@
     watch: {
       data(newData) {
         this.note.title = newData.title
+        this.note.tags = newData.tags
         this.note.markdown = !!newData.content.markdown
         this.note.content = this.note.markdown ? newData.content.markdown : newData.content.text
       }
