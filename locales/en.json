@@ -52,6 +52,9 @@
       "save": "Save",
       "abort": "Cancel"
     },
+    "edit":{
+      "title": "Edit"
+    },
     "copy": {
       "successful": "Content was copied to clipboard."
     },

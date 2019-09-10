@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId">
+  <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId" ref="form">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -34,6 +34,11 @@
         type: Object,
         required: false,
       },
+      clearAfterSubmit: {
+        type: Boolean,
+        required: false,
+        default: true
+      }
     },
     data() {
       let note = {
@@ -78,6 +83,9 @@
         else data.content.text = this.note.content
 
         this.$emit('onSubmit', data)
+        if(this.clearAfterSubmit) {
+          this.$refs.form.reset()
+        }
       }
     },
     watch: {

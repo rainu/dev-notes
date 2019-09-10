@@ -52,6 +52,9 @@
       "save": "Speichern",
       "abort": "Abbrechen"
     },
+    "edit":{
+      "title": "Bearbeiten"
+    },
     "copy": {
       "successful": "Inhalt wurde kopiert."
     },

@@ -35,7 +35,7 @@
     <v-dialog v-model="dialog.edit.open" persistent>
       <v-card v-if="dialog.edit.note">
         <v-card-title>
-          <span class="headline">EDIT</span>
+          <span class="headline">{{$t('note.edit.title')}}</span>
         </v-card-title>
         <v-card-text>
           <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
