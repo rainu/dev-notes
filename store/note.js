@@ -5,6 +5,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  loadNote(state, note) {
+    state.notes.push(note)
+  },
   addNote(state, note) {
     if(!note || !note.id || !note.type || !note.title || !note.content) {
       console.log("Try to add invalid note: " + JSON.stringify(note))
@@ -12,6 +15,7 @@ export const mutations = {
     }
 
     state.notes.push(note)
+    this.$localStore.setNote(note)
   },
   editNote(state, note) {
     let index = state.notes.findIndex(r => r.id === note.id)
@@ -21,10 +25,13 @@ export const mutations = {
     }
 
     Vue.set(state.notes, index, note)
+    this.$localStore.setNote(note)
   },
   deleteNote(state, noteId) {
     let index = state.notes.findIndex(r => r.id === noteId)
     state.notes.splice(index, 1)
+
+    this.$localStore.removeNote(noteId)
   }
 }
 
@@ -36,68 +43,12 @@ export const getters = {
 
 export const actions = {
   init(ctx) {
-    ctx.commit('addNote', {
-      id: '0',
-      type: 'text',
-      title: 'test text',
-      content: {
-        markdown: `# RayNote
-
-> A progressive web application (PWA) for notes.
-
-## Build Setup
-
-\`\`\`bash
-# install dependencies
-$ npm run install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-\`\`\`
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-`
-      }
-    })
-    ctx.commit('addNote', {
-      id: '2',
-      type: 'text',
-      title: 'test text',
-      content: {
-        text: 'Hello World'
-      }
-    })
-    ctx.commit('addNote', {
-      id: '1',
-      type: 'picture',
-      title: 'test picture',
-      content: {
-        url: 'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif'
-      }
-    })
-    ctx.commit('addNote', {
-      id: '11',
-      type: 'picture',
-      title: 'test picture',
-      content: {
-        url: 'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif'
-      }
-    })
-    ctx.commit('addNote', {
-      id: '12',
-      type: 'picture',
-      title: 'test picture',
-      content: {
-        url: 'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif'
-      }
-    })
+    this.$localStore.getNotes()
+      .then(notes => {
+        for(let note of notes) {
+          ctx.commit('loadNote', note)
+        }
+      })
   }
 }
 
