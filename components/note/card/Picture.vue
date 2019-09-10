@@ -1,5 +1,28 @@
 <template>
   <v-card>
+    <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
+      <v-card>
+        <v-card-actions>
+          <v-card-title >{{note.title}}</v-card-title>
+          <div class="flex-grow-1"></div>
+          <v-btn icon class="error" @click="onDelete()">
+            <v-icon>delete</v-icon>
+          </v-btn>
+          <v-btn icon class="primary" @click="onEdit()">
+            <v-icon>edit</v-icon>
+          </v-btn>
+          <v-btn icon @click="onCopy()">
+            <v-icon>file_copy</v-icon>
+          </v-btn>
+          <v-btn icon @click="fullscreen = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-card-actions>
+
+        <v-img :src="note.content.url"></v-img>
+      </v-card>
+    </v-dialog>
+
     <v-img :src="note.content.url">
       <v-card-title >{{note.title}}</v-card-title>
     </v-img>
@@ -14,6 +37,9 @@
 
       <div class="flex-grow-1"></div>
 
+      <v-btn icon @click="fullscreen = true">
+        <v-icon>fullscreen</v-icon>
+      </v-btn>
       <v-btn icon @click="onCopy()">
         <v-icon>file_copy</v-icon>
       </v-btn>
@@ -32,6 +58,7 @@
     },
     data(){
       return {
+        fullscreen: false
       }
     },
     methods: {
