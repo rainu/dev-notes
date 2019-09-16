@@ -80,13 +80,13 @@
     </v-snackbar>
 
     <v-footer app class="pa-0">
-      <v-toolbar dense>
+      <v-toolbar dense color="footer">
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
           <v-menu offset-y top max-height="50%" :close-on-content-click="false">
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on">
+              <v-btn v-on="on" color="primary">
                 <v-icon>search</v-icon>
               </v-btn>
             </template>
@@ -101,7 +101,7 @@
           </v-menu>
           <v-menu offset-y top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on">
+              <v-btn v-on="on" color="primary">
                 <v-icon>add_circle</v-icon>
               </v-btn>
             </template>

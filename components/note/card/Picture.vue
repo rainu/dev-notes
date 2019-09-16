@@ -1,5 +1,10 @@
 <template>
-  <v-card>
+  <v-card class="elevation-6">
+    <v-toolbar color="primary" flat>
+      <v-toolbar-title>{{note.title}}</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+    </v-toolbar>
+
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-card-actions>
@@ -23,9 +28,9 @@
       </v-card>
     </v-dialog>
 
-    <v-img :src="note.content.url">
-      <v-card-title >{{note.title}}</v-card-title>
-    </v-img>
+    <div class="card-view">
+      <v-img :src="note.content.url" ></v-img>
+    </div>
 
     <v-card-actions>
       <v-btn icon class="error" @click="onDelete()">
@@ -76,5 +81,8 @@
 </script>
 
 <style scoped>
-
+  .card-view {
+    height: 250px;
+    overflow: auto;
+  }
 </style>

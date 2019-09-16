@@ -24,11 +24,11 @@
       </v-flex>
 
       <v-footer app class="pa-0">
-        <v-toolbar dense>
+        <v-toolbar dense color="footer">
           <div class="flex-grow-1"></div>
 
           <v-toolbar-items>
-            <v-btn block color="primary" type="submit" @click="onSave">
+            <v-btn block color="primary" @click="onSave">
               <v-icon>save</v-icon>
               {{$t('settings.save')}}
             </v-btn>

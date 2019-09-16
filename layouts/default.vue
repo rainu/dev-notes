@@ -1,9 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      color="navigation"
       fixed
       app
     >
@@ -19,7 +20,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar :clipped-left="clipped" fixed app color="header">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>RayNote</v-toolbar-title>
     </v-app-bar>

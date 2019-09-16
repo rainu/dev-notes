@@ -1,5 +1,10 @@
 <template>
-  <v-card>
+  <v-card class="elevation-6">
+    <v-toolbar color="primary" flat>
+      <v-toolbar-title>{{note.title}}</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+    </v-toolbar>
+
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-card-actions>
@@ -26,11 +31,7 @@
       </v-card>
     </v-dialog>
 
-    <v-card-title>
-      <span class="headline">{{note.title}}</span>
-    </v-card-title>
-
-    <v-card-text>
+    <v-card-text class="card-view">
       <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
       <template v-if="note.content.text">{{note.content.text}}</template>
     </v-card-text>
@@ -90,5 +91,8 @@
 </script>
 
 <style scoped>
-
+  .card-view {
+    height: 250px;
+    overflow: auto;
+  }
 </style>
