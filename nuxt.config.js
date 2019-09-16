@@ -31,6 +31,10 @@ export default {
     "lang": "de-DE"
   },
 
+  icon: {
+    sizes: [16, 32, 120, 144, 152, 192, 384, 512]
+  },
+
   /*
   ** Customize the progress-bar color
   */
