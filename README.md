@@ -1,4 +1,4 @@
-# RayNote
+# DevNote
 
 > A progressive web application (PWA) for notes.
 

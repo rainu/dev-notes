@@ -41,7 +41,7 @@
 
     <v-app-bar :clipped-left="clipped" fixed app color="header">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>RayNote</v-toolbar-title>
+      <v-toolbar-title>DevNote</v-toolbar-title>
     </v-app-bar>
 
     <v-content>

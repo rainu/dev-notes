@@ -19,14 +19,14 @@ export default {
   },
 
   manifest: {
-    "name": "RayNote",
-    "short_name": "RayNote",
+    "name": "DevNote",
+    "short_name": "DevNote",
     "start_url": "/",
     "scope": ".",
     "display": "standalone",
     "orientation": "portrait-primary",
-    "background_color": "#fff",
-    "theme_color": "#fff",
+    "background_color": "#FFE7A2",
+    "theme_color": "#74B392",
     "dir": "ltr",
     "lang": "de-DE"
   },
