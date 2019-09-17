@@ -13,6 +13,11 @@ export function newLocalStore() {
       version: 1.0,
       storeName: 'notes', // Should be alphanumeric, with underscores.
     }),
+    boards: localforage.createInstance({
+      driver: localforage.INDEXEDDB,
+      version: 1.0,
+      storeName: 'boards', // Should be alphanumeric, with underscores.
+    }),
   }
 
   return {
@@ -20,6 +25,7 @@ export function newLocalStore() {
       return Promise.all([
         store.settings.ready(),
         store.notes.ready(),
+        store.boards.ready(),
       ])
     },
     getLanguage(){
@@ -41,6 +47,20 @@ export function newLocalStore() {
     },
     removeNote(id) {
       return store.notes.removeItem(id)
+    },
+    getBoard(id) {
+      return store.boards.getItem(id)
+    },
+    getBoards(){
+      return store.boards.keys()
+        .then(keys => keys.map(id => this.getBoard(id)))
+        .then(promises => Promise.all(promises))
+    },
+    setBoard(board) {
+      return store.boards.setItem(board.id, board)
+    },
+    removeBoard(id) {
+      return store.boards.removeItem(id)
     }
   }
 }

@@ -91,11 +91,14 @@
               </v-btn>
             </template>
             <v-list v-if="availableTags && availableTags.length > 0">
-              <v-list-item>
-                <v-switch :label="$t('note.tags.filter.without')" v-model="filter.showWithoutTag" color="success"></v-switch>
-              </v-list-item>
               <v-list-item v-for="tag in availableTags" :key="tag">
-                <v-switch :label="tag" v-model="filter.tags[tag]" color="success"></v-switch>
+                <v-btn block class="text-capitalize" @click="onFilterTagChange(tag)">
+                  <v-icon v-if="filter.tags[tag] === true" color="green">check_circle</v-icon>
+                  <v-icon v-if="filter.tags[tag] === false" color="red">remove_circle</v-icon>
+                  <v-icon v-if="filter.tags[tag] === null">filter_list</v-icon>
+                  <span class="flex-grow-1"></span>
+                  {{tag}}
+                </v-btn>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -125,6 +128,8 @@ import { mapGetters, mapState, mapMutations } from 'vuex';
 import Vue from 'vue'
 import copy from 'copy-to-clipboard';
 import uuid4 from 'uuid4';
+
+import { readBoardQuery } from '../common/boardQuery'
 import NoteCardText from "../components/note/card/Text";
 import NoteCardPicture from "../components/note/card/Picture";
 import NoteFormText from "../components/note/form/Text";
@@ -153,7 +158,6 @@ export default {
 
       filter: {
         tags: {},
-        showWithoutTag: true,
       },
 
       snackbar: {
@@ -184,16 +188,12 @@ export default {
 
       return this.notes.filter(note => {
         for(let tag of note.tags) {
-          if(this.filter.tags[tag]) {
-            return true
+          if(this.filter.tags[tag] === false) {
+            return false
           }
         }
 
-        if((!note.tags || note.tags.length === 0) && this.filter.showWithoutTag){
-          return true
-        }
-
-        return false
+        return true
       })
     }
   },
@@ -243,22 +243,39 @@ export default {
       copy(content)
       this.snackbar.copied = true
     },
+    onFilterTagChange(tag){
+      if(this.filter.tags[tag] === true) this.filter.tags[tag] = false
+      else if(this.filter.tags[tag] === false) this.filter.tags[tag] = null
+      else if(this.filter.tags[tag] === null) this.filter.tags[tag] = true
+    },
     applyTags(tags){
       //add missing
       for(let tag of tags) {
         if(!this.filter.tags.hasOwnProperty(tag)){
-          Vue.set(this.filter.tags, tag, true)
+          Vue.set(this.filter.tags, tag, null)
         }
       }
     },
+    applyQueryTags(){
+      this.filter.tags = {}
+      this.applyTags(this.availableTags)
+
+      let boardQuery = readBoardQuery(this.$route.query)
+      for(let tagName of Object.keys(boardQuery.tags)) {
+        this.filter.tags[tagName] = boardQuery.tags[tagName]
+      }
+    }
   },
   watch: {
     availableTags(tags) {
       this.applyTags(tags)
+    },
+    '$route.query'() {
+      this.applyQueryTags()
     }
   },
   mounted() {
-    this.applyTags(this.availableTags)
-  }
+    this.applyQueryTags()
+  },
 }
 </script>

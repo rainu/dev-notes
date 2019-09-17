@@ -17,11 +17,31 @@
     "form": {
       "validation": {
         "required": "Dies ist ein Pflichtfeld!"
+      },
+      "icon": {
+        "group": {
+          "action": "Aktion",
+          "alert": "Alarm",
+          "av": "Audio/Video",
+          "communication": "Kommunikation",
+          "content": "Inhalt",
+          "device": "Gerät",
+          "editor": "Editor",
+          "file": "Datei",
+          "hardware": "Hardware",
+          "image": "Bild",
+          "maps": "Karte",
+          "navigation": "Navigation",
+          "notification": "Benachrichtigung",
+          "places": "Ort",
+          "social": "Sozial",
+          "toggle": "Umschalter"
+        }
       }
     }
   },
   "navigation": {
-    "home": "Start",
+    "home": "Alle",
     "settings": "Einstellungen"
   },
   "note": {
@@ -39,9 +59,6 @@
     },
     "tags": {
       "title": "Schlagwörter",
-      "filter": {
-        "without": "Ohne Schlagwörter"
-      },
       "action": {
         "add": {
           "title": "Schlagwort hinzufügen",
@@ -68,10 +85,33 @@
       "confirmation": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?"
     }
   },
+  "board": {
+    "title": "Pinwandname",
+    "new": {
+      "title": "Neue Pinnwand anlegen"
+    },
+    "actions": {
+      "new": "Neue Pinnwand",
+      "save": "Anlegen",
+      "abort": "Abbrechen"
+    },
+    "edit": {
+      "title": "Bearbeiten"
+    },
+    "delete": {
+      "confirmation": "Sind Sie sicher, dass Sie diese Pinnwand löschen wollen?"
+    },
+    "saved": {
+      "successfully": "Die Pinnwand wurde gespeichert."
+    }
+  },
   "settings": {
     "title": "Einstellungen",
     "save": "Speichern",
     "saved": "Die Einstellungen wurden erfolgreich gespeichert.",
+    "boards": {
+      "title": "Pinnwände"
+    },
     "others":{
       "title": "Andere",
       "language": {
@@ -79,5 +119,4 @@
       }
     }
   }
-
 }

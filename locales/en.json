@@ -17,11 +17,31 @@
     "form": {
       "validation": {
         "required": "This field is mandatory!"
+      },
+      "icon": {
+        "group": {
+          "action":  "action",
+          "alert": "alert",
+          "av":  "av",
+          "communication": "communication",
+          "content":  "content",
+          "device": "device",
+          "editor":  "editor",
+          "file": "file",
+          "hardware":  "hardware",
+          "image": "image",
+          "maps":  "maps",
+          "navigation": "navigation",
+          "notification":  "notification",
+          "places": "places",
+          "social":  "social",
+          "toggle": "toggle"
+        }
       }
     }
   },
   "navigation": {
-    "home": "Home",
+    "home": "All",
     "settings": "Settings"
   },
   "note": {
@@ -39,9 +59,6 @@
     },
     "tags": {
       "title": "Tags",
-      "filter": {
-        "without": "Without Tags"
-      },
       "action": {
         "add": {
           "title": "Add tag",
@@ -68,10 +85,33 @@
       "confirmation": "Are you sure to delete this note?"
     }
   },
+  "board": {
+    "title": "Dashboard",
+    "new": {
+      "title": "Create new dashboard"
+    },
+    "actions": {
+      "new": "New dashboard",
+      "save": "Create",
+      "abort": "Abort"
+    },
+    "edit": {
+      "title": "Edit"
+    },
+    "delete": {
+      "confirmation": "Are you sure to delete this dashboard?"
+    },
+    "saved": {
+      "successfully": "The dashboard was saved successfully."
+    }
+  },
   "settings": {
     "title": "Settings",
     "save": "Save",
     "saved": "The configuration was saved successfully.",
+    "boards": {
+      "title": "Dashboards"
+    },
     "others": {
       "title": "Others",
       "language": {
