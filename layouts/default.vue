@@ -45,7 +45,15 @@
 
     <v-app-bar :clipped-left="clipped" fixed app color="header">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>DevNote</v-toolbar-title>
+      <v-toolbar-title>{{boardTitle}}</v-toolbar-title>
+
+      <div class="flex-grow-1"></div>
+
+      <v-toolbar-items>
+        <v-btn text class="text-capitalize">
+          <v-icon>info</v-icon>
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
 
     <v-content>
@@ -56,7 +64,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { generateBoardQuery } from '../common/boardQuery'
+import { generateBoardQuery, readBoardQuery } from '../common/boardQuery'
 
 export default {
   data () {
@@ -65,6 +73,7 @@ export default {
       drawer: false,
       fixed: false,
       links: [],
+      boardTitle: null,
       miniVariant: false,
     }
   },
@@ -82,15 +91,22 @@ export default {
           route: `/?${generateBoardQuery(board)}`,
         }
       })
+    },
+    applyBoardInfo(){
+      this.boardTitle = readBoardQuery(this.$route.query).title
     }
   },
   watch: {
     boards(boards){
       this.applyBoards(boards)
-    }
+    },
+    '$route.query'() {
+      this.applyBoardInfo()
+    },
   },
   mounted() {
     this.applyBoards(this.boards)
+    this.applyBoardInfo()
   }
 }
 </script>

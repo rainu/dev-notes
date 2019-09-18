@@ -86,7 +86,7 @@
         <v-toolbar-items>
           <v-menu offset-y top max-height="50%" :close-on-content-click="false">
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" color="primary">
+              <v-btn v-on="on" :color="filter.active ? 'primary' : ''">
                 <v-icon>search</v-icon>
               </v-btn>
             </template>
@@ -104,7 +104,7 @@
           </v-menu>
           <v-menu offset-y top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" color="primary">
+              <v-btn v-on="on">
                 <v-icon>add_circle</v-icon>
               </v-btn>
             </template>
@@ -157,6 +157,7 @@ export default {
       },
 
       filter: {
+        active: false,
         tags: {},
       },
 
@@ -289,9 +290,9 @@ export default {
       this.filter.tags = {}
       this.applyTags(this.availableTags)
 
-      let boardQuery = readBoardQuery(this.$route.query)
-      for(let tagName of Object.keys(boardQuery.tags)) {
-        this.filter.tags[tagName] = boardQuery.tags[tagName]
+      let boardInfo = readBoardQuery(this.$route.query)
+      for(let tagName of Object.keys(boardInfo.tags)) {
+        this.filter.tags[tagName] = boardInfo.tags[tagName]
       }
     }
   },
@@ -301,6 +302,19 @@ export default {
     },
     '$route.query'() {
       this.applyQueryTags()
+    },
+    'filter.tags': {
+      deep: true,
+      handler(tags){
+        this.filter.active = false
+
+        for(let tagValue of Object.values(tags)) {
+          if(tagValue !== null){
+            this.filter.active = true
+            break
+          }
+        }
+      }
     }
   },
   mounted() {

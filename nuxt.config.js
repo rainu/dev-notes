@@ -19,8 +19,8 @@ export default {
   },
 
   manifest: {
-    "name": "DevNote",
-    "short_name": "DevNote",
+    "name": "DevNotes",
+    "short_name": "DevNotes",
     "start_url": "/",
     "scope": ".",
     "display": "standalone",

@@ -1,4 +1,4 @@
-# DevNote
+# DevNotes
 
 > A progressive web application (PWA) for notes.
 
