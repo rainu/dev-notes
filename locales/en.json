@@ -92,7 +92,8 @@
     },
     "actions": {
       "new": "New dashboard",
-      "save": "Create",
+      "add": "Create",
+      "save": "Save",
       "abort": "Abort"
     },
     "edit": {

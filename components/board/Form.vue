@@ -1,5 +1,23 @@
 <template>
   <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId" ref="form">
+    <v-dialog v-model="dialog.open">
+      <v-card>
+        <v-card-title>
+          <span class="headline">{{$t('note.tags.action.add.title')}}</span>
+        </v-card-title>
+        <v-card-text>
+          <v-form @submit.prevent="addTag()">
+            <v-text-field autofocus v-model="dialog.tag" :label="$t('note.tags.action.add.tag')"></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+          <v-btn color="error" @click="dialog.open = false">{{$t('note.tags.action.add.cancel')}}</v-btn>
+          <v-btn color="primary" @click="addTag()">{{$t('note.tags.action.add.ok')}}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -16,6 +34,11 @@
             <v-icon v-if="board.filter.tags[tag].value === null" disabled>filter_list</v-icon>
             <span class="flex-grow-1"></span>
             {{tag}}
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn block @click="dialog.open = true" class="primary">
+            <v-icon>add</v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -69,17 +92,31 @@
 
       return {
         valid: false,
-        board: board
+        board: board,
+        dialog: {
+          open: false,
+          tag: null
+        },
+        addedTags: []
       }
     },
     computed: {
       ...mapGetters({
-        availableTags: 'note/getAvailableTags'
+        noteTags: 'note/getAvailableTags',
+        boardTags: 'board/getAvailableTags'
       }),
       ruleRequired(){
         return [
           v => !!v || this.$t('common.form.validation.required')
         ]
+      },
+      availableTags(){
+        let tags = {}
+        for(let tag of this.noteTags) tags[tag] = true
+        for(let tag of this.boardTags) tags[tag] = true
+        for(let tag of this.addedTags) tags[tag] = true
+
+        return Object.keys(tags).sort()
       }
     },
     methods: {
@@ -95,6 +132,11 @@
             Vue.set(this.board.filter.tags, tag, { value: null })
           }
         }
+      },
+      addTag(){
+        this.dialog.open = false
+        this.addedTags.push(this.dialog.tag)
+        this.dialog.tag = null
       },
       onSubmit() {
         if(!this.valid) return

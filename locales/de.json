@@ -58,11 +58,11 @@
       }
     },
     "tags": {
-      "title": "Schlagwörter",
+      "title": "Stichwörter",
       "action": {
         "add": {
-          "title": "Schlagwort hinzufügen",
-          "tag": "Schlagwort",
+          "title": "Stichwort hinzufügen",
+          "tag": "Stichwort",
           "ok": "Hinzufügen",
           "cancel": "Abbrechen"
         }
@@ -92,7 +92,8 @@
     },
     "actions": {
       "new": "Neue Pinnwand",
-      "save": "Anlegen",
+      "add": "Anlegen",
+      "save": "Speichern",
       "abort": "Abbrechen"
     },
     "edit": {

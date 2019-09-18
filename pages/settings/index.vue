@@ -101,7 +101,7 @@
           <v-card-actions>
             <div class="flex-grow-1"></div>
             <v-btn color="error" @click="dialog.new.open = false">{{$t('note.actions.abort')}}</v-btn>
-            <v-btn color="primary" type="submit" form="board-new-form">{{$t('board.actions.save')}}</v-btn>
+            <v-btn color="primary" type="submit" form="board-new-form">{{$t('board.actions.add')}}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

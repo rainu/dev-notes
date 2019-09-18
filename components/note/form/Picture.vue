@@ -62,8 +62,16 @@
     },
     computed: {
       ...mapGetters({
-        availableTags: 'note/getAvailableTags'
+        noteTags: 'note/getAvailableTags',
+        boardTags: 'board/getAvailableTags'
       }),
+      availableTags() {
+        let tags = {}
+        for(let tag of this.noteTags) tags[tag] = true
+        for(let tag of this.boardTags) tags[tag] = true
+
+        return Object.keys(tags).sort()
+      },
       ruleRequired(){
         return [
           v => !!v || this.$t('common.form.validation.required')

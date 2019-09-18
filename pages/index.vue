@@ -176,11 +176,19 @@ export default {
   },
   computed: {
     ...mapGetters({
-      availableTags: 'note/getAvailableTags'
+      noteTags: 'note/getAvailableTags',
+      boardTags: 'board/getAvailableTags'
     }),
     ...mapState({
       notes: state => state.note.notes,
     }),
+    availableTags() {
+      let tags = {}
+      for(let tag of this.noteTags) tags[tag] = true
+      for(let tag of this.boardTags) tags[tag] = true
+
+      return Object.keys(tags).sort()
+    },
     filteredNotes(){
       if(!this.availableTags || this.availableTags.length === 0){
         return this.notes

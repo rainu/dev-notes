@@ -39,6 +39,18 @@ export const getters = {
   getBoardById(state, id) {
     return state.boards.filter(n => n.id === id)[0]
   },
+  getAvailableTags(state) {
+    let tagMap = {}
+    for(let board of state.boards) {
+      if(board.filter.tags) {
+        for(let curTag of Object.keys(board.filter.tags)) {
+          tagMap[curTag] = true
+        }
+      }
+    }
+
+    return Object.keys(tagMap).sort()
+  }
 }
 
 export const actions = {
