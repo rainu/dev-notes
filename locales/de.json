@@ -107,13 +107,10 @@
   },
   "settings": {
     "title": "Einstellungen",
-    "save": "Speichern",
-    "saved": "Die Einstellungen wurden erfolgreich gespeichert.",
     "boards": {
       "title": "Pinnwände"
     },
     "notes": {
-      "title": "Notizen",
       "size": {
         "fixed": "Feste Größe",
         "value": "Größe",
@@ -125,11 +122,11 @@
     "theme": {
       "dark": "Nachtmodus"
     },
+    "language": {
+      "title": "Sprache"
+    },
     "others":{
-      "title": "Andere",
-      "language": {
-        "title": "Sprache"
-      }
+      "title": "Andere"
     }
   }
 }

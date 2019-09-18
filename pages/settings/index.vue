@@ -49,7 +49,7 @@
         <v-col cols="12">
           <v-card class="elevation-12">
             <v-toolbar color="primary" flat>
-              <v-toolbar-title>{{$t('settings.notes.title')}}</v-toolbar-title>
+              <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
               <div class="flex-grow-1"></div>
             </v-toolbar>
             <v-card-text class="pt-0 pb-0">
@@ -70,32 +70,24 @@
               </v-row>
               <v-row>
                 <v-col cols="6">
-                  <v-switch v-model="theme.dark" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+                  <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+                </v-col>
+                <v-col cols="6">
+                  <v-select
+                    :items="localeOptions"
+                    :value="locale"
+                    item-text="label"
+                    item-value="value"
+                    prepend-icon="language"
+                    :label="$t('settings.language.title')"
+                    @change="onLanguageChange"
+                  ></v-select>
                 </v-col>
               </v-row>
             </v-card-text>
           </v-card>
         </v-col>
 
-        <v-col cols="12">
-          <v-card class="elevation-12">
-            <v-toolbar color="primary" flat>
-              <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
-              <div class="flex-grow-1"></div>
-            </v-toolbar>
-            <v-card-text>
-              <v-select
-                :items="localeOptions"
-                :value="locale"
-                item-text="label"
-                item-value="value"
-                prepend-icon="language"
-                :label="$t('settings.others.language.title')"
-                @change="onLanguageChange"
-              ></v-select>
-            </v-card-text>
-          </v-card>
-        </v-col>
       </v-row>
 
       <v-dialog v-model="dialog.new.open" persistent>
@@ -147,28 +139,9 @@
         </v-card>
       </v-dialog>
 
-      <v-footer app class="pa-0">
-        <v-toolbar dense color="footer">
-          <div class="flex-grow-1"></div>
-
-          <v-toolbar-items>
-            <v-btn block color="primary" @click="onSave">
-              <v-icon>save</v-icon>
-              {{$t('settings.save')}}
-            </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-      </v-footer>
-
       <v-snackbar v-model="snackbar.board.saved" color="success" class="text-center" :timeout="1000">
         {{$t('board.saved.successfully')}}
         <v-btn text @click="snackbar.board.saved = false" >
-          <v-icon>close</v-icon>
-        </v-btn>
-      </v-snackbar>
-      <v-snackbar v-model="snackbar.saved" color="success" class="text-center">
-        {{$t('settings.saved')}}
-        <v-btn text @click="snackbar.saved = false" >
           <v-icon>close</v-icon>
         </v-btn>
       </v-snackbar>
@@ -198,10 +171,7 @@
           boardId: null,
         }
       },
-      language: null,
-      theme: {
-        dark: true
-      },
+      darkModeSwitch: null,
       noteSizes: [
         {label: 'settings.notes.size.small', value: 'small'},
         {label: 'settings.notes.size.medium', value: 'medium'},
@@ -215,7 +185,6 @@
         board: {
           saved: false,
         },
-        saved: false
       }
     }),
     computed: {
@@ -223,12 +192,12 @@
         locale: state => state.settings.locale,
         locales: state => state.settings.locales,
         noteSettings: state => state.settings.notes,
-        darkSetting: state => state.settings.theme.dark,
+        darkMode: state => state.settings.theme.dark,
         boards: state => state.board.boards,
       }),
       localeOptions(){
         return this.locales.map(l => ({value: l, label: i18n.localeMappings[l].meta.language.code}))
-      }
+      },
     },
     methods: {
       ...mapActions({
@@ -242,7 +211,7 @@
         setNoteSize: 'settings/setNoteSize',
       }),
       onLanguageChange(lang){
-        this.language = lang
+        this.applyLanguage(lang)
       },
       onSaveNewBoard(board){
         this.addBoard({
@@ -282,16 +251,6 @@
         this.notes.fixedSize = settings.fixed
         this.notes.size = settings.size
       },
-      onSave(){
-        this.snackbar.saved = false
-        this.applyLanguage(this.language)
-        this.applyDarkMode(this.theme.dark)
-        this.setNoteSize({
-          fixed: this.notes.fixedSize,
-          size: this.notes.size
-        })
-        this.snackbar.saved = true
-      }
     },
     watch: {
       noteSettings: {
@@ -300,13 +259,22 @@
           this.updateNoteSettings(settings)
         }
       },
-      darkSetting(dark) {
-        this.theme.dark = dark
+      notes: {
+        deep: true,
+        handler(notes) {
+          this.setNoteSize({
+            fixed: notes.fixedSize,
+            size: notes.size
+          })
+        }
+      },
+      darkModeSwitch(value){
+        this.applyDarkMode(value)
       }
     },
     mounted() {
       this.updateNoteSettings(this.noteSettings)
-      this.theme.dark = this.darkSetting
+      this.darkModeSwitch = this.darkMode
     }
   }
 </script>

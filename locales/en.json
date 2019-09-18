@@ -107,13 +107,10 @@
   },
   "settings": {
     "title": "Settings",
-    "save": "Save",
-    "saved": "The configuration was saved successfully.",
     "boards": {
       "title": "Dashboards"
     },
     "notes": {
-      "title": "Notes",
       "size": {
         "fixed": "Fixed size",
         "value": "Size",
@@ -125,11 +122,11 @@
     "theme": {
       "dark": "Darkmode"
     },
+    "language": {
+      "title": "Language"
+    },
     "others": {
-      "title": "Others",
-      "language": {
-        "title": "Language"
-      }
+      "title": "Others"
     }
   }
 }
