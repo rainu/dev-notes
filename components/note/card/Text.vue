@@ -7,27 +7,31 @@
 
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
-        <v-card-actions>
-          <v-card-title >{{note.title}}</v-card-title>
+        <v-toolbar color="primary" flat>
+          <v-toolbar-title>{{note.title}}</v-toolbar-title>
           <div class="flex-grow-1"></div>
+          <v-btn icon @click="fullscreen = false">
+            <v-icon>fullscreen_exit</v-icon>
+          </v-btn>
+        </v-toolbar>
+
+        <v-card-text class="pa-4">
+          <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
+          <template v-if="note.content.text">{{note.content.text}}</template>
+        </v-card-text>
+
+        <v-card-actions>
           <v-btn icon class="error" @click="onDelete()">
             <v-icon>delete</v-icon>
           </v-btn>
           <v-btn icon class="primary" @click="onEdit()">
             <v-icon>edit</v-icon>
           </v-btn>
+          <div class="flex-grow-1"></div>
           <v-btn icon @click="onCopy()">
             <v-icon>file_copy</v-icon>
           </v-btn>
-          <v-btn icon @click="fullscreen = false">
-            <v-icon>close</v-icon>
-          </v-btn>
         </v-card-actions>
-
-        <v-card-text>
-          <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
-          <template v-if="note.content.text">{{note.content.text}}</template>
-        </v-card-text>
       </v-card>
     </v-dialog>
 
