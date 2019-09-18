@@ -194,9 +194,30 @@ export default {
         return this.notes
       }
 
+      let blacklist = {}
+      let whitelist = {}
+
+      for(let tagName of Object.keys(this.filter.tags)) {
+        let tagValue = this.filter.tags[tagName]
+
+        if(tagValue === true) whitelist[tagName] = true
+        else if(tagValue === false) blacklist[tagName] = true
+      }
+
       return this.notes.filter(note => {
-        for(let tag of note.tags) {
-          if(this.filter.tags[tag] === false) {
+        let tagsMap = {}
+        for(let tag of note.tags) tagsMap[tag] = true
+
+        for(let blacklistedTag of Object.keys(blacklist)) {
+          if(tagsMap.hasOwnProperty(blacklistedTag)) {
+            //this tag is blacklisted -> not should be filtered out!
+            return false
+          }
+        }
+
+        for(let whitelistedTag of Object.keys(whitelist)) {
+          if(!tagsMap.hasOwnProperty(whitelistedTag)) {
+            //this tag is not included in note -> this note should be filtered out!
             return false
           }
         }
