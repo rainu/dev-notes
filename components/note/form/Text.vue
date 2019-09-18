@@ -85,7 +85,7 @@
         this.$emit('onSubmit', data)
         if(this.clearAfterSubmit) {
           this.$refs.form.reset()
-          this.tags = []
+          this.note.tags = []
         }
       }
     },
