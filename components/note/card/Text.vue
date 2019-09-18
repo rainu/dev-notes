@@ -35,7 +35,7 @@
       </v-card>
     </v-dialog>
 
-    <v-card-text class="card-view">
+    <v-card-text :class="viewClass">
       <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
       <template v-if="note.content.text">{{note.content.text}}</template>
     </v-card-text>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import VueMarkdown from 'vue-markdown'
 
   export default {
@@ -79,6 +80,15 @@
         fullscreen: false
       }
     },
+    computed: {
+      ...mapState({
+        noteSettings: state => state.settings.notes,
+      }),
+      viewClass(){
+        if(!this.noteSettings.fixed) return ""
+        return `card-view-${this.noteSettings.size}`
+      }
+    },
     methods: {
       onEdit(){
         this.$emit('onEdit')
@@ -95,8 +105,16 @@
 </script>
 
 <style scoped>
-  .card-view {
+  .card-view-small {
+    height: 150px;
+    overflow: auto;
+  }
+  .card-view-medium {
     height: 250px;
+    overflow: auto;
+  }
+  .card-view-large {
+    height: 350px;
     overflow: auto;
   }
 </style>

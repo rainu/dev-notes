@@ -34,6 +34,20 @@ export function newLocalStore() {
     setLanguage(lang){
       return store.settings.setItem('language', lang)
     },
+    setThemeDarkMode(dark) {
+      return store.settings.setItem('theme.dark', dark)
+    },
+    getThemeDarkMode() {
+      return store.settings.getItem('theme.dark')
+    },
+    getNoteSize(){
+      return store.settings.getItem('note.size')
+    },
+    setNoteSize(fixed, size){
+      return store.settings.setItem('note.size', {
+        fixed, size
+      })
+    },
     getNote(id) {
       return store.notes.getItem(id)
     },

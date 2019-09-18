@@ -32,7 +32,7 @@
       </v-card>
     </v-dialog>
 
-    <div class="card-view">
+    <div :class="viewClass">
       <v-img :src="note.content.url" ></v-img>
     </div>
 
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   export default {
     name: "NoteCardPicture",
     props: {
@@ -68,6 +70,15 @@
     data(){
       return {
         fullscreen: false
+      }
+    },
+    computed: {
+      ...mapState({
+        noteSettings: state => state.settings.notes,
+      }),
+      viewClass(){
+        if(!this.noteSettings.fixed) return ""
+        return `card-view-${this.noteSettings.size}`
       }
     },
     methods: {
@@ -85,8 +96,16 @@
 </script>
 
 <style scoped>
-  .card-view {
+  .card-view-small {
+    height: 150px;
+    overflow: auto;
+  }
+  .card-view-medium {
     height: 250px;
+    overflow: auto;
+  }
+  .card-view-large {
+    height: 350px;
     overflow: auto;
   }
 </style>

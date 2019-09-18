@@ -1,12 +1,12 @@
 import Vuex from "vuex"
-import i18n from './i18n'
+import settings from './settings'
 import note from './note'
 import board from './board'
 
 const createStore = () => {
   return new Vuex.Store({
     modules: {
-      i18n, note, board
+      settings, note, board
     },
   })
 }

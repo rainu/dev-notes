@@ -112,6 +112,19 @@
     "boards": {
       "title": "Dashboards"
     },
+    "notes": {
+      "title": "Notes",
+      "size": {
+        "fixed": "Fixed size",
+        "value": "Size",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    },
+    "theme": {
+      "dark": "Darkmode"
+    },
     "others": {
       "title": "Others",
       "language": {

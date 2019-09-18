@@ -112,6 +112,19 @@
     "boards": {
       "title": "Pinnwände"
     },
+    "notes": {
+      "title": "Notizen",
+      "size": {
+        "fixed": "Feste Größe",
+        "value": "Größe",
+        "small": "Klein",
+        "medium": "Mittel",
+        "large": "Groß"
+      }
+    },
+    "theme": {
+      "dark": "Nachtmodus"
+    },
     "others":{
       "title": "Andere",
       "language": {

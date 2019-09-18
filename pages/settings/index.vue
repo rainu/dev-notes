@@ -49,6 +49,37 @@
         <v-col cols="12">
           <v-card class="elevation-12">
             <v-toolbar color="primary" flat>
+              <v-toolbar-title>{{$t('settings.notes.title')}}</v-toolbar-title>
+              <div class="flex-grow-1"></div>
+            </v-toolbar>
+            <v-card-text class="pt-0 pb-0">
+              <v-row>
+                <v-col cols="6">
+                  <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
+                </v-col>
+                <v-col cols="6" v-if="notes.fixedSize">
+                  <v-select
+                    :items="noteSizes"
+                    v-model="notes.size"
+                    :item-text="getNoteSizeItemLabel"
+                    item-value="value"
+                    prepend-icon="format_size"
+                    :label="$t('settings.notes.size.value')"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="6">
+                  <v-switch v-model="theme.dark" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-col>
+
+        <v-col cols="12">
+          <v-card class="elevation-12">
+            <v-toolbar color="primary" flat>
               <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
               <div class="flex-grow-1"></div>
             </v-toolbar>
@@ -168,6 +199,18 @@
         }
       },
       language: null,
+      theme: {
+        dark: true
+      },
+      noteSizes: [
+        {label: 'settings.notes.size.small', value: 'small'},
+        {label: 'settings.notes.size.medium', value: 'medium'},
+        {label: 'settings.notes.size.large', value: 'large'},
+      ],
+      notes: {
+        size: 'small',
+        fixedSize: false,
+      },
       snackbar: {
         board: {
           saved: false,
@@ -177,8 +220,10 @@
     }),
     computed: {
       ...mapState({
-        locale: state => state.i18n.locale,
-        locales: state => state.i18n.locales,
+        locale: state => state.settings.locale,
+        locales: state => state.settings.locales,
+        noteSettings: state => state.settings.notes,
+        darkSetting: state => state.settings.theme.dark,
         boards: state => state.board.boards,
       }),
       localeOptions(){
@@ -187,12 +232,14 @@
     },
     methods: {
       ...mapActions({
-        applyLanguage: 'i18n/applyLanguage',
+        applyLanguage: 'settings/applyLanguage',
+        applyDarkMode: 'settings/applyThemeDark',
       }),
       ...mapMutations({
         addBoard: 'board/addBoard',
         editBoard: 'board/editBoard',
         deleteBoard: 'board/deleteBoard',
+        setNoteSize: 'settings/setNoteSize',
       }),
       onLanguageChange(lang){
         this.language = lang
@@ -228,12 +275,39 @@
         this.deleteBoard(this.dialog.delete.boardId)
         this.dialog.delete.boardId = null
       },
+      getNoteSizeItemLabel(item){
+        return this.$t(item.label)
+      },
+      updateNoteSettings(settings){
+        this.notes.fixedSize = settings.fixed
+        this.notes.size = settings.size
+      },
       onSave(){
         this.snackbar.saved = false
         this.applyLanguage(this.language)
+        this.applyDarkMode(this.theme.dark)
+        this.setNoteSize({
+          fixed: this.notes.fixedSize,
+          size: this.notes.size
+        })
         this.snackbar.saved = true
       }
     },
+    watch: {
+      noteSettings: {
+        deep: true,
+        handler(settings){
+          this.updateNoteSettings(settings)
+        }
+      },
+      darkSetting(dark) {
+        this.theme.dark = dark
+      }
+    },
+    mounted() {
+      this.updateNoteSettings(this.noteSettings)
+      this.theme.dark = this.darkSetting
+    }
   }
 </script>
 
