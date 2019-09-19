@@ -42,7 +42,8 @@
   },
   "navigation": {
     "home": "All",
-    "settings": "Settings"
+    "settings": "Settings",
+    "backup": "Backup"
   },
   "note": {
     "title": "Title",
@@ -104,6 +105,17 @@
     },
     "saved": {
       "successfully": "The dashboard was saved successfully."
+    }
+  },
+  "backup": {
+    "title": "Backup",
+    "import": {
+      "file": "Import file",
+      "failed": "The import failed. Error: {err}",
+      "success": "The import was successful."
+    },
+    "export": {
+      "file": "Export file"
     }
   },
   "settings": {

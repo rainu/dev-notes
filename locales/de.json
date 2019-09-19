@@ -42,7 +42,8 @@
   },
   "navigation": {
     "home": "Alle",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "backup": "Sicherung"
   },
   "note": {
     "title": "Titel",
@@ -104,6 +105,17 @@
     },
     "saved": {
       "successfully": "Die Pinnwand wurde gespeichert."
+    }
+  },
+  "backup": {
+    "title": "Sicherung",
+    "import": {
+      "file": "Datei importieren",
+      "failed": "Die Datei konnte nicht importiert werden! Fehler: {err}",
+      "success": "Die Datei wurde erfolgreich importiert."
+    },
+    "export": {
+      "file": "Datei exportieren"
     }
   },
   "settings": {

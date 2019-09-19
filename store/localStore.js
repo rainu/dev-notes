@@ -62,6 +62,9 @@ export function newLocalStore() {
     removeNote(id) {
       return store.notes.removeItem(id)
     },
+    clearNotes(){
+      return store.notes.clear()
+    },
     getBoard(id) {
       return store.boards.getItem(id)
     },
@@ -75,6 +78,9 @@ export function newLocalStore() {
     },
     removeBoard(id) {
       return store.boards.removeItem(id)
+    },
+    clearBoards(){
+      return store.boards.clear()
     }
   }
 }

@@ -32,6 +32,15 @@
 
         <v-divider />
 
+        <v-list-item router to="/backup/">
+          <v-list-item-action>
+            <v-icon>import_export</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('navigation.backup')" />
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item router to="/settings/">
           <v-list-item-action>
             <v-icon>settings_applications</v-icon>

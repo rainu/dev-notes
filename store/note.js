@@ -32,7 +32,11 @@ export const mutations = {
     state.notes.splice(index, 1)
 
     this.$localStore.removeNote(noteId)
-  }
+  },
+  clearNotes(state){
+    state.notes = []
+    this.$localStore.clearNotes()
+  },
 }
 
 export const getters = {

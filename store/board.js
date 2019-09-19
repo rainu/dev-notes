@@ -32,7 +32,11 @@ export const mutations = {
     state.boards.splice(index, 1)
 
     this.$localStore.removeBoard(boardId)
-  }
+  },
+  clearBoards(state){
+    state.boards = []
+    this.$localStore.clearBoards()
+  },
 }
 
 export const getters = {
