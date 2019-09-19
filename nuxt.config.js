@@ -36,6 +36,7 @@ export default {
   },
 
   env: {
+    routerBase: routerBase.router.base,
     version: process.env.npm_package_version,
     revision: process.env.COMMIT_HASH || 'development'
   },

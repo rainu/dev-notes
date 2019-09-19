@@ -13,7 +13,7 @@
       <v-card-text>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/avatar.jpg"></v-img>
+            <v-img :src="routerBase + 'avatar.jpg'"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -88,6 +88,7 @@
     name: "Info",
     data(){
       return {
+        routerBase: process.env.routerBase,
         version: process.env.version,
         revision: {
           long: process.env.revision,

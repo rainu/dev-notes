@@ -46,6 +46,9 @@ export const actions = {
         .then(dark => {
           if(dark !== null) {
             return ctx.dispatch('applyThemeDark', dark)
+          } else {
+            //if there is no settings (fresh install) - apply the default theme mode here
+            return ctx.dispatch('applyThemeDark', true)
           }
         }),
       this.$localStore.getNoteSize()
