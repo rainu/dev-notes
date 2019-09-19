@@ -45,7 +45,7 @@ export default {
     "name": "DevNotes",
     "short_name": "DevNotes",
     "start_url": routerBase.router.base,
-    "scope": ".",
+    "scope": routerBase.router.base + ".",
     "display": "standalone",
     "orientation": "portrait-primary",
     "background_color": "#FFE7A2",
