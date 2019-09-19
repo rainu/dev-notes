@@ -4,10 +4,12 @@
       <v-col cols="12" sm="6" md="3" v-for="note of filteredNotes" :key="note.id">
 
         <NoteCardText v-if="note.type === 'text'" :note="note"
+                      :show-tags="showTags"
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
         <NoteCardPicture v-if="note.type === 'picture'" :note="note"
+                      :show-tags="showTags"
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
@@ -84,6 +86,10 @@
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
+          <v-btn @click="showTags = !showTags">
+            <v-icon :color="showTags ? 'primary' : ''">flag</v-icon>
+          </v-btn>
+
           <v-menu offset-y top max-height="50%" :close-on-content-click="false">
             <template v-slot:activator="{ on }">
               <v-btn v-on="on" :color="filter.active ? 'primary' : ''">
@@ -155,6 +161,8 @@ export default {
           noteId: null
         }
       },
+
+      showTags: false,
 
       filter: {
         active: false,

@@ -36,6 +36,10 @@
       <v-img :src="note.content.url" ></v-img>
     </div>
 
+    <div class="text-center pt-2 px-2" v-show="showTags">
+      <v-chip v-for="tag of note.tags" :key="tag" class="ma-1">{{tag}}</v-chip>
+    </div>
+
     <v-card-actions>
       <v-btn icon class="error" @click="onDelete()">
         <v-icon>delete</v-icon>
@@ -46,6 +50,9 @@
 
       <div class="flex-grow-1"></div>
 
+      <v-btn icon :color="showTags ? 'primary' : ''" @click="showTags = !showTags">
+        <v-icon>flag</v-icon>
+      </v-btn>
       <v-btn icon @click="fullscreen = true">
         <v-icon>fullscreen</v-icon>
       </v-btn>
@@ -65,6 +72,11 @@
       note: {
         type: Object,
         required: true,
+      },
+      showTags: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
     data(){
