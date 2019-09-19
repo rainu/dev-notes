@@ -25,6 +25,7 @@
         <v-card-text>
           <NoteFormText form-id="note-new-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
           <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
+          <NoteFormTemplate form-id="note-new-form" v-if="dialog.new.type.id === 'template'" @onSubmit="onSaveNewNote"></NoteFormTemplate>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -42,6 +43,7 @@
         <v-card-text>
           <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
           <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
+          <NoteFormTemplate form-id="note-edit-form" v-if="dialog.edit.note.type === 'template'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormTemplate>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -140,10 +142,11 @@ import NoteCardText from "../components/note/card/Text";
 import NoteCardPicture from "../components/note/card/Picture";
 import NoteFormText from "../components/note/form/Text";
 import NoteFormPicture from "../components/note/form/Picture";
+import NoteFormTemplate from "../components/note/form/Template";
 
 export default {
   components: {
-    NoteCardText, NoteCardPicture, NoteFormText, NoteFormPicture
+    NoteFormTemplate, NoteCardText, NoteCardPicture, NoteFormText, NoteFormPicture
   },
   data(){
     return {
@@ -179,6 +182,7 @@ export default {
         types: [
           { id: 'picture', icon: 'photo', text: 'note.picture.title' },
           { id: 'text', icon: 'notes', text: 'note.text.title' },
+          { id: 'template', icon: 'ballot', text: 'note.template.title' },
         ]
       }
     }

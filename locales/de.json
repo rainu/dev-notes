@@ -61,6 +61,23 @@
       "content": "Inhalt",
       "markdown": "Markdown"
     },
+    "template": {
+      "title": "Vorlage",
+      "template": "Template",
+      "placeholder": {
+        "title": "Platzhalter",
+        "name": "Name",
+        "description": "Beschreibung",
+        "default": "Standardwert",
+        "required": "Pflichtfeld",
+        "add": "Platzhalter",
+        "edit": "Anpassen",
+        "action": {
+          "add": "Hinzufügen",
+          "save": "Speichern"
+        }
+      }
+    },
     "picture": {
       "title": "Bild",
       "url": {

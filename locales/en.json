@@ -61,6 +61,23 @@
       "content": "Content",
       "markdown": "Markdown"
     },
+    "template": {
+      "title": "Template",
+      "template": "Template",
+      "placeholder": {
+        "title": "Placeholder",
+        "name": "Name",
+        "description": "Description",
+        "default": "Default value",
+        "required": "Mandatory",
+        "add": "Placeholder",
+        "edit": "Edit",
+        "action": {
+          "add": "Add",
+          "save": "Save"
+        }
+      }
+    },
     "picture": {
       "title": "Picture",
       "url": {
