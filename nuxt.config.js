@@ -18,6 +18,11 @@ export default {
     ]
   },
 
+  env: {
+    version: process.env.npm_package_version,
+    revision: process.env.COMMIT_HASH || 'development'
+  },
+
   manifest: {
     "name": "DevNotes",
     "short_name": "DevNotes",

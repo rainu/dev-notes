@@ -5,10 +5,10 @@
   "author": "rainu",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "COMMIT_HASH=$(git rev-parse HEAD) nuxt",
+    "build": "COMMIT_HASH=$(git rev-parse HEAD) nuxt build",
+    "start": "COMMIT_HASH=$(git rev-parse HEAD) nuxt start",
+    "generate": "COMMIT_HASH=$(git rev-parse HEAD) nuxt generate"
   },
   "dependencies": {
     "@mdi/font": "^4.2.95",

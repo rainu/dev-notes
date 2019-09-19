@@ -4,6 +4,15 @@
       "code": "Deutsch"
     }
   },
+  "about":{
+    "title": "DevNotes",
+    "author": "Autor",
+    "code": "Quellcode",
+    "license": "Lizens",
+    "bug": "Fehler melden",
+    "version": "Version",
+    "close": "Ok"
+  },
   "common": {
     "error": "Fehler",
     "alert": "Warnung",

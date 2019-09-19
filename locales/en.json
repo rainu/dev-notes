@@ -4,6 +4,15 @@
       "code": "English"
     }
   },
+  "about":{
+    "title": "DevNotes",
+    "author": "Author",
+    "code": "Sourcecode",
+    "license": "License",
+    "bug": "Bug report",
+    "version": "Version",
+    "close": "Ok"
+  },
   "common": {
     "error": "Error",
     "alert": "Warning",

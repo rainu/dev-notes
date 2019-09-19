@@ -59,9 +59,7 @@
       <div class="flex-grow-1"></div>
 
       <v-toolbar-items>
-        <v-btn text class="text-capitalize">
-          <v-icon>info</v-icon>
-        </v-btn>
+        <Info />
       </v-toolbar-items>
     </v-app-bar>
 
@@ -74,8 +72,10 @@
 <script>
 import { mapState } from 'vuex';
 import { generateBoardQuery, readBoardQuery } from '../common/boardQuery'
+import Info from "../components/Info";
 
 export default {
+  components: {Info},
   data () {
     return {
       clipped: false,
