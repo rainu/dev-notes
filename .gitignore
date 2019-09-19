@@ -82,7 +82,7 @@ dist
 .editorconfig
 
 # Service worker
-sw.*
+static/sw.*
 
 # Mac OSX
 .DS_Store
