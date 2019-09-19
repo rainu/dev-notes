@@ -1,7 +1,25 @@
 import colors from 'vuetify/es5/util/colors'
 
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/dev-notes/'
+  }
+} : {
+  router: {
+    base: '/'
+  }
+}
+
 export default {
+  ...routerBase,
+
   mode: 'spa',
+
+  generate: {
+    dir: 'docs'
+  },
+
   /*
   ** Headers of the page
   */
@@ -14,7 +32,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: `${routerBase.router.base}favicon.ico` }
     ]
   },
 
