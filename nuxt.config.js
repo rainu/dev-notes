@@ -44,7 +44,7 @@ export default {
   manifest: {
     "name": "DevNotes",
     "short_name": "DevNotes",
-    "start_url": "/",
+    "start_url": routerBase.router.base,
     "scope": ".",
     "display": "standalone",
     "orientation": "portrait-primary",

@@ -8,7 +8,7 @@
     "title": "DevNotes",
     "author": "Autor",
     "code": "Quellcode",
-    "license": "Lizens",
+    "license": "Lizenz",
     "bug": "Fehler melden",
     "version": "Version",
     "close": "Ok"
@@ -96,7 +96,7 @@
     }
   },
   "board": {
-    "title": "Pinwandname",
+    "title": "Pinnwandname",
     "new": {
       "title": "Neue Pinnwand anlegen"
     },
