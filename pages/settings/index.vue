@@ -54,10 +54,10 @@
             </v-toolbar>
             <v-card-text class="pt-0 pb-0">
               <v-row>
-                <v-col cols="6">
+                <v-col cols="12" sm="6">
                   <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
                 </v-col>
-                <v-col cols="6" v-if="notes.fixedSize">
+                <v-col cols="12" sm="6" v-if="notes.fixedSize">
                   <v-select
                     :items="noteSizes"
                     v-model="notes.size"
@@ -69,10 +69,10 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="6">
+                <v-col cols="12" sm="6">
                   <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="12" sm="6">
                   <v-select
                     :items="localeOptions"
                     :value="locale"
