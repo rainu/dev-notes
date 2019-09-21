@@ -69,11 +69,19 @@
         "name": "Name",
         "description": "Description",
         "default": "Default value",
-        "required": "Mandatory",
+        "required": {
+          "title": "Mandatory",
+          "mandatory": "Mandatory",
+          "optional": "Optional"
+        },
+        "validation": {
+          "invalid-character": "It must start with a letter and must only contains numbers and letters!"
+        },
         "add": "Placeholder",
         "edit": "Edit",
         "action": {
           "add": "Add",
+          "close": "Ok",
           "save": "Save"
         }
       }
@@ -103,6 +111,7 @@
       "title": "Edit"
     },
     "copy": {
+      "title": "Copy",
       "successful": "Content was copied to clipboard."
     },
     "saved": {

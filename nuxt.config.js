@@ -129,6 +129,8 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      //we need the compiler-included build for template-notes!
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
     }
   }
 }

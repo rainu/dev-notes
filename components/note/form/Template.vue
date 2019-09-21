@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-text-field v-model="note.title" :label="$t('note.title')" :rules="ruleRequired" required></v-text-field>
+          <v-text-field v-model="note.title" :label="$t('note.title')" :rules="[ruleRequired]" required></v-text-field>
         </v-col>
       </v-row>
 
@@ -56,10 +56,10 @@
         </v-card-title>
         <v-card-text>
           <v-form v-model="dialog.add.valid" @submit.prevent="addPlaceholder()">
-            <v-text-field autofocus v-model="dialog.add.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="ruleRequired" required></v-text-field>
+            <v-text-field autofocus v-model="dialog.add.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="[ruleRequired, rulePlaceholderName]" required></v-text-field>
             <v-textarea v-model="dialog.add.placeholder.description" :label="$t('note.template.placeholder.description')" ></v-textarea>
             <v-text-field v-model="dialog.add.placeholder.default" :label="$t('note.template.placeholder.default')" ></v-text-field>
-            <v-switch v-model="dialog.add.placeholder.required" :label="$t('note.template.placeholder.required')" color="primary"></v-switch>
+            <v-switch v-model="dialog.add.placeholder.required" :label="$t('note.template.placeholder.required.title')" color="primary"></v-switch>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -77,10 +77,10 @@
         </v-card-title>
         <v-card-text>
           <v-form v-model="dialog.edit.valid" @submit.prevent="savePlaceholder()">
-            <v-text-field autofocus v-model="dialog.edit.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="ruleRequired" required></v-text-field>
+            <v-text-field autofocus v-model="dialog.edit.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="[ruleRequired, rulePlaceholderName]" required></v-text-field>
             <v-textarea v-model="dialog.edit.placeholder.description" :label="$t('note.template.placeholder.description')" ></v-textarea>
             <v-text-field v-model="dialog.edit.placeholder.default" :label="$t('note.template.placeholder.default')" ></v-text-field>
-            <v-switch v-model="dialog.edit.placeholder.required" :label="$t('note.template.placeholder.required')" color="primary"></v-switch>
+            <v-switch v-model="dialog.edit.placeholder.required" :label="$t('note.template.placeholder.required.title')" color="primary"></v-switch>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -170,9 +170,15 @@
         return Object.keys(tags).sort()
       },
       ruleRequired(){
-        return [
-          v => !!v || this.$t('common.form.validation.required')
-        ]
+        return v => !!v || this.$t('common.form.validation.required')
+      },
+      rulePlaceholderName(){
+        return v => {
+          if(v && v.match(/^[a-zA-Z][a-zA-Z0-9]*$/)) {
+            return true
+          }
+          return this.$t('note.template.placeholder.validation.invalid-character')
+        }
       }
     },
     methods: {

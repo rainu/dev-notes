@@ -13,6 +13,11 @@
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
+        <NoteCardTemplate v-if="note.type === 'template'" :note="note"
+                      :show-tags="showTags"
+                      @onCopy="onCopyNote"
+                      @onEdit="onEditRequest(note)"
+                      @onDelete="onDeleteRequest(note.id)" />
 
       </v-col>
     </v-row>
@@ -143,9 +148,11 @@ import NoteCardPicture from "../components/note/card/Picture";
 import NoteFormText from "../components/note/form/Text";
 import NoteFormPicture from "../components/note/form/Picture";
 import NoteFormTemplate from "../components/note/form/Template";
+import NoteCardTemplate from "../components/note/card/Template";
 
 export default {
   components: {
+    NoteCardTemplate,
     NoteFormTemplate, NoteCardText, NoteCardPicture, NoteFormText, NoteFormPicture
   },
   data(){
@@ -180,9 +187,9 @@ export default {
       note: {
         data: {},
         types: [
+          { id: 'template', icon: 'ballot', text: 'note.template.title' },
           { id: 'picture', icon: 'photo', text: 'note.picture.title' },
           { id: 'text', icon: 'notes', text: 'note.text.title' },
-          { id: 'template', icon: 'ballot', text: 'note.template.title' },
         ]
       }
     }

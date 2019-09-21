@@ -69,11 +69,19 @@
         "name": "Name",
         "description": "Beschreibung",
         "default": "Standardwert",
-        "required": "Pflichtfeld",
+        "required": {
+          "title": "Pflichtfeld",
+          "mandatory": "Notwendig",
+          "optional": "Optional"
+        },
+        "validation": {
+          "invalid-character": "Muss mit einem Buchstaben anfangen und darf nur Buchstaben und Zahlen beinhalten!"
+        },
         "add": "Platzhalter",
         "edit": "Anpassen",
         "action": {
           "add": "Hinzufügen",
+          "close": "Ok",
           "save": "Speichern"
         }
       }
@@ -103,6 +111,7 @@
       "title": "Bearbeiten"
     },
     "copy": {
+      "title": "Kopieren",
       "successful": "Inhalt wurde kopiert."
     },
     "saved": {
