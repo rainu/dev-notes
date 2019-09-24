@@ -21,16 +21,19 @@ export function newLocalStore() {
   const store = {
     cryptoModule: noCrypto,
     settings: localforage.createInstance({
+      name: process.env.appName,
       driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'settings', // Should be alphanumeric, with underscores.
     }),
     notes: localforage.createInstance({
+      name: process.env.appName,
       driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'notes', // Should be alphanumeric, with underscores.
     }),
     boards: localforage.createInstance({
+      name: process.env.appName,
       driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'boards', // Should be alphanumeric, with underscores.
