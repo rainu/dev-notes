@@ -200,11 +200,7 @@
 
               <v-row>
                 <v-col cols="12" sm="6">
-                  <v-card>
-                    <v-card-text>
-                      <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
-                    </v-card-text>
-                  </v-card>
+                  <SettingsTheme />
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-card>
@@ -304,9 +300,10 @@
   import i18n from '../../locales'
   import uuid4 from 'uuid4'
   import BoardForm from "../../components/board/Form";
+  import SettingsTheme from "../../components/settings/Theme";
 
   export default {
-    components: {BoardForm},
+    components: {SettingsTheme, BoardForm},
     data: () => ({
       dialog: {
         new: {
@@ -336,7 +333,6 @@
         current: null,
         password: ["", ""],
       },
-      darkModeSwitch: null,
       noteSizes: [
         {label: 'settings.notes.size.small', value: 'small'},
         {label: 'settings.notes.size.medium', value: 'medium'},
@@ -400,7 +396,6 @@
     methods: {
       ...mapActions({
         applyLanguage: 'settings/applyLanguage',
-        applyDarkMode: 'settings/applyThemeDark',
         checkSecret: 'settings/checkSecret',
         enableEncryption: 'settings/enableEncryption',
         disableEncryption: 'settings/disableEncryption'
@@ -504,13 +499,9 @@
           })
         }
       },
-      darkModeSwitch(value){
-        this.applyDarkMode(value)
-      }
     },
     mounted() {
       this.updateNoteSettings(this.noteSettings)
-      this.darkModeSwitch = this.darkMode
     }
   }
 </script>
