@@ -12,7 +12,7 @@
         <v-list-item v-for="placeholder of note.placeholder" :key="placeholder.id" class="pa-0">
           <v-list-item-content>
             <v-list-item-title>
-              <v-btn block text @click="insertPlaceholder(placeholder.name)">{{placeholder.name}}</v-btn>
+              <v-btn block @click="insertPlaceholder(placeholder.name)" >{{placeholder.name}}</v-btn>
             </v-list-item-title>
           </v-list-item-content>
 
