@@ -178,27 +178,10 @@
               <div class="flex-grow-1"></div>
             </v-toolbar>
             <v-card-text class="pb-0">
-              <v-card>
-                <v-card-text>
-                  <v-row>
-                    <v-col cols="12" sm="6">
-                      <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
-                    </v-col>
-                    <v-col cols="12" sm="6" v-if="notes.fixedSize">
-                      <v-select
-                        :items="noteSizes"
-                        v-model="notes.size"
-                        :item-text="getNoteSizeItemLabel"
-                        item-value="value"
-                        prepend-icon="format_size"
-                        :label="$t('settings.notes.size.value')"
-                      ></v-select>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
-              </v-card>
-
               <v-row>
+                <v-col cols="12" >
+                  <SettingsNote />
+                </v-col>
                 <v-col cols="12" sm="6">
                   <SettingsTheme />
                 </v-col>
@@ -289,9 +272,10 @@
   import BoardForm from "../../components/board/Form";
   import SettingsTheme from "../../components/settings/Theme";
   import SettingsLanguage from "../../components/settings/Language";
+  import SettingsNote from "../../components/settings/Note";
 
   export default {
-    components: {SettingsLanguage, SettingsTheme, BoardForm},
+    components: {SettingsNote, SettingsLanguage, SettingsTheme, BoardForm},
     data: () => ({
       dialog: {
         new: {
@@ -321,15 +305,6 @@
         current: null,
         password: ["", ""],
       },
-      noteSizes: [
-        {label: 'settings.notes.size.small', value: 'small'},
-        {label: 'settings.notes.size.medium', value: 'medium'},
-        {label: 'settings.notes.size.large', value: 'large'},
-      ],
-      notes: {
-        size: 'small',
-        fixedSize: false,
-      },
       snackbar: {
         board: {
           saved: false,
@@ -343,8 +318,6 @@
     computed: {
       ...mapState({
         isEncrypted: state => state.settings.encrypted,
-        noteSettings: state => state.settings.notes,
-        darkMode: state => state.settings.theme.dark,
         boards: state => state.board.boards,
       }),
       encryptionPassword1Rules(){
@@ -386,7 +359,6 @@
         addBoard: 'board/addBoard',
         editBoard: 'board/editBoard',
         deleteBoard: 'board/deleteBoard',
-        setNoteSize: 'settings/setNoteSize',
       }),
       onSaveNewBoard(board){
         this.addBoard({
@@ -454,33 +426,6 @@
           .then(() => this.disableEncryption())
           .catch(() => this.snackbar.change.failed = true)
       },
-      getNoteSizeItemLabel(item){
-        return this.$t(item.label)
-      },
-      updateNoteSettings(settings){
-        this.notes.fixedSize = settings.fixed
-        this.notes.size = settings.size
-      },
-    },
-    watch: {
-      noteSettings: {
-        deep: true,
-        handler(settings){
-          this.updateNoteSettings(settings)
-        }
-      },
-      notes: {
-        deep: true,
-        handler(notes) {
-          this.setNoteSize({
-            fixed: notes.fixedSize,
-            size: notes.size
-          })
-        }
-      },
-    },
-    mounted() {
-      this.updateNoteSettings(this.noteSettings)
     }
   }
 </script>
