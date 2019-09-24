@@ -2,6 +2,37 @@
 
 > A progressive web application (PWA) for notes.
 
+[Try it out!](https://rainu.github.io/dev-notes/)
+
+## Features
+* No need for external server (such like a database)
+    * The whole content will be stored locally
+* optional encryption
+    * The note-content can be stored encrypted
+* Note-Types:
+    * Textual
+    * Markdown
+    * Image
+    * Template - text with customizable placeholder
+* Filterable notes - each note can have multiple tags
+* Customizable boards
+    * a board is a user-predefined set of filters
+* Copy note-content to clipboard
+* Multilingual
+    * english
+    * german
+* Responsive - looks great at mobile and desktop
+* Different Themes:
+    * dark
+    * light
+* Backup-Mechanism
+    * Download as file
+    * Upload a file
+    
+## Changelog
+### 0.9.0
+* implements all base features
+
 ## Build Setup
 
 ``` bash

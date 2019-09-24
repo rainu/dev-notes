@@ -6,5 +6,5 @@ const localeMappings = {
 export default {
   locales: Object.keys(localeMappings),
   localeMappings,
-  defaultLocale: 'de'
+  defaultLocale: 'en'
 }
