@@ -49,6 +49,15 @@
             <v-list-item-title v-text="$t('navigation.settings')" />
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item router to="/help/">
+          <v-list-item-action>
+            <v-icon>help</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('navigation.help')" />
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 

@@ -1,5 +1,11 @@
 <template>
   <v-container fluid>
+    <v-row justify="center" v-if="!existNotes">
+      <v-col>
+        <HelpFirstSteps />
+      </v-col>
+    </v-row>
+
     <v-row align="center">
       <v-col cols="12" sm="6" md="3" v-for="note of filteredNotes" :key="note.id">
 
@@ -9,15 +15,15 @@
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
         <NoteCardPicture v-if="note.type === 'picture'" :note="note"
-                      :show-tags="showTags"
-                      @onCopy="onCopyNote"
-                      @onEdit="onEditRequest(note)"
-                      @onDelete="onDeleteRequest(note.id)" />
+                         :show-tags="showTags"
+                         @onCopy="onCopyNote"
+                         @onEdit="onEditRequest(note)"
+                         @onDelete="onDeleteRequest(note.id)" />
         <NoteCardTemplate v-if="note.type === 'template'" :note="note"
-                      :show-tags="showTags"
-                      @onCopy="onCopyNote"
-                      @onEdit="onEditRequest(note)"
-                      @onDelete="onDeleteRequest(note.id)" />
+                          :show-tags="showTags"
+                          @onCopy="onCopyNote"
+                          @onEdit="onEditRequest(note)"
+                          @onDelete="onDeleteRequest(note.id)" />
 
       </v-col>
     </v-row>
@@ -149,11 +155,17 @@ import NoteFormText from "../components/note/form/Text";
 import NoteFormPicture from "../components/note/form/Picture";
 import NoteFormTemplate from "../components/note/form/Template";
 import NoteCardTemplate from "../components/note/card/Template";
+import HelpFirstSteps from "../components/help/FirstSteps";
 
 export default {
   components: {
+    HelpFirstSteps,
     NoteCardTemplate,
-    NoteFormTemplate, NoteCardText, NoteCardPicture, NoteFormText, NoteFormPicture
+    NoteFormTemplate,
+    NoteCardText,
+    NoteFormText,
+    NoteCardPicture,
+    NoteFormPicture
   },
   data(){
     return {
@@ -244,7 +256,10 @@ export default {
 
         return true
       })
-    }
+    },
+    existNotes() {
+      return this.notes.length > 0
+    },
   },
   methods: {
     ...mapMutations({

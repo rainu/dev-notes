@@ -52,17 +52,26 @@
   "navigation": {
     "home": "Alle",
     "settings": "Einstellungen",
-    "backup": "Sicherung"
+    "backup": "Sicherung",
+    "help": "Hilfe"
   },
   "note": {
     "title": "Titel",
+    "help": {
+      "first-steps": {
+        "title": "Willkommen in {appName}",
+        "preamble": "Fügen Sie einfach eine neue Notiz hinzu, indem Sie auf das **Plus-Symbol** in der **unteren rechten Ecke** klicken.\n\nEs gibt verschiedene Arten von Notizen."
+      }
+    },
     "text": {
       "title": "Text",
+      "help": "Dies ist eine eine einfache Text Notiz. Wenn Sie diese Notiz kopieren, kopieren Sie den Text, den Sie sehen. Es ist außerdem möglich den Inhalt in **Markdown** zu schreiben.",
       "content": "Inhalt",
       "markdown": "Markdown"
     },
     "template": {
       "title": "Vorlage",
+      "help": "Dies ist eine Notiz in der Sie eine Vorlage (Text) und Platzhalter definieren können. Wenn Sie den Inhalt dieser Notiz kopieren, werden Sie aufgefordert, diese Platzhalter auszufüllen. Danach wird die Vorlage mit den **ersetzten** Platzhaltern kopiert. Diese Art ist gut für Komandozeilen-Befehle geeignet.",
       "template": "Template",
       "placeholder": {
         "title": "Platzhalter",
@@ -88,6 +97,7 @@
     },
     "picture": {
       "title": "Bild",
+      "help": "Dies ist ein Notiz in der Sie eine **Bild-URL** hinterlegen können. Das Bild wird dargestellt und wenn Sie den Inhalt kopieren, kopieren Sie die Bild-URL. Diese Art ist hervorragend geeignet um **[Reaktions-GIFs](https://giphy.com/search/developer)** zu speichern :)",
       "url": {
         "placeholder": "http://test.de/bild.png"
       }

@@ -52,17 +52,26 @@
   "navigation": {
     "home": "All",
     "settings": "Settings",
-    "backup": "Backup"
+    "backup": "Backup",
+    "help": "Help"
   },
   "note": {
     "title": "Title",
+    "help": {
+      "first-steps": {
+        "title": "Welcome to {appName}",
+        "preamble": "Just add a new note by clicking on the **plus icon** in the **lower right corner**.\n\nThere are different types of notes."
+      }
+    },
     "text": {
       "title": "Text",
+      "help": "This is a simple text note. When you copying this note, you copy the text which are you see. It is also possible to write the content in **Markdown**.",
       "content": "Content",
       "markdown": "Markdown"
     },
     "template": {
       "title": "Template",
+      "help": "This is a note where you can define a template (text) and placeholders. When you copy the contents of this note, you are prompted to fill in these placeholders. Then the template is copied with the **replaced** placeholders. This type is ideal for command line commands.",
       "template": "Template",
       "placeholder": {
         "title": "Placeholder",
@@ -88,6 +97,7 @@
     },
     "picture": {
       "title": "Picture",
+      "help": "This is a note in which you can deposit a **Image URL**. The image will be displayed and when you copy the content, you copy the URL of that image. This type is ideal for storing **[reaction GIFs](https://giphy.com/search/developer)** :)",
       "url": {
         "placeholder": "http://example.com/picture.png"
       }
