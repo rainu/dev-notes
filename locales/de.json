@@ -21,7 +21,8 @@
     "confirmation": {
       "title": "Warnung",
       "agree": "Ja",
-      "disagree": "Abbrechen"
+      "disagree": "Abbrechen",
+      "close": "Schließen"
     },
     "form": {
       "validation": {
@@ -133,6 +134,10 @@
   },
   "board": {
     "title": "Pinnwandname",
+    "help": {
+      "title": "Hilfe zu Pinnwänden",
+      "content": "Notizen können **Stichworte** enthalten. Nach diesen können Notizen **gefiltert** werden. Damit man diese Filter nicht immer neu setzen muss, können Pinnwände erstellt werden.\n\nPinnwände sind eine eine Ansammlung an Filtern. Sie haben ein **Namen**, ein **Icon** und werden in der **Menüleiste** angezeigt. Somit können **Kategorien** oder häufig genutzte Filter realisiert werden."
+    },
     "new": {
       "title": "Neue Pinnwand anlegen"
     },
@@ -167,6 +172,10 @@
     "unlock": "Entsperren",
     "password": "Passwort",
     "invalid": "Das Passwort ist ungültig!",
+    "help": {
+      "title": "Hilfe zur Verschlüsselung",
+      "content": "Die Daten befinden sich lokal auf Ihrem Gerät! Sie werden explizit **nicht** auf einem Server gespeichert. Dennoch werden sie standardmäßig **unverschlüsselt** - und damit in lesbarer Form - abgelegt. Möchten Sie das nicht, können Sie die Daten verschlüsselt ablegen lassen. Dadurch sind die Notizen auch dann Sicher, wenn sie das Gerät verlieren!\n\nUm die Daten verschlüsseln zu lassen, benötigen Sie ein (gutes) **Passwort**. Dies müssen Sie fortan beim Start der Anwendung eingeben.\n\n **ACHTUNG:** Verlieren Sie das Passwort, können Ihre Daten **nicht** wiederhergestellt werden! Da das Passwort **nicht** gespeichert wird.\n\nSollten Sie bereits Daten unverschlüsselt gespeichert haben, ist dies kein Problem! Diese können auch nachträglich verschlüsselt werden. Andersherum gilt dies auch: Sie können Ihre Daten wieder entschlüsselt ablegen lassen und müssen ab dann auch kein Passwort beim Start eingeben!"
+    },
     "actions": {
       "unlock": "Entsperren"
     }

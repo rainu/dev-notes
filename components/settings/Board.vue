@@ -4,6 +4,9 @@
       <v-toolbar color="primary" flat>
         <v-toolbar-title>{{$t('settings.boards.title')}}</v-toolbar-title>
         <div class="flex-grow-1"></div>
+        <v-btn icon @click="showHelp = true">
+          <v-icon>help</v-icon>
+        </v-btn>
       </v-toolbar>
 
       <!-- for each available board -->
@@ -91,6 +94,15 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="showHelp" scrollable>
+      <HelpBoard>
+        <div class="flex-grow-1"></div>
+        <v-btn color="primary" @click="showHelp = false">
+          {{$t('common.confirmation.close')}}
+        </v-btn>
+      </HelpBoard>
+    </v-dialog>
+
     <v-snackbar v-model="snackbar.board.saved" color="success" class="text-center" :timeout="1000">
       {{$t('board.saved.successfully')}}
       <v-btn text @click="snackbar.board.saved = false" >
@@ -104,12 +116,14 @@
   import { mapMutations, mapState } from 'vuex';
   import uuid4 from 'uuid4'
   import BoardForm from "../board/Form";
+  import HelpBoard from "../help/Board";
 
   export default {
     name: "SettingsBoard",
-    components: {BoardForm},
+    components: {HelpBoard, BoardForm},
     data(){
       return {
+        showHelp: false,
         dialog: {
           new: {
             open: false,

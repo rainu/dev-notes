@@ -4,6 +4,9 @@
       <v-toolbar color="primary" flat>
         <v-toolbar-title>{{$t('settings.encryption.title')}}</v-toolbar-title>
         <div class="flex-grow-1"></div>
+        <v-btn icon @click="showHelp = true">
+          <v-icon>help</v-icon>
+        </v-btn>
       </v-toolbar>
 
       <template v-if="isEncrypted">
@@ -119,6 +122,15 @@
 
     </v-card>
 
+    <v-dialog v-model="showHelp" scrollable>
+      <HelpEncryption>
+        <div class="flex-grow-1"></div>
+        <v-btn color="primary" @click="showHelp = false">
+          {{$t('common.confirmation.close')}}
+        </v-btn>
+      </HelpEncryption>
+    </v-dialog>
+
     <v-snackbar v-model="snackbar.change.failed" color="error" class="text-center" :timeout="5000">
       {{$t('encryption.invalid')}}
       <v-btn text @click="snackbar.change.failed = false" >
@@ -136,10 +148,13 @@
 
 <script>
   import { mapActions, mapState } from 'vuex';
+  import HelpEncryption from "../help/Encryption";
 
   export default {
     name: "SettingsEncryption",
+    components: {HelpEncryption},
     data: () => ({
+      showHelp: false,
       encryption: {
         valid: false,
         password: ["", ""],
