@@ -42,7 +42,7 @@
                   <p>${placeholder.default ? placeholder.default : '-'}</p>
 
                   <h3>{{$t('note.template.placeholder.description')}}</h3>
-                  <p>${placeholder.description}</p>
+                  <p>${placeholder.description ? placeholder.description : '-' }</p>
                 </v-card-text>
 
                 <v-card-actions class="text-center">
