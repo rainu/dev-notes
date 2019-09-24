@@ -2,6 +2,8 @@
   <v-container fluid>
     <v-layout column justify-center>
       <v-row align="center">
+
+        <!-- Board options -->
         <v-col cols="12">
           <v-card class="elevation-12">
             <v-toolbar color="primary" flat>
@@ -46,42 +48,178 @@
           </v-card>
         </v-col>
 
+        <!-- Encryption -->
+        <v-col cols="12" >
+          <v-card class="elevation-12">
+            <v-toolbar color="primary" flat>
+              <v-toolbar-title>{{$t('settings.encryption.title')}}</v-toolbar-title>
+              <div class="flex-grow-1"></div>
+            </v-toolbar>
+
+            <template v-if="isEncrypted">
+              <v-card-text>
+                <v-row>
+
+                  <!-- Change password -->
+                  <v-col cols="12">
+                    <v-card>
+                      <v-card-text>
+                        <v-form v-model="passwordChange.valid" @submit.prevent="onPasswordChange" ref="password-change">
+                          <v-row>
+                            <v-col cols="12" sm="3">
+                              <v-text-field :type="passwordChange.showPassword ? 'text' : 'password'"
+                                            :append-icon="passwordChange.showPassword ? 'visibility' : 'visibility_off'"
+                                            @click:append="passwordChange.showPassword = !passwordChange.showPassword"
+                                            v-model="passwordChange.current"
+                                            :rules="changePasswordCurrentRules"
+                                            :label="$t('settings.encryption.password.current')"
+                                            @change="validatePasswordChange"
+                                            required />
+                            </v-col>
+                            <v-col cols="12" sm="3">
+                              <v-text-field type="password"
+                                            v-model="passwordChange.password[0]"
+                                            :rules="changePassword1Rules"
+                                            :label="$t('settings.encryption.password.1st')"
+                                            @change="validatePasswordChange"
+                                            required />
+                            </v-col>
+                            <v-col cols="12" sm="3">
+                              <v-text-field type="password"
+                                            v-model="passwordChange.password[1]"
+                                            :rules="changePassword2Rules"
+                                            :label="$t('settings.encryption.password.2nd')"
+                                            @change="validatePasswordChange"
+                                            required />
+                            </v-col>
+                            <v-col cols="12" sm="3" align-self="center">
+                              <v-btn block color="primary" @click="onPasswordChange" :disabled="!passwordChange.valid">
+                                <v-icon>compare_arrows</v-icon>
+                                {{$t('settings.encryption.actions.change')}}
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-form>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+
+                  <!-- disable encryption -->
+                  <v-col cols="12">
+                    <v-card>
+                      <v-card-text>
+                        <v-form v-model="decryption.valid" @submit.prevent="onDecrypt" ref="encryption-disable">
+                          <v-row>
+                            <v-col cols="12" sm="3">
+                              <v-text-field :type="decryption.showPassword ? 'text' : 'password'"
+                                            :append-icon="decryption.showPassword ? 'visibility' : 'visibility_off'"
+                                            @click:append="decryption.showPassword = !decryption.showPassword"
+                                            v-model="decryption.password"
+                                            :label="$t('settings.encryption.password.current')"
+                                            required />
+                            </v-col>
+                            <v-col cols="12" sm="3" align-self="center">
+                              <v-btn block color="primary" @click="onDecrypt" :disabled="!decryption.valid">
+                                <v-icon>lock_open</v-icon>
+                                {{$t('settings.encryption.actions.decrypt')}}
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-form>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+
+                </v-row>
+
+              </v-card-text>
+            </template>
+            <template v-else>
+              <v-card-text>
+                <v-form v-model="encryption.valid" @submit.prevent="onEncrypt" ref="encryption-enable">
+                  <v-row>
+
+                    <v-col cols="12" sm="4">
+                      <v-text-field type="password"
+                                    :label="$t('settings.encryption.password.1st')"
+                                    v-model="encryption.password[0]"
+                                    :rules="encryptionPassword1Rules"
+                                    @change="validateEncryptionChange"
+                                    required />
+                    </v-col>
+                    <v-col cols="12" sm="4">
+                      <v-text-field type="password"
+                                    :label="$t('settings.encryption.password.2nd')"
+                                    v-model="encryption.password[1]"
+                                    :rules="encryptionPassword2Rules"
+                                    @change="validateEncryptionChange"
+                                    required />
+                    </v-col>
+                    <v-col cols="12" sm="4" align-self="center">
+                      <v-btn block color="primary" @click="onEncrypt" :disabled="!encryption.valid">
+                        <v-icon>lock</v-icon>
+                        {{$t('settings.encryption.actions.encrypt')}}
+                      </v-btn>
+                    </v-col>
+
+                  </v-row>
+                </v-form>
+              </v-card-text>
+            </template>
+
+          </v-card>
+        </v-col>
+
+        <!-- Other options -->
         <v-col cols="12">
           <v-card class="elevation-12">
             <v-toolbar color="primary" flat>
               <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
               <div class="flex-grow-1"></div>
             </v-toolbar>
-            <v-card-text class="pt-0 pb-0">
+            <v-card-text class="pb-0">
+              <v-card>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" sm="6">
+                      <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
+                    </v-col>
+                    <v-col cols="12" sm="6" v-if="notes.fixedSize">
+                      <v-select
+                        :items="noteSizes"
+                        v-model="notes.size"
+                        :item-text="getNoteSizeItemLabel"
+                        item-value="value"
+                        prepend-icon="format_size"
+                        :label="$t('settings.notes.size.value')"
+                      ></v-select>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+
               <v-row>
                 <v-col cols="12" sm="6">
-                  <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
-                </v-col>
-                <v-col cols="12" sm="6" v-if="notes.fixedSize">
-                  <v-select
-                    :items="noteSizes"
-                    v-model="notes.size"
-                    :item-text="getNoteSizeItemLabel"
-                    item-value="value"
-                    prepend-icon="format_size"
-                    :label="$t('settings.notes.size.value')"
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="6">
-                  <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+                  <v-card>
+                    <v-card-text>
+                      <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+                    </v-card-text>
+                  </v-card>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <v-select
-                    :items="localeOptions"
-                    :value="locale"
-                    item-text="label"
-                    item-value="value"
-                    prepend-icon="language"
-                    :label="$t('settings.language.title')"
-                    @change="onLanguageChange"
-                  ></v-select>
+                  <v-card>
+                    <v-card-text>
+                      <v-select
+                        :items="localeOptions"
+                        :value="locale"
+                        item-text="label"
+                        item-value="value"
+                        prepend-icon="language"
+                        :label="$t('settings.language.title')"
+                        @change="onLanguageChange"
+                      ></v-select>
+                    </v-card-text>
+                  </v-card>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -145,6 +283,18 @@
           <v-icon>close</v-icon>
         </v-btn>
       </v-snackbar>
+      <v-snackbar v-model="snackbar.change.failed" color="error" class="text-center" :timeout="5000">
+        {{$t('encryption.invalid')}}
+        <v-btn text @click="snackbar.change.failed = false" >
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-snackbar>
+      <v-snackbar v-model="snackbar.change.success" color="success" class="text-center" :timeout="5000">
+        {{$t('settings.encryption.change.successful')}}
+        <v-btn text @click="snackbar.change.success = false" >
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-snackbar>
     </v-layout>
   </v-container>
 </template>
@@ -171,6 +321,21 @@
           boardId: null,
         }
       },
+      encryption: {
+        valid: false,
+        password: ["", ""],
+      },
+      decryption: {
+        valid: false,
+        showPassword: false,
+        password: "",
+      },
+      passwordChange: {
+        valid: false,
+        showPassword: false,
+        current: null,
+        password: ["", ""],
+      },
       darkModeSwitch: null,
       noteSizes: [
         {label: 'settings.notes.size.small', value: 'small'},
@@ -185,12 +350,17 @@
         board: {
           saved: false,
         },
+        change: {
+          success: false,
+          failed: false,
+        }
       }
     }),
     computed: {
       ...mapState({
         locale: state => state.settings.locale,
         locales: state => state.settings.locales,
+        isEncrypted: state => state.settings.encrypted,
         noteSettings: state => state.settings.notes,
         darkMode: state => state.settings.theme.dark,
         boards: state => state.board.boards,
@@ -198,11 +368,42 @@
       localeOptions(){
         return this.locales.map(l => ({value: l, label: i18n.localeMappings[l].meta.language.code}))
       },
+      encryptionPassword1Rules(){
+        return [
+          v => !!v || this.$t('common.form.validation.required')
+        ]
+      },
+      encryptionPassword2Rules(){
+        return [
+          v => !!v || this.$t('settings.encryption.password.different'),
+          v => this.encryption.password[0] === this.encryption.password[1] || this.$t('settings.encryption.password.different')
+        ]
+      },
+      changePasswordCurrentRules(){
+        return [
+          v => !!v || this.$t('common.form.validation.required')
+        ]
+      },
+      changePassword1Rules(){
+        return [
+          v => !!v || this.$t('settings.encryption.password.different'),
+        ]
+      },
+      changePassword2Rules(){
+        return [
+          v => !!v || this.$t('settings.encryption.password.different'),
+          v => this.passwordChange.password[0] === this.passwordChange.password[1] || this.$t('settings.encryption.password.different')
+        ]
+      },
+
     },
     methods: {
       ...mapActions({
         applyLanguage: 'settings/applyLanguage',
         applyDarkMode: 'settings/applyThemeDark',
+        checkSecret: 'settings/checkSecret',
+        enableEncryption: 'settings/enableEncryption',
+        disableEncryption: 'settings/disableEncryption'
       }),
       ...mapMutations({
         addBoard: 'board/addBoard',
@@ -243,6 +444,41 @@
         this.dialog.delete.open = false
         this.deleteBoard(this.dialog.delete.boardId)
         this.dialog.delete.boardId = null
+      },
+      onEncrypt(){
+        if(!this.encryption.valid) return
+
+        let secret = this.encryption.password[0]
+        this.$refs['encryption-enable'].reset()
+        this.enableEncryption(secret)
+      },
+      validateEncryptionChange(){
+        this.$refs['encryption-enable'].validate()
+      },
+      onPasswordChange(){
+        if(!this.passwordChange.valid) return
+
+        this.checkSecret(this.passwordChange.current)
+          .then(() => {
+            this.enableEncryption(this.passwordChange.password[0])
+            this.$refs['password-change'].reset()
+
+            this.snackbar.change.success = true
+          })
+          .catch(() => this.snackbar.change.failed = true)
+      },
+      validatePasswordChange(){
+        this.$refs['password-change'].validate()
+      },
+      onDecrypt(){
+        if(!this.decryption.valid) return
+
+        this.checkSecret(this.decryption.password)
+          .then(() => {
+            this.$refs['encryption-disable'].reset()
+          })
+          .then(() => this.disableEncryption())
+          .catch(() => this.snackbar.change.failed = true)
       },
       getNoteSizeItemLabel(item){
         return this.$t(item.label)

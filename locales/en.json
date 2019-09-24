@@ -153,10 +153,35 @@
       "file": "Export file"
     }
   },
+  "encryption": {
+    "unlock": "Unlock",
+    "password": "Password",
+    "invalid": "The password is invalid!",
+    "actions": {
+      "unlock": "Unlock"
+    }
+  },
   "settings": {
     "title": "Settings",
     "boards": {
       "title": "Dashboards"
+    },
+    "encryption": {
+      "title": "Encryption",
+      "password": {
+        "current": "Current password",
+        "1st": "Password",
+        "2nd": "Password repeat",
+        "different": "Password is different!"
+      },
+      "change": {
+        "successful": "The password was changed successfully!"
+      },
+      "actions": {
+        "change": "Change",
+        "encrypt": "Encrypt",
+        "decrypt": "Decrypt"
+      }
     },
     "notes": {
       "size": {

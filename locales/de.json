@@ -153,10 +153,35 @@
       "file": "Datei exportieren"
     }
   },
+  "encryption": {
+    "unlock": "Entsperren",
+    "password": "Passwort",
+    "invalid": "Das Passwort ist ungültig!",
+    "actions": {
+      "unlock": "Entsperren"
+    }
+  },
   "settings": {
     "title": "Einstellungen",
     "boards": {
       "title": "Pinnwände"
+    },
+    "encryption": {
+      "title": "Verschlüsselung",
+      "password": {
+        "current": "Aktuelles Passwort",
+        "1st": "Passwort",
+        "2nd": "Passwort wiederholen",
+        "different": "Passwort ist nicht identisch!"
+      },
+      "change": {
+        "successful": "Das Passwort wurde erfolgreich geändert!"
+      },
+      "actions": {
+        "change": "Ändern",
+        "encrypt": "Verschlüsseln",
+        "decrypt": "Entschlüsseln"
+      }
     },
     "notes": {
       "size": {
