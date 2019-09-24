@@ -203,19 +203,7 @@
                   <SettingsTheme />
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <v-card>
-                    <v-card-text>
-                      <v-select
-                        :items="localeOptions"
-                        :value="locale"
-                        item-text="label"
-                        item-value="value"
-                        prepend-icon="language"
-                        :label="$t('settings.language.title')"
-                        @change="onLanguageChange"
-                      ></v-select>
-                    </v-card-text>
-                  </v-card>
+                  <SettingsLanguage />
                 </v-col>
               </v-row>
             </v-card-text>
@@ -297,13 +285,13 @@
 
 <script>
   import { mapActions, mapMutations, mapState } from 'vuex';
-  import i18n from '../../locales'
   import uuid4 from 'uuid4'
   import BoardForm from "../../components/board/Form";
   import SettingsTheme from "../../components/settings/Theme";
+  import SettingsLanguage from "../../components/settings/Language";
 
   export default {
-    components: {SettingsTheme, BoardForm},
+    components: {SettingsLanguage, SettingsTheme, BoardForm},
     data: () => ({
       dialog: {
         new: {
@@ -354,16 +342,11 @@
     }),
     computed: {
       ...mapState({
-        locale: state => state.settings.locale,
-        locales: state => state.settings.locales,
         isEncrypted: state => state.settings.encrypted,
         noteSettings: state => state.settings.notes,
         darkMode: state => state.settings.theme.dark,
         boards: state => state.board.boards,
       }),
-      localeOptions(){
-        return this.locales.map(l => ({value: l, label: i18n.localeMappings[l].meta.language.code}))
-      },
       encryptionPassword1Rules(){
         return [
           v => !!v || this.$t('common.form.validation.required')
@@ -395,7 +378,6 @@
     },
     methods: {
       ...mapActions({
-        applyLanguage: 'settings/applyLanguage',
         checkSecret: 'settings/checkSecret',
         enableEncryption: 'settings/enableEncryption',
         disableEncryption: 'settings/disableEncryption'
@@ -406,9 +388,6 @@
         deleteBoard: 'board/deleteBoard',
         setNoteSize: 'settings/setNoteSize',
       }),
-      onLanguageChange(lang){
-        this.applyLanguage(lang)
-      },
       onSaveNewBoard(board){
         this.addBoard({
           id: uuid4(),
