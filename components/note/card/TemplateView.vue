@@ -1,6 +1,34 @@
 <template>
-  <component :is="renderedTemplate">
-  </component>
+  <div>
+    <component :is="renderedTemplate" />
+
+    <v-dialog v-model="dialog.show" v-if="dialog.placeholder" scrollable>
+
+      <v-card>
+        <v-toolbar color="primary" flat>
+          <v-toolbar-title>{{dialog.placeholder.name}}</v-toolbar-title>
+          <div class="flex-grow-1"></div>
+        </v-toolbar>
+
+        <v-card-text class="pt-4">
+          <h3>{{$t(`note.template.placeholder.required.${dialog.placeholder.required ? 'mandatory' : 'optional'}`)}}</h3>
+          <p></p>
+
+          <h3>{{$t('note.template.placeholder.default')}}</h3>
+          <p>{{dialog.placeholder.default ? dialog.placeholder.default : '-'}}</p>
+
+          <h3>{{$t('note.template.placeholder.description')}}</h3>
+          <p>{{dialog.placeholder.description ? dialog.placeholder.description : '-' }}</p>
+        </v-card-text>
+
+        <v-card-actions class="text-center">
+          <div class="flex-grow-1"></div>
+          <v-btn color="primary" @click="dialog.show = false">{{$t('note.template.placeholder.action.close')}}</v-btn>
+        </v-card-actions>
+      </v-card>
+
+    </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -16,59 +44,33 @@
         required: true
       }
     },
+    data(){
+      return {
+        dialog: {
+          show: false,
+          placeholder: null,
+        }
+      }
+    },
+    methods: {
+      onPlaceholderClick(placeholderIndex) {
+        this.dialog.placeholder = this.placeholder[placeholderIndex]
+        this.dialog.show = true
+      }
+    },
     computed: {
       renderedTemplate(){
         let rendered = this.template
 
-        for(let placeholder of this.placeholder) {
+        for(let i in this.placeholder) {
+          let placeholder = this.placeholder[i]
           rendered = rendered.replace(new RegExp(`__${placeholder.name}__`, 'g'),
-              `<a href="javascript:" @click="dialog.${placeholder.name} = true" class="placeholder ${placeholder.required ? 'required' : 'optional'}">${placeholder.name}</a>`
+              `<a href="javascript:" @click="onPlaceholderClick(${i})" class="placeholder ${placeholder.required ? 'required' : 'optional'}">${placeholder.name}</a>`
           )
         }
-        for(let placeholder of this.placeholder) {
-          rendered += `
-            <v-dialog v-model="dialog.${placeholder.name}" scrollable>
-
-              <v-card>
-                <v-card-title>
-                  <span class="headline">${placeholder.name}</span>
-                </v-card-title>
-
-                <v-card-text>
-                  <h3>{{$t('note.template.placeholder.required.${placeholder.required ? 'mandatory' : 'optional'}')}}</h3>
-                  <p></p>
-
-                  <h3>{{$t('note.template.placeholder.default')}}</h3>
-                  <p>${placeholder.default ? placeholder.default : '-'}</p>
-
-                  <h3>{{$t('note.template.placeholder.description')}}</h3>
-                  <p>${placeholder.description ? placeholder.description : '-' }</p>
-                </v-card-text>
-
-                <v-card-actions class="text-center">
-                  <div class="flex-grow-1"></div>
-                  <v-btn color="primary" @click="dialog.${placeholder.name} = false">{{$t('note.template.placeholder.action.close')}}</v-btn>
-                </v-card-actions>
-              </v-card>
-
-            </v-dialog>
-          `
-        }
-
         let self = this
         return {
           template: `<div>${rendered}</div>`,
-          data(){
-            let data = {
-              dialog: {}
-            }
-
-            for(let placeholder of self.placeholder) {
-              data.dialog[placeholder.name] = false
-            }
-
-            return data
-          },
           methods: {
             onPlaceholderClick(name) {
               self.onPlaceholderClick(name)
