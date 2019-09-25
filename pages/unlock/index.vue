@@ -56,7 +56,7 @@
           .then(() => {
             this.setupCrypto(this.password)
               .then(() => Promise.all([this.initBoards(), this.initNotes()]))
-              .then(() => this.$router.push(this.$route.query.from ? this.$route.query.from : this.$router.options.base))
+              .then(() => this.$router.push(this.$route.query.from ? this.$route.query.from : "/"))
           })
           .catch(() => this.snackbar = true)
       }

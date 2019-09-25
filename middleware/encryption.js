@@ -4,7 +4,7 @@ export default function ({ isHMR, app, store, route, params, error, redirect }) 
   if(!store.state.settings.encrypted) return
   if(store.state.settings.setupCrypto) return
 
-  if(route.path !== app.router.options.base + "unlock") {
-    redirect(`${app.router.options.base}unlock?from=${route.fullPath}`)
+  if(!route.path.endsWith("/unlock")) {
+    redirect(`/unlock?from=${route.fullPath}`)
   }
 }
