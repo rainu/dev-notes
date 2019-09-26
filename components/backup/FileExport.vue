@@ -28,7 +28,7 @@
     methods:{
       onDownloadFile(){
         let exportData = exportAll(this.notes, this.boards)
-        let blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/json' } );
+        let blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/json;charset=UTF-8' } );
         let link = this.$refs['downloadLink'];
         link.href = window.URL.createObjectURL(blob);
         link.download = `dev_notes_backup.json`;

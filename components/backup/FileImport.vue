@@ -48,7 +48,7 @@
         this.uploadError = null
 
         let fileReader = new FileReader()
-        fileReader.readAsBinaryString(this.$refs.fileInput.files[0])
+        fileReader.readAsText(this.$refs.fileInput.files[0], 'UTF-8')
 
         fileReader.addEventListener('load', (e) => {
           let importResult = importAll(e.target.result)
