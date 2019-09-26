@@ -157,6 +157,7 @@
         if(this.clearAfterSubmit) {
           this.$refs.form.reset()
 
+          this.board.icon = this.defaultIcon
           this.board.filter.tags = {}
           this.applyTags(this.availableTags)
         }
