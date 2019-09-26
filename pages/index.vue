@@ -111,7 +111,7 @@
             </template>
             <v-list v-if="availableTags && availableTags.length > 0">
               <v-list-item v-for="tag in availableTags" :key="tag">
-                <v-btn block class="text-capitalize" @click="onFilterTagChange(tag)">
+                <v-btn block class="text-none" @click="onFilterTagChange(tag)">
                   <v-icon v-if="filter.tags[tag] === true" color="green">check_circle</v-icon>
                   <v-icon v-if="filter.tags[tag] === false" color="red">remove_circle</v-icon>
                   <v-icon v-if="filter.tags[tag] === null">filter_list</v-icon>

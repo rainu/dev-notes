@@ -28,7 +28,7 @@
       </v-row>
       <v-row>
         <v-col v-for="tag of availableTags" :key="tag">
-          <v-btn block class="text-capitalize" @click="onTagChange(tag)" v-if="board.filter.tags[tag]">
+          <v-btn block class="text-none text-center" @click="onTagChange(tag)" v-if="board.filter.tags[tag]">
             <v-icon v-if="board.filter.tags[tag].value === true" color="green">check_circle</v-icon>
             <v-icon v-if="board.filter.tags[tag].value === false" color="red">remove_circle</v-icon>
             <v-icon v-if="board.filter.tags[tag].value === null" disabled>filter_list</v-icon>
