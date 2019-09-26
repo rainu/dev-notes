@@ -232,6 +232,7 @@
         if(this.clearAfterSubmit) {
           this.$refs.form.reset()
           this.note.tags = []
+          this.note.placeholder = []
         }
       }
     },
