@@ -30,6 +30,14 @@
     * Upload a file
     
 ## Changelog
+
+### 0.9.1
+* fix Bugs
+    * [#7](https://github.com/rainu/dev-notes/issues/7)
+    * [#2](https://github.com/rainu/dev-notes/issues/2)
+    * [#1](https://github.com/rainu/dev-notes/issues/1)
+* dont capitalize placeholder names
+
 ### 0.9.0
 * implements all base features
 
