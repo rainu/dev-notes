@@ -1,8 +1,14 @@
+const migrationSteps = [
+  (data) => data, //there is already a version 1 out there
+]
+
+const CURRENT_VERSION = migrationSteps.length
+
 export const exportAll = (notes, boards) => {
   let exportObj = {
-    version: 1,
+    version: CURRENT_VERSION,
     notes: {},
-    boards: {}
+    boards: {},
   }
 
   for(let note of notes) {
@@ -24,8 +30,8 @@ export const importAll = (json) => {
     return new Error(e)
   }
 
-  if(parsed.version !== 1) {
-    return new Error('Invalid version')
+  if(parsed.version !== CURRENT_VERSION) {
+    parsed = migrate(parsed)
   }
 
   let notes = []
@@ -37,4 +43,14 @@ export const importAll = (json) => {
   return {
     notes, boards
   }
+}
+
+const migrate = (data) => {
+  for(let i = data.version; i < migrationSteps.length; i++) {
+    console.log(`Import-Migration: do Step ${i + 1} of ${migrationSteps.length}`)
+    data = migrationSteps[i](data)
+    data.version = i + 1
+  }
+
+  return data
 }
