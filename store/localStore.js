@@ -1,6 +1,7 @@
 //this is not a vuex-store! but a file for our localforage store
 import localforage from 'localforage'
 import SimpleCrypto from "simple-crypto-js/build/SimpleCrypto";
+import migrationSteps from './localStoreMigrations'
 
 const CRYPTO_CHECK = "ENCRYPTION_CHECK"
 
@@ -20,6 +21,12 @@ const crypto = (secret) => {
 export function newLocalStore() {
   const store = {
     cryptoModule: noCrypto,
+    meta: localforage.createInstance({
+      name: process.env.appName,
+      driver: localforage.INDEXEDDB,
+      version: 1.0,
+      storeName: 'meta', // Should be alphanumeric, with underscores.
+    }),
     settings: localforage.createInstance({
       name: process.env.appName,
       driver: localforage.INDEXEDDB,
@@ -43,10 +50,33 @@ export function newLocalStore() {
   return {
     ready() {
       return Promise.all([
+        store.meta.ready(),
         store.settings.ready(),
         store.notes.ready(),
         store.boards.ready(),
-      ])
+      ]).then(() => this.$migrate())
+    },
+
+    $migrate(){
+      const KEY_VERSION = 'version.store'
+
+      //get the current schema version
+      return store.meta.getItem(KEY_VERSION)
+        .then(storeVersion => {
+          let currentMigrationVersion = storeVersion ? storeVersion : 0
+
+          let p = Promise.resolve()
+          for(let i = currentMigrationVersion; i < migrationSteps.length; i++) {
+            p = p.then(() => {
+              console.log(`Migration: do Step ${i + 1} of ${migrationSteps.length}`)
+              return migrationSteps[i](store)
+            }).then(() => {
+              return store.meta.setItem(KEY_VERSION, i + 1)
+            })
+          }
+
+          return p
+        })
     },
 
     setupEncryptionModule(secret){
