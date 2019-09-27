@@ -66,7 +66,7 @@
     },
     "text": {
       "title": "Text",
-      "help": "This is a simple text note. When you copying this note, you copy the text which are you see. It is also possible to write the content in **Markdown**.",
+      "help": "This is a simple text note. If you copy this note you the shown text is copied. It is also possible to write the content in **Markdown**.",
       "content": "Content",
       "markdown": "Markdown"
     },
@@ -98,7 +98,7 @@
     },
     "picture": {
       "title": "Picture",
-      "help": "This is a note in which you can deposit a **Image URL**. The image will be displayed and when you copy the content, you copy the URL of that image. This type is ideal for storing **[reaction GIFs](https://giphy.com/search/developer)** :)",
+      "help": "This is a note in which you can store a **Image URL**. The image will be displayed and when you copy the content, you copy the URL of that image. This type is ideal for storing **[reaction GIFs](https://giphy.com/search/developer)** :)",
       "url": {
         "placeholder": "http://example.com/picture.png"
       }
@@ -129,14 +129,14 @@
       "successful": "Content was saved successfully."
     },
     "delete": {
-      "confirmation": "Are you sure to delete this note?"
+      "confirmation": "Are you sure you want to delete this note?"
     }
   },
   "board": {
     "title": "Dashboard",
     "help": {
       "title": "Dashboard help",
-      "content": "Notes may contain **tags**. These tags can be used to **filter** notes .So that you do not always set this filter again, dashboards can be created.\n\nDashboards are a collection of filters. They have a **name**, an **icon** and are displayed in the **menu bar**. Thus, **categories** or frequently used filters can be realized."
+      "content": "Notes may contain **tags**. These tags can be used to **filter** notes. To avoid you having to set these filters every time dashboards can be created.\n\nDashboards are a collection of filters. They have a **name**, an **icon** and are displayed in the **menu bar**. This way **categories** or frequently used filters can be created."
     },
     "new": {
       "title": "Create new dashboard"
@@ -151,7 +151,7 @@
       "title": "Edit"
     },
     "delete": {
-      "confirmation": "Are you sure to delete this dashboard?"
+      "confirmation": "Are you sure you want to delete this dashboard?"
     },
     "saved": {
       "successfully": "The dashboard was saved successfully."
@@ -174,7 +174,7 @@
     "invalid": "The password is invalid!",
     "help": {
       "title": "Encryption help",
-      "content": "The data is located locally on your device! They are explicitly **not** stored on a server. Nevertheless, they are stored by default **unencrypted** - and thus in readable form. If you do not want this, you can have the data encrypted. As a result, the notes are safe even if they lose the device!\n\nTo encrypt the data, you need a (good) **password**. From now on, you must enter this when starting the application.\n\n**ATTENTION:** If you lose the password, your data **can not** be recovered! Because the password **is not** saved!.\n\nIf you have already saved data unencrypted, this is no problem! These can also be encrypted later. The reverse is also true: you can have your data stored in decrypted form and you do not have to enter a password at the start!"
+      "content": "The data is stored on your device! It is explicitly **not** stored on a server. Nevertheless, by default it is stored **unencrypted** - and thus in readable form. If you do not want this, you can have the data encrypted. As a result, the notes are safe even if you lose the device!\n\nTo encrypt the data, you need a (good) **password**. From now on, you must enter it when starting the application.\n\n**ATTENTION:** If you lose the password, your data **can not** be recovered! Because the password **is not** saved!.\n\nIt is no problem if you already have some unencrypted notes! These can also be encrypted later. The reverse is also true: you can have your data stored in decrypted form and you do not have to enter a password at the start from then on!"
     },
     "actions": {
       "unlock": "Unlock"
