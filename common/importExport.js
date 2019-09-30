@@ -1,14 +1,22 @@
 const migrationSteps = [
   (data) => data, //there is already a version 1 out there
+  (data) => {
+    //IN: { notes: {..}, boards: {..} }
+    //OUT: { notes: {..}, boards: {..}, boardOrder: [..] }
+
+    data.boardOrder = Object.keys(data.boards)
+    return data
+  }
 ]
 
 const CURRENT_VERSION = migrationSteps.length
 
-export const exportAll = (notes, boards) => {
+export const exportAll = (notes, boards, boardOrder) => {
   let exportObj = {
     version: CURRENT_VERSION,
     notes: {},
     boards: {},
+    boardOrder: boardOrder
   }
 
   for(let note of notes) {
@@ -19,6 +27,7 @@ export const exportAll = (notes, boards) => {
     exportObj.boards[board.id] = board
   }
 
+  console.log(exportObj)
   return exportObj
 }
 

@@ -3,6 +3,7 @@ import localforage from 'localforage'
 import SimpleCrypto from "simple-crypto-js/build/SimpleCrypto";
 import migrationSteps from './localStoreMigrations'
 
+const BOARD_ORDER_KEY = "__order"
 const CRYPTO_CHECK = "ENCRYPTION_CHECK"
 
 const noCrypto = {
@@ -166,11 +167,17 @@ export function newLocalStore() {
     },
     getBoards(){
       return store.boards.keys()
-        .then(keys => keys.map(id => this.getBoard(id)))
+        .then(keys => keys.filter(k => k !== BOARD_ORDER_KEY).map(id => this.getBoard(id)))
         .then(promises => Promise.all(promises))
     },
     setBoard(board) {
       return store.boards.setItem(board.id, board)
+    },
+    getBoardOrder(){
+      return store.boards.getItem(BOARD_ORDER_KEY)
+    },
+    setBoardOrder(order) {
+      return store.boards.setItem(BOARD_ORDER_KEY, order)
     },
     removeBoard(id) {
       return store.boards.removeItem(id)

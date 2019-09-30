@@ -23,11 +23,12 @@
       ...mapState({
         notes: state => state.note.notes,
         boards: state => state.board.boards,
+        boardOrder: state => state.board.boardOrder,
       }),
     },
     methods:{
       onDownloadFile(){
-        let exportData = exportAll(this.notes, this.boards)
+        let exportData = exportAll(this.notes, this.boards, this.boardOrder)
         let blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/json;charset=UTF-8' } );
         let link = this.$refs['downloadLink'];
         link.href = window.URL.createObjectURL(blob);

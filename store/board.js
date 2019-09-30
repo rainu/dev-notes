@@ -2,11 +2,22 @@ import Vue from 'vue'
 
 export const state = () => ({
   boards: [],
+  boardOrder: []
 })
 
 export const mutations = {
-  loadBoard(state, board) {
-    state.boards.push(board)
+  loadBoards(state, {boards, order}) {
+    state.boards.push(...boards)
+    state.boardOrder.push(...order)
+  },
+  setBoardOrder(state, order) {
+    if(state.boards.length !== order.length) {
+      console.log("Try to set invalid board order!")
+      return false
+    }
+
+    state.boardOrder = order
+    this.$localStore.setBoardOrder(state.boardOrder)
   },
   addBoard(state, board) {
     if(!board || !board.id || !board.title || !board.icon || !board.filter) {
@@ -15,7 +26,9 @@ export const mutations = {
     }
 
     state.boards.push(board)
+    state.boardOrder.push(board.id)
     this.$localStore.setBoard(board)
+    this.$localStore.setBoardOrder(state.boardOrder)
   },
   editBoard(state, board) {
     let index = state.boards.findIndex(r => r.id === board.id)
@@ -31,10 +44,16 @@ export const mutations = {
     let index = state.boards.findIndex(r => r.id === boardId)
     state.boards.splice(index, 1)
 
+    index = state.boardOrder.findIndex(r => r.id === boardId)
+    state.boardOrder.splice(index, 1)
+
     this.$localStore.removeBoard(boardId)
+    this.$localStore.setBoardOrder(state.boardOrder)
   },
   clearBoards(state){
     state.boards = []
+    state.boardOrder = []
+
     this.$localStore.clearBoards()
   },
 }
@@ -59,12 +78,8 @@ export const getters = {
 
 export const actions = {
   init(ctx) {
-    this.$localStore.getBoards()
-      .then(boards => {
-        for(let board of boards) {
-          ctx.commit('loadBoard', board)
-        }
-      })
+    return Promise.all([this.$localStore.getBoards(), this.$localStore.getBoardOrder()])
+      .then(([boards, order]) => ctx.commit('loadBoards', {boards, order}))
   }
 }
 

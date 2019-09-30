@@ -10,32 +10,39 @@
       </v-toolbar>
 
       <!-- for each available board -->
-      <v-card-text v-for="board of boards" :key="board.id">
-        <v-card >
-          <v-card-title>
-            <v-icon>{{board.icon}}</v-icon>
-            {{board.title}}
-          </v-card-title>
+      <draggable v-model="boardOrder" handle=".handle">
+        <v-card-text v-for="boardId of boardOrder" :key="boardId">
+          <v-card >
+            <v-card-title>
+              <v-icon>{{boardMap[boardId].icon}}</v-icon>
+              {{boardMap[boardId].title}}
+            </v-card-title>
 
-          <v-card-text class="pb-0">
-            <v-chip v-for="tagName of Object.keys(board.filter.tags)" :key="board.id + '_' + tagName">
-              <v-icon left color="green" v-if="board.filter.tags[tagName].value">check_circle</v-icon>
-              <v-icon left color="red" v-else>remove_circle</v-icon>
-              {{tagName}}
-            </v-chip>
-          </v-card-text>
+            <v-card-text class="pb-0">
+              <v-chip v-for="tagName of Object.keys(boardMap[boardId].filter.tags)" :key="boardId + '_' + tagName">
+                <v-icon left color="green" v-if="boardMap[boardId].filter.tags[tagName].value">check_circle</v-icon>
+                <v-icon left color="red" v-else>remove_circle</v-icon>
+                {{tagName}}
+              </v-chip>
+            </v-card-text>
 
-          <v-card-actions>
-            <div class="flex-grow-1"></div>
-            <v-btn icon class="error" @click="onBoardDeleteRequest(board.id)">
-              <v-icon>delete</v-icon>
-            </v-btn>
-            <v-btn icon class="primary" @click="onEditRequest(board)">
-              <v-icon>edit</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-card-text>
+            <v-card-actions>
+              <v-btn icon class="handle">
+                <v-icon>drag_indicator</v-icon>
+              </v-btn>
+              <div class="flex-grow-1"></div>
+              <v-btn icon class="error" @click="onBoardDeleteRequest(boardId)">
+                <v-icon>delete</v-icon>
+              </v-btn>
+              <v-btn icon class="primary" @click="onEditRequest(boardMap[boardId])">
+                <v-icon>edit</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-card-text>
+        <transition-group>
+        </transition-group>
+      </draggable>
 
       <v-card-actions>
         <v-btn block color="primary" @click="dialog.new.open = true">
@@ -115,12 +122,13 @@
 <script>
   import { mapMutations, mapState } from 'vuex';
   import uuid4 from 'uuid4'
+  import draggable from 'vuedraggable'
   import BoardForm from "../board/Form";
   import HelpBoard from "../help/Board";
 
   export default {
     name: "SettingsBoard",
-    components: {HelpBoard, BoardForm},
+    components: {HelpBoard, BoardForm, draggable},
     data(){
       return {
         showHelp: false,
@@ -148,6 +156,23 @@
       ...mapState({
         boards: state => state.board.boards,
       }),
+      boardMap() {
+        let map = {}
+
+        for(let board of this.boards) {
+          map[board.id] = board
+        }
+
+        return map
+      },
+      boardOrder: {
+        get() {
+          return this.$store.state.board.boardOrder
+        },
+        set(value) {
+          this.$store.commit('board/setBoardOrder', value)
+        }
+      }
     },
     methods: {
       ...mapMutations({
@@ -191,5 +216,7 @@
 </script>
 
 <style scoped>
-
+  .handle {
+    cursor: grab;
+  }
 </style>
