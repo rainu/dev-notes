@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId" ref="form">
-    <v-dialog v-model="dialog.open">
+    <v-dialog v-model="dialog.open" scrollable>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('note.tags.action.add.title')}}</span>

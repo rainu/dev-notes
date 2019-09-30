@@ -52,7 +52,7 @@
       </v-card-actions>
     </v-card>
 
-    <v-dialog v-model="dialog.new.open" persistent>
+    <v-dialog v-model="dialog.new.open" scrollable>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('board.new.title')}}</span>
@@ -68,7 +68,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="dialog.edit.open" persistent>
+    <v-dialog v-model="dialog.edit.open" scrollable>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('board.edit.title')}}</span>

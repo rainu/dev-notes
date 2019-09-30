@@ -49,7 +49,7 @@
       </v-row>
     </v-container>
 
-    <v-dialog v-model="dialog.add.open">
+    <v-dialog v-model="dialog.add.open" scrollable>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('note.template.placeholder.add')}}</span>
@@ -70,7 +70,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="dialog.edit.open">
+    <v-dialog v-model="dialog.edit.open" scrollable>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('note.template.placeholder.edit')}}</span>

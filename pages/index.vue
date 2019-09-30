@@ -28,7 +28,7 @@
       </v-col>
     </v-row>
 
-    <v-dialog v-model="dialog.new.open" persistent>
+    <v-dialog v-model="dialog.new.open" scrollable>
       <v-card v-if="dialog.new.type">
         <v-card-title>
           <span class="headline">{{$t(dialog.new.type.text)}}</span>
@@ -46,7 +46,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="dialog.edit.open" persistent>
+    <v-dialog v-model="dialog.edit.open" scrollable>
       <v-card v-if="dialog.edit.note">
         <v-card-title>
           <span class="headline">{{$t('note.edit.title')}}</span>
