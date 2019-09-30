@@ -31,6 +31,16 @@
     
 ## Changelog
 
+### 0.9.2
+* pin the most action buttons in dialog at the bottom
+* make the most dialogs non-persisted (you can close them with ESC)
+* note order can now be configured
+* board order can now be configured
+* add migration mechanism:
+    * makes the export files backward compatible
+    * makes the local storage backward compatible
+* fix some english translations
+
 ### 0.9.1
 * fix Bugs
     * [#7](https://github.com/rainu/dev-notes/issues/7)
