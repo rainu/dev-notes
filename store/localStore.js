@@ -3,7 +3,7 @@ import localforage from 'localforage'
 import SimpleCrypto from "simple-crypto-js/build/SimpleCrypto";
 import migrationSteps from './localStoreMigrations'
 
-const BOARD_ORDER_KEY = "__order"
+const ORDER_KEY = "__order"
 const CRYPTO_CHECK = "ENCRYPTION_CHECK"
 
 const noCrypto = {
@@ -150,7 +150,7 @@ export function newLocalStore() {
     },
     getNotes(){
       return store.notes.keys()
-        .then(keys => keys.map(id => this.getNote(id)))
+        .then(keys => keys.filter(k => k !== ORDER_KEY).map(id => this.getNote(id)))
         .then(promises => Promise.all(promises))
     },
     setNote(note) {
@@ -158,6 +158,12 @@ export function newLocalStore() {
     },
     removeNote(id) {
       return store.notes.removeItem(id)
+    },
+    getNoteOrder(){
+      return store.notes.getItem(ORDER_KEY)
+    },
+    setNoteOrder(order) {
+      return store.notes.setItem(ORDER_KEY, order)
     },
     clearNotes(){
       return store.notes.clear()
@@ -167,17 +173,17 @@ export function newLocalStore() {
     },
     getBoards(){
       return store.boards.keys()
-        .then(keys => keys.filter(k => k !== BOARD_ORDER_KEY).map(id => this.getBoard(id)))
+        .then(keys => keys.filter(k => k !== ORDER_KEY).map(id => this.getBoard(id)))
         .then(promises => Promise.all(promises))
     },
     setBoard(board) {
       return store.boards.setItem(board.id, board)
     },
     getBoardOrder(){
-      return store.boards.getItem(BOARD_ORDER_KEY)
+      return store.boards.getItem(ORDER_KEY)
     },
     setBoardOrder(order) {
-      return store.boards.setItem(BOARD_ORDER_KEY, order)
+      return store.boards.setItem(ORDER_KEY, order)
     },
     removeBoard(id) {
       return store.boards.removeItem(id)

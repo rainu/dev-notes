@@ -6,17 +6,25 @@ const migrationSteps = [
 
     data.boardOrder = Object.keys(data.boards)
     return data
+  },
+  (data) => {
+    //IN: { notes: {..}, boards: {..}, boardOrder: [..] }
+    //OUT: { notes: {..}, boards: {..}, boardOrder: [..], noteOrder: [...] }
+
+    data.noteOrder = Object.keys(data.noteOrder)
+    return data
   }
 ]
 
 const CURRENT_VERSION = migrationSteps.length
 
-export const exportAll = (notes, boards, boardOrder) => {
+export const exportAll = (notes, boards, boardOrder, noteOrder) => {
   let exportObj = {
     version: CURRENT_VERSION,
     notes: {},
     boards: {},
-    boardOrder: boardOrder
+    boardOrder: boardOrder,
+    noteOrder: noteOrder,
   }
 
   for(let note of notes) {
@@ -27,7 +35,6 @@ export const exportAll = (notes, boards, boardOrder) => {
     exportObj.boards[board.id] = board
   }
 
-  console.log(exportObj)
   return exportObj
 }
 

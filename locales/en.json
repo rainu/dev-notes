@@ -114,6 +114,9 @@
         }
       }
     },
+    "order": {
+      "title": "Sorting"
+    },
     "actions": {
       "save": "Save",
       "abort": "Cancel"

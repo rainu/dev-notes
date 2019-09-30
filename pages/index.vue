@@ -96,6 +96,9 @@
 
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
+        <v-toolbar-items>
+          <NoteOrderConfig />
+        </v-toolbar-items>
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
@@ -156,9 +159,11 @@ import NoteFormPicture from "../components/note/form/Picture";
 import NoteFormTemplate from "../components/note/form/Template";
 import NoteCardTemplate from "../components/note/card/Template";
 import HelpFirstSteps from "../components/help/FirstSteps";
+import NoteOrderConfig from "../components/note/OrderConfig";
 
 export default {
   components: {
+    NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
     NoteFormTemplate,
@@ -213,6 +218,7 @@ export default {
     }),
     ...mapState({
       notes: state => state.note.notes,
+      noteOrder: state => state.note.noteOrder
     }),
     availableTags() {
       let tags = {}
@@ -236,7 +242,12 @@ export default {
         else if(tagValue === false) blacklist[tagName] = true
       }
 
-      return this.notes.filter(note => {
+      let noteMap = {}
+      for(let note of this.notes) {
+        noteMap[note.id] = note
+      }
+
+      return this.noteOrder.map(nId => noteMap[nId]).filter(note => {
         let tagsMap = {}
         for(let tag of note.tags) tagsMap[tag] = true
 

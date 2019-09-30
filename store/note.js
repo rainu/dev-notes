@@ -2,11 +2,22 @@ import Vue from 'vue'
 
 export const state = () => ({
   notes: [],
+  noteOrder: []
 })
 
 export const mutations = {
-  loadNote(state, note) {
-    state.notes.push(note)
+  loadNotes(state, {notes, order}) {
+    state.notes.push(...notes)
+    state.noteOrder.push(...order)
+  },
+  setNoteOrder(state, order) {
+    if(state.notes.length !== order.length) {
+      console.log("Try to set invalid note order!")
+      return false
+    }
+
+    state.noteOrder = order
+    this.$localStore.setNoteOrder(state.noteOrder)
   },
   addNote(state, note) {
     if(!note || !note.id || !note.type || !note.title || !note.content) {
@@ -15,7 +26,9 @@ export const mutations = {
     }
 
     state.notes.push(note)
+    state.noteOrder.push(note.id)
     this.$localStore.setNote(note)
+    this.$localStore.setNoteOrder(state.noteOrder)
   },
   editNote(state, note) {
     let index = state.notes.findIndex(r => r.id === note.id)
@@ -31,10 +44,16 @@ export const mutations = {
     let index = state.notes.findIndex(r => r.id === noteId)
     state.notes.splice(index, 1)
 
+    index = state.noteOrder.findIndex(r => r.id === noteId)
+    state.noteOrder.splice(index, 1)
+
     this.$localStore.removeNote(noteId)
+    this.$localStore.setNoteOrder(state.noteOrder)
   },
   clearNotes(state){
     state.notes = []
+    state.noteOrder = []
+
     this.$localStore.clearNotes()
   },
 }
@@ -59,12 +78,8 @@ export const getters = {
 
 export const actions = {
   init(ctx) {
-    this.$localStore.getNotes()
-      .then(notes => {
-        for(let note of notes) {
-          ctx.commit('loadNote', note)
-        }
-      })
+    return Promise.all([this.$localStore.getNotes(), this.$localStore.getNoteOrder()])
+      .then(([notes, order]) => ctx.commit('loadNotes', {notes, order}))
   }
 }
 
