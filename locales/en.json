@@ -79,6 +79,19 @@
         "name": "Name",
         "description": "Description",
         "default": "Default value",
+        "type": {
+          "title": "Type",
+          "text": "Text",
+          "flag": "Flag",
+          "enum": "Enumeration"
+        },
+        "flag-value": "Value",
+        "enum": {
+          "label": "Label",
+          "value": "Value",
+          "add": "New item",
+          "remove": "Remove"
+        },
         "required": {
           "title": "Mandatory",
           "mandatory": "Mandatory",

@@ -79,6 +79,19 @@
         "name": "Name",
         "description": "Beschreibung",
         "default": "Standardwert",
+        "type": {
+          "title": "Typ",
+          "text": "Text",
+          "flag": "Flag",
+          "enum": "Auswahl"
+        },
+        "flag-value": "Wert",
+        "enum": {
+          "label": "Titel",
+          "value": "Wert",
+          "add": "Neue Auswahl",
+          "remove": "Entfernen"
+        },
         "required": {
           "title": "Pflichtfeld",
           "mandatory": "Notwendig",

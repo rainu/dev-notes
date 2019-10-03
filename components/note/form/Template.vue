@@ -56,10 +56,60 @@
         </v-card-title>
         <v-card-text>
           <v-form v-model="dialog.add.valid" @submit.prevent="addPlaceholder()">
-            <v-text-field autofocus v-model="dialog.add.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="[ruleRequired, rulePlaceholderName]" required></v-text-field>
-            <v-textarea v-model="dialog.add.placeholder.description" :label="$t('note.template.placeholder.description')" ></v-textarea>
-            <v-text-field v-model="dialog.add.placeholder.default" :label="$t('note.template.placeholder.default')" ></v-text-field>
-            <v-switch v-model="dialog.add.placeholder.required" :label="$t('note.template.placeholder.required.title')" color="primary"></v-switch>
+            <v-text-field autofocus
+                          v-model="dialog.add.placeholder.name"
+                          :label="$t('note.template.placeholder.name')"
+                          :rules="[ruleRequired, rulePlaceholderName]"
+                          required></v-text-field>
+
+            <v-textarea v-model="dialog.add.placeholder.description"
+                        :label="$t('note.template.placeholder.description')" ></v-textarea>
+
+            <v-select v-model="dialog.add.placeholder.type"
+                      :label="$t('note.template.placeholder.type.title')"
+                      :items="availablePlaceholderTypes"
+                      item-text="label"
+                      item-value="value"
+                      :rules="[ruleRequired]"
+                      required ></v-select>
+
+            <template v-if="dialog.add.placeholder.type === 'text'">
+              <v-text-field v-model="dialog.add.placeholder.default"
+                            :label="$t('note.template.placeholder.default')" ></v-text-field>
+
+              <v-switch v-model="dialog.add.placeholder.required"
+                        :label="$t('note.template.placeholder.required.title')"
+                        color="primary"></v-switch>
+            </template>
+            <v-text-field v-if="dialog.add.placeholder.type === 'flag'"
+                        v-model="dialog.add.placeholder.value"
+                        :label="$t('note.template.placeholder.flag-value')"
+                        :rules="[ruleRequired]"
+                        required></v-text-field>
+            <template v-if="dialog.add.placeholder.type === 'enum'">
+              <v-row v-for="item of dialog.add.placeholder.values" :key="item.id">
+                <v-col cols="12" sm="5">
+                  <v-text-field v-model="item.label" :label="$t('note.template.placeholder.enum.label')" :rules="[ruleRequired]" required/>
+                </v-col>
+                <v-col cols="12" sm="5">
+                  <v-text-field v-model="item.value" :label="$t('note.template.placeholder.enum.value')" :rules="[ruleRequired]" required/>
+                </v-col>
+                <v-col cols="12" sm="2">
+                  <v-btn block color="error" @click="removeEnumItem(dialog.add.placeholder, item.id)">
+                    <v-icon>delete</v-icon>
+                    {{$t('note.template.placeholder.enum.remove')}}
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-btn block color="primary" @click="addEnumItem(dialog.add.placeholder)">
+                    <v-icon>add</v-icon>
+                    {{$t('note.template.placeholder.enum.add')}}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </template>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -77,10 +127,60 @@
         </v-card-title>
         <v-card-text>
           <v-form v-model="dialog.edit.valid" @submit.prevent="savePlaceholder()">
-            <v-text-field autofocus v-model="dialog.edit.placeholder.name" :label="$t('note.template.placeholder.name')" :rules="[ruleRequired, rulePlaceholderName]" required></v-text-field>
-            <v-textarea v-model="dialog.edit.placeholder.description" :label="$t('note.template.placeholder.description')" ></v-textarea>
-            <v-text-field v-model="dialog.edit.placeholder.default" :label="$t('note.template.placeholder.default')" ></v-text-field>
-            <v-switch v-model="dialog.edit.placeholder.required" :label="$t('note.template.placeholder.required.title')" color="primary"></v-switch>
+            <v-text-field autofocus
+                          v-model="dialog.edit.placeholder.name"
+                          :label="$t('note.template.placeholder.name')"
+                          :rules="[ruleRequired, rulePlaceholderName]"
+                          required></v-text-field>
+
+            <v-textarea v-model="dialog.edit.placeholder.description"
+                        :label="$t('note.template.placeholder.description')" ></v-textarea>
+
+            <v-select v-model="dialog.edit.placeholder.type"
+                      :label="$t('note.template.placeholder.type.title')"
+                      :items="availablePlaceholderTypes"
+                      item-text="label"
+                      item-value="value"
+                      :rules="[ruleRequired]"
+                      required ></v-select>
+
+            <template v-if="dialog.edit.placeholder.type === 'text'">
+              <v-text-field v-model="dialog.edit.placeholder.default"
+                            :label="$t('note.template.placeholder.default')" ></v-text-field>
+
+              <v-switch v-model="dialog.edit.placeholder.required"
+                        :label="$t('note.template.placeholder.required.title')"
+                        color="primary"></v-switch>
+            </template>
+            <v-text-field v-if="dialog.edit.placeholder.type === 'flag'"
+                          v-model="dialog.edit.placeholder.value"
+                          :label="$t('note.template.placeholder.flag-value')"
+                          :rules="[ruleRequired]"
+                          required></v-text-field>
+            <template v-if="dialog.edit.placeholder.type === 'enum'">
+              <v-row v-for="item of dialog.edit.placeholder.values" :key="item.id">
+                <v-col cols="12" sm="5">
+                  <v-text-field v-model="item.label" :label="$t('note.template.placeholder.enum.label')" :rules="[ruleRequired]" required/>
+                </v-col>
+                <v-col cols="12" sm="5">
+                  <v-text-field v-model="item.value" :label="$t('note.template.placeholder.enum.value')" :rules="[ruleRequired]" required/>
+                </v-col>
+                <v-col cols="12" sm="2">
+                  <v-btn block color="error" @click="removeEnumItem(dialog.edit.placeholder, item.id)">
+                    <v-icon>delete</v-icon>
+                    {{$t('note.template.placeholder.enum.remove')}}
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-btn block color="primary" @click="addEnumItem(dialog.edit.placeholder)">
+                    <v-icon>add</v-icon>
+                    {{$t('note.template.placeholder.enum.add')}}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </template>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -133,6 +233,13 @@
         note.tags = this.data.tags
         note.template = this.data.content.template
         note.placeholder = cloneDataObject(this.data.content.placeholder)
+
+        for(let placeholder of note.placeholder) {
+          if (!placeholder.hasOwnProperty('default')) placeholder.default = null
+          if (!placeholder.hasOwnProperty('required')) placeholder.required = true
+          if (!placeholder.hasOwnProperty('value')) placeholder.value = null
+          if (!placeholder.hasOwnProperty('values')) placeholder.values = []
+        }
       }
 
       return {
@@ -143,6 +250,8 @@
             placeholder: {
               name: null,
               type: 'text',
+              value: null,
+              values: [],
               description: null,
               default: null,
               required: true,
@@ -163,6 +272,13 @@
         noteTags: 'note/getAvailableTags',
         boardTags: 'board/getAvailableTags'
       }),
+      availablePlaceholderTypes(){
+        return [
+          { value: 'text', label: this.$t('note.template.placeholder.type.text') },
+          { value: 'flag', label: this.$t('note.template.placeholder.type.flag') },
+          { value: 'enum', label: this.$t('note.template.placeholder.type.enum') },
+        ]
+      },
       availableTags() {
         let tags = {}
         for(let tag of this.noteTags) tags[tag] = true
@@ -193,10 +309,23 @@
         })
         this.dialog.add.valid = true
         this.dialog.add.placeholder.name = null
+        this.dialog.add.placeholder.value = null
+        this.dialog.add.placeholder.values = []
         this.dialog.add.placeholder.description = null
         this.dialog.add.placeholder.default = null
         this.dialog.add.placeholder.required = true
         this.dialog.add.open = false
+      },
+      addEnumItem(placeholder){
+        placeholder.values.push({
+          id: uuid4(),
+          value: null,
+          label: null
+        })
+      },
+      removeEnumItem(placeholder, itemId) {
+        let index = placeholder.values.findIndex(v => v.id === itemId)
+        placeholder.values.splice(index, 1)
       },
       deletePlaceholder(placeholderId) {
         let index = this.note.placeholder.findIndex(p => p.id === placeholderId)
@@ -219,7 +348,7 @@
         this.note.template += `__${placeholderName}__`
       },
       onSubmit() {
-        if(!this.valid) return
+        if (!this.valid) return
 
         let data = {
           content: {}
@@ -228,6 +357,25 @@
         data.tags = this.note.tags
         data.content.template = this.note.template
         data.content.placeholder = cloneDataObject(this.note.placeholder)
+
+        for (let placeholder of data.content.placeholder) {
+          switch (placeholder.type) {
+            case 'text':
+              delete placeholder.value
+              delete placeholder.values
+              break;
+            case 'flag':
+              delete placeholder.default
+              delete placeholder.required
+              delete placeholder.values
+              break;
+            case 'enum':
+              delete placeholder.default
+              delete placeholder.required
+              delete placeholder.value
+              break;
+          }
+        }
 
         this.$emit('onSubmit', data)
         if(this.clearAfterSubmit) {
