@@ -31,6 +31,13 @@
     
 ## Changelog
 
+### 0.9.3
+* placeholder can now have multiple types [#8](https://github.com/rainu/dev-notes/issues/8):
+    * enum
+    * flag 
+    * text (default)
+* preserve line breaks in text notes [#12](https://github.com/rainu/dev-notes/issues/12)
+
 ### 0.9.2
 * pin the most action buttons in dialog at the bottom
 * make the most dialogs non-persisted (you can close them with ESC)
