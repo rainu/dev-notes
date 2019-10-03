@@ -68,6 +68,7 @@
             <v-select v-model="dialog.add.placeholder.type"
                       :label="$t('note.template.placeholder.type.title')"
                       :items="availablePlaceholderTypes"
+                      @change="onPlaceholderTypeChange($event, dialog.add.placeholder)"
                       item-text="label"
                       item-value="value"
                       :rules="[ruleRequired]"
@@ -94,7 +95,7 @@
                 <v-col cols="12" sm="5">
                   <v-text-field v-model="item.value" :label="$t('note.template.placeholder.enum.value')" :rules="[ruleRequired]" required/>
                 </v-col>
-                <v-col cols="12" sm="2">
+                <v-col cols="12" sm="2" v-if="dialog.add.placeholder.values.length > 1">
                   <v-btn block color="error" @click="removeEnumItem(dialog.add.placeholder, item.id)">
                     <v-icon>delete</v-icon>
                     {{$t('note.template.placeholder.enum.remove')}}
@@ -165,7 +166,7 @@
                 <v-col cols="12" sm="5">
                   <v-text-field v-model="item.value" :label="$t('note.template.placeholder.enum.value')" :rules="[ruleRequired]" required/>
                 </v-col>
-                <v-col cols="12" sm="2">
+                <v-col cols="12" sm="2" v-if="dialog.edit.placeholder.values.length > 1">
                   <v-btn block color="error" @click="removeEnumItem(dialog.edit.placeholder, item.id)">
                     <v-icon>delete</v-icon>
                     {{$t('note.template.placeholder.enum.remove')}}
@@ -326,6 +327,11 @@
       removeEnumItem(placeholder, itemId) {
         let index = placeholder.values.findIndex(v => v.id === itemId)
         placeholder.values.splice(index, 1)
+      },
+      onPlaceholderTypeChange(type, placeholder) {
+        if(type === 'enum' && (!placeholder.values || placeholder.values.length === 0)){
+          this.addEnumItem(placeholder)
+        }
       },
       deletePlaceholder(placeholderId) {
         let index = this.note.placeholder.findIndex(p => p.id === placeholderId)
