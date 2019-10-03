@@ -9,6 +9,7 @@
         <v-row justify="center">
           <v-col cols="12" sm="4" v-for="placeholder of placeholderForm" :key="placeholder.name">
             <v-text-field
+              v-if="placeholder.type === 'text'"
               v-model="placeholder.value"
               :label="placeholder.name"
               :placeholder="placeholder.default"

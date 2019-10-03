@@ -142,6 +142,7 @@
             valid: true,
             placeholder: {
               name: null,
+              type: 'text',
               description: null,
               default: null,
               required: true,

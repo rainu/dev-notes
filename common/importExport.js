@@ -11,7 +11,20 @@ const migrationSteps = [
     //IN: { notes: {..}, boards: {..}, boardOrder: [..] }
     //OUT: { notes: {..}, boards: {..}, boardOrder: [..], noteOrder: [...] }
 
-    data.noteOrder = Object.keys(data.noteOrder)
+    data.noteOrder = Object.keys(data.notes)
+    return data
+  },
+  (data) => {
+    //IN: { notes: { 'id': { type: 'template', content: { placeholder:[{..}] }} } }
+    //OUT: { notes: { 'id': { type: 'template', content: { placeholder:[{ type: 'text', ..}] }} } }
+
+    for(let noteId of Object.keys(data.notes).filter(nId => data.notes[nId].type === 'template')){
+      data.notes[noteId].content.placeholder = data.notes[noteId].content.placeholder.map(p => {
+        p.type = 'text'
+        return p
+      })
+    }
+
     return data
   }
 ]

@@ -161,6 +161,7 @@ export function newLocalStore() {
     },
     getNoteOrder(){
       return store.notes.getItem(ORDER_KEY)
+        .then(order => !order ? [] : order)
     },
     setNoteOrder(order) {
       return store.notes.setItem(ORDER_KEY, order)
@@ -181,6 +182,7 @@ export function newLocalStore() {
     },
     getBoardOrder(){
       return store.boards.getItem(ORDER_KEY)
+        .then(order => !order ? [] : order)
     },
     setBoardOrder(order) {
       return store.boards.setItem(ORDER_KEY, order)
