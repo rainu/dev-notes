@@ -11,11 +11,37 @@
         </v-toolbar>
 
         <v-card-text class="pt-4">
-          <h3>{{$t(`note.template.placeholder.required.${dialog.placeholder.required ? 'mandatory' : 'optional'}`)}}</h3>
-          <p></p>
+          <template v-if="dialog.placeholder.type === 'text'">
+            <h3>{{$t(`note.template.placeholder.required.${dialog.placeholder.required ? 'mandatory' : 'optional'}`)}}</h3>
+            <p></p>
 
-          <h3>{{$t('note.template.placeholder.default')}}</h3>
-          <p>{{dialog.placeholder.default ? dialog.placeholder.default : '-'}}</p>
+            <h3>{{$t('note.template.placeholder.default')}}</h3>
+            <p>{{dialog.placeholder.default ? dialog.placeholder.default : '-'}}</p>
+          </template>
+          <template v-if="dialog.placeholder.type === 'flag'">
+            <h3>{{$t('note.template.placeholder.flag-value')}}</h3>
+            <p>{{dialog.placeholder.value}}</p>
+          </template>
+          <template v-if="dialog.placeholder.type === 'enum'">
+            <h3>{{$t('note.template.placeholder.type.enum')}}</h3>
+            <v-simple-table class="pb-2" dense>
+              <template v-slot:default>
+                <thead>
+                <tr>
+                  <th class="text-left">{{$t('note.template.placeholder.enum.label')}}</th>
+                  <th class="text-left">{{$t('note.template.placeholder.enum.value')}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in dialog.placeholder.values" :key="item.id">
+                  <td>{{ item.label }}</td>
+                  <td>{{ item.value }}</td>
+                </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </template>
+
 
           <h3>{{$t('note.template.placeholder.description')}}</h3>
           <p>{{dialog.placeholder.description ? dialog.placeholder.description : '-' }}</p>
