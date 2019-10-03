@@ -16,6 +16,24 @@
               :hint="placeholder.description"
               :required="placeholder.required"
               :rules="placeholder.required ? ruleRequired : []"></v-text-field>
+
+            <v-switch
+              v-if="placeholder.type === 'flag'"
+              @change="onFlagChange($event, placeholder)"
+              :label="`${placeholder.name}${placeholder.description ? ': ' + placeholder.description : ''}`"
+              color="primary"
+            ></v-switch>
+
+            <v-select
+              v-if="placeholder.type === 'enum'"
+              v-model="placeholder.value"
+              :label="placeholder.name"
+              :hint="placeholder.description"
+              :items="placeholder.default"
+              item-text="label"
+              item-value="value"
+            ></v-select>
+
           </v-col>
         </v-row>
       </v-form>
@@ -45,13 +63,28 @@
       let placeholderForm = []
 
       for(let placeholder of this.placeholder){
-        placeholderForm.push({
+        let item = {
           name: placeholder.name,
-          value: placeholder.default,
-          required: placeholder.required,
+          type: placeholder.type,
           description: placeholder.description,
-          default: placeholder.default,
-        })
+        }
+        switch(placeholder.type) {
+          case 'text':
+            item.value = placeholder.default
+            item.default = placeholder.default
+            item.required = placeholder.required
+            break;
+          case 'flag':
+            item.value = ''
+            item.default = placeholder.value
+            break;
+          case 'enum':
+            item.value = placeholder.values[0].value
+            item.default = placeholder.values
+            break;
+        }
+
+        placeholderForm.push(item)
       }
 
       return {
@@ -67,6 +100,13 @@
       }
     },
     methods:{
+      onFlagChange(value, placeholder){
+        if(value) {
+          placeholder.value = placeholder.default
+        }else{
+          placeholder.value = ''
+        }
+      },
       onCopy(){
         if(!this.valid) return
 
