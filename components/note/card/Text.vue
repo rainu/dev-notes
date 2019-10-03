@@ -17,7 +17,7 @@
 
         <v-card-text class="pa-4">
           <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
-          <template v-if="note.content.text">{{note.content.text}}</template>
+          <pre v-if="note.content.text">{{note.content.text}}</pre>
         </v-card-text>
 
         <v-card-actions>
@@ -37,7 +37,7 @@
 
     <v-card-text :class="viewClass">
       <vue-markdown v-if="note.content.markdown" :source="note.content.markdown"></vue-markdown>
-      <template v-if="note.content.text">{{note.content.text}}</template>
+      <pre v-if="note.content.text">{{note.content.text}}</pre>
     </v-card-text>
 
     <div class="text-center pt-2 px-2" v-show="showTags">
@@ -128,5 +128,8 @@
   .card-view-large {
     height: 350px;
     overflow: auto;
+  }
+  pre {
+    font-family:Roboto, sans-serif;
   }
 </style>
