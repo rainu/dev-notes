@@ -55,7 +55,9 @@ export function newLocalStore() {
         store.settings.ready(),
         store.notes.ready(),
         store.boards.ready(),
-      ]).then(() => this.$migrate())
+      ])
+      .then(() => this.isEncrypted())
+      .then((isEncrypted) => isEncrypted ? Promise.resolve() : this.$migrate())
     },
 
     $migrate(){
@@ -70,7 +72,7 @@ export function newLocalStore() {
           for(let i = currentMigrationVersion; i < migrationSteps.length; i++) {
             p = p.then(() => {
               console.log(`Migration: do Step ${i + 1} of ${migrationSteps.length}`)
-              return migrationSteps[i](store)
+              return migrationSteps[i](store, store.cryptoModule)
             }).then(() => {
               return store.meta.setItem(KEY_VERSION, i + 1)
             })
@@ -82,6 +84,7 @@ export function newLocalStore() {
 
     setupEncryptionModule(secret){
       store.cryptoModule = crypto(secret)
+      return this.$migrate()
     },
 
     isEncrypted(){
