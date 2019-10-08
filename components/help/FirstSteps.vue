@@ -38,6 +38,9 @@
           name: 'picture',
           icon: 'photo'
         }, {
+          name: 'camera',
+          icon: 'camera'
+        }, {
           name: 'template',
           icon: 'ballot'
         }]

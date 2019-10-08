@@ -116,6 +116,12 @@
         "placeholder": "http://test.de/bild.png"
       }
     },
+    "camera": {
+      "title": "Foto",
+      "help": "Dies ist eine Notiz in der Sie ein Foto machen und eine dazugehörige Beschreibung speichern können.",
+      "description": "Beschreibung",
+      "device": "Gerät"
+    },
     "credentials": {
       "title": "Anmeldedaten",
       "help": "Dies ist eine Notiz für Anmeldedaten. Hier können Benutzername und Passwort gespeichert werden. Es wird empfohlen, dies nur zu tun, wenn die **Verschlüsselung aktiviert** ist! Im Einstellungsbereich kann die Verschlüsselung aktiviert werden.",

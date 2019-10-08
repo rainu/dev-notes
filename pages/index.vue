@@ -24,6 +24,11 @@
                          @onCopy="onCopyNote"
                          @onEdit="onEditRequest(note)"
                          @onDelete="onDeleteRequest(note.id)" />
+        <NoteCardCamera v-if="note.type === 'camera'" :note="note"
+                         :show-tags="showTags"
+                         @onCopy="onCopyNote"
+                         @onEdit="onEditRequest(note)"
+                         @onDelete="onDeleteRequest(note.id)" />
         <NoteCardTemplate v-if="note.type === 'template'" :note="note"
                           :show-tags="showTags"
                           @onCopy="onCopyNote"
@@ -43,6 +48,7 @@
           <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-new-form" v-if="dialog.new.type.id === 'template'" @onSubmit="onSaveNewNote"></NoteFormTemplate>
           <NoteFormCredentials form-id="note-new-form" v-if="dialog.new.type.id === 'credentials'" @onSubmit="onSaveNewNote"></NoteFormCredentials>
+          <NoteFormCamera form-id="note-new-form" v-if="dialog.new.type.id === 'camera'" @onSubmit="onSaveNewNote"></NoteFormCamera>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -62,6 +68,7 @@
           <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-edit-form" v-if="dialog.edit.note.type === 'template'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormTemplate>
           <NoteFormCredentials form-id="note-edit-form" v-if="dialog.edit.note.type === 'credentials'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCredentials>
+          <NoteFormCamera form-id="note-edit-form" v-if="dialog.edit.note.type === 'camera'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCamera>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -169,10 +176,11 @@ import HelpFirstSteps from "../components/help/FirstSteps";
 import NoteOrderConfig from "../components/note/OrderConfig";
 import NoteFormCredentials from "../components/note/form/Credentials";
 import NoteCardCredentials from "../components/note/card/Credentials";
+import NoteFormCamera from "../components/note/form/Camera";
+import NoteCardCamera from "../components/note/card/Camera";
 
 export default {
   components: {
-    NoteCardCredentials,
     NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
@@ -181,7 +189,10 @@ export default {
     NoteFormText,
     NoteCardPicture,
     NoteFormPicture,
-    NoteFormCredentials
+    NoteCardCredentials,
+    NoteFormCredentials,
+    NoteCardCamera,
+    NoteFormCamera
   },
   data(){
     return {
@@ -218,6 +229,7 @@ export default {
           { id: 'template', icon: 'ballot', text: 'note.template.title' },
           { id: 'credentials', icon: 'fingerprint', text: 'note.credentials.title' },
           { id: 'picture', icon: 'photo', text: 'note.picture.title' },
+          { id: 'camera', icon: 'camera', text: 'note.camera.title' },
           { id: 'text', icon: 'notes', text: 'note.text.title' },
         ]
       }
