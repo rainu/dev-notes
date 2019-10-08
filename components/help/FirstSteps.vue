@@ -32,6 +32,9 @@
           name: 'text',
           icon: 'notes'
         }, {
+          name: 'credentials',
+          icon: 'fingerprint'
+        }, {
           name: 'picture',
           icon: 'photo'
         }, {

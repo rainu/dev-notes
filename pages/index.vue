@@ -37,6 +37,7 @@
           <NoteFormText form-id="note-new-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
           <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-new-form" v-if="dialog.new.type.id === 'template'" @onSubmit="onSaveNewNote"></NoteFormTemplate>
+          <NoteFormCredentials form-id="note-new-form" v-if="dialog.new.type.id === 'credentials'" @onSubmit="onSaveNewNote"></NoteFormCredentials>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -55,6 +56,7 @@
           <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
           <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-edit-form" v-if="dialog.edit.note.type === 'template'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormTemplate>
+          <NoteFormCredentials form-id="note-edit-form" v-if="dialog.edit.note.type === 'credentials'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCredentials>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -160,6 +162,7 @@ import NoteFormTemplate from "../components/note/form/Template";
 import NoteCardTemplate from "../components/note/card/Template";
 import HelpFirstSteps from "../components/help/FirstSteps";
 import NoteOrderConfig from "../components/note/OrderConfig";
+import NoteFormCredentials from "../components/note/form/Credentials";
 
 export default {
   components: {
@@ -170,7 +173,8 @@ export default {
     NoteCardText,
     NoteFormText,
     NoteCardPicture,
-    NoteFormPicture
+    NoteFormPicture,
+    NoteFormCredentials
   },
   data(){
     return {
@@ -205,6 +209,7 @@ export default {
         data: {},
         types: [
           { id: 'template', icon: 'ballot', text: 'note.template.title' },
+          { id: 'credentials', icon: 'fingerprint', text: 'note.credentials.title' },
           { id: 'picture', icon: 'photo', text: 'note.picture.title' },
           { id: 'text', icon: 'notes', text: 'note.text.title' },
         ]

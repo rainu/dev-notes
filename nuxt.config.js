@@ -104,7 +104,7 @@ export default {
           accent: '#eaff00',
           secondary: '#FFE7A2',
           info: '#40f934',
-          warning: '#FFE7A2',
+          warning: '#b8b11e',
           error: '#FF6363',
           success: '#74B392',
         },

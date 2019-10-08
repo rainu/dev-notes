@@ -116,6 +116,17 @@
         "placeholder": "http://test.de/bild.png"
       }
     },
+    "credentials": {
+      "title": "Anmeldedaten",
+      "help": "Dies ist eine Notiz für Anmeldedaten. Hier können Benutzername und Passwort gespeichert werden. Es wird empfohlen, dies nur zu tun, wenn die **Verschlüsselung aktiviert** ist! Im Einstellungsbereich kann die Verschlüsselung aktiviert werden.",
+      "url": "Webseite",
+      "description": "Beschreibung",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "warn": {
+        "decrypted": "Warnung: Ihre Notizen werden unverschlüsselt gespeichert! Es wird empfohlen, Passwörter niemals im Klartext zu speichern! Im Einstellungsbereich können Sie die Verschlüsselung aktivieren."
+      }
+    },
     "tags": {
       "title": "Stichwörter",
       "action": {
