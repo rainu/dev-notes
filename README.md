@@ -31,6 +31,9 @@
     
 ## Changelog
 
+### 0.9.4
+* repair migration when crypto module is enabled
+
 ### 0.9.3
 * placeholder can now have multiple types [#8](https://github.com/rainu/dev-notes/issues/8):
     * enum
