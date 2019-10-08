@@ -13,6 +13,8 @@
     * Textual
     * Markdown
     * Image
+    * Photo
+    * Credentials
     * Template - text with customizable placeholder
 * Filterable notes - each note can have multiple tags
 * Customizable boards
@@ -30,6 +32,11 @@
     * Upload a file
     
 ## Changelog
+
+### 0.9.5
+* implements new note types:
+    * credentials [#4](https://github.com/rainu/dev-notes/issues/4):
+    * camera(photo) [#6](https://github.com/rainu/dev-notes/issues/6):
 
 ### 0.9.4
 * repair migration when crypto module is enabled
