@@ -14,6 +14,11 @@
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
+        <NoteCardCredentials v-if="note.type === 'credentials'" :note="note"
+                      :show-tags="showTags"
+                      @onCopy="onCopyNote"
+                      @onEdit="onEditRequest(note)"
+                      @onDelete="onDeleteRequest(note.id)" />
         <NoteCardPicture v-if="note.type === 'picture'" :note="note"
                          :show-tags="showTags"
                          @onCopy="onCopyNote"
@@ -163,9 +168,11 @@ import NoteCardTemplate from "../components/note/card/Template";
 import HelpFirstSteps from "../components/help/FirstSteps";
 import NoteOrderConfig from "../components/note/OrderConfig";
 import NoteFormCredentials from "../components/note/form/Credentials";
+import NoteCardCredentials from "../components/note/card/Credentials";
 
 export default {
   components: {
+    NoteCardCredentials,
     NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
