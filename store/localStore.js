@@ -28,6 +28,12 @@ export function newLocalStore() {
       version: 1.0,
       storeName: 'meta', // Should be alphanumeric, with underscores.
     }),
+    secrets: localforage.createInstance({
+      name: process.env.appName,
+      driver: localforage.INDEXEDDB,
+      version: 1.0,
+      storeName: 'secrets', // Should be alphanumeric, with underscores.
+    }),
     settings: localforage.createInstance({
       name: process.env.appName,
       driver: localforage.INDEXEDDB,
@@ -95,8 +101,8 @@ export function newLocalStore() {
         .then(encryptedValue => crypto(secret).decrypt(encryptedValue) === CRYPTO_CHECK)
     },
     enableEncryption(secret){
-      return this.getNotes()
-        .then(plainNotes => {
+      return Promise.all([this.getNotes(), this.getSecrets()])
+        .then(([plainNotes, plainSecrets]) => {
           this.setupEncryptionModule(secret)
 
           //encrypt the notes with the new secret
@@ -105,14 +111,19 @@ export function newLocalStore() {
             p.push(this.setNote(note))
           }
 
+          //encrypt the secrets with the new secret
+          for(let secret of Object.values(plainSecrets)){
+            p.push(this.setSecret(secret.key, secret.value))
+          }
+
           return Promise.all(p)
         })
         .then(() => store.settings.setItem('encryption_check', crypto(secret).encrypt(CRYPTO_CHECK)))
         .then(() => store.settings.setItem('encrypted', true))
     },
     disableEncryption(){
-      return this.getNotes()
-        .then(plainNotes => {
+      return Promise.all([this.getNotes(), this.getSecrets()])
+        .then(([plainNotes, plainSecrets]) => {
           store.cryptoModule = noCrypto
 
           //decrypt the notes
@@ -121,10 +132,28 @@ export function newLocalStore() {
             p.push(this.setNote(note))
           }
 
+          //decrypt the secrets
+          for(let secret of Object.values(plainSecrets)){
+            p.push(this.setSecret(secret.key, secret.value))
+          }
+
           return Promise.all(p)
         })
         .then(() => store.settings.removeItem('encryption_check'))
         .then(() => store.settings.setItem('encrypted', false))
+    },
+
+    setSecret(key, value) {
+      return store.secrets.setItem(key, store.cryptoModule.encrypt(value))
+    },
+    getSecret(key) {
+      return store.secrets.getItem(key)
+        .then(secret => secret ? store.cryptoModule.decrypt(secret) : secret)
+    },
+    getSecrets(){
+      return store.secrets.keys()
+        .then(keys => keys.map(key => this.getSecret(key).then(secret => ({key: key, value: secret}))))
+        .then(promises => Promise.all(promises))
     },
 
     getLanguage(){

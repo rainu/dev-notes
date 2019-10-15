@@ -9,6 +9,7 @@ export default function ({app, store}) {
       return Promise.all([
         store.dispatch('note/init'),
         store.dispatch('board/init'),
+        store.dispatch('secrets/init'),
       ])
     }
   });

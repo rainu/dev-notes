@@ -49,13 +49,14 @@
         checkSecret: 'settings/checkSecret',
         setupCrypto: 'settings/setupCrypto',
         initBoards: 'board/init',
-        initNotes: 'note/init'
+        initNotes: 'note/init',
+        initSecrets: 'secrets/init',
       }),
       onUnlock(){
         this.checkSecret(this.password)
           .then(() => {
             this.setupCrypto(this.password)
-              .then(() => Promise.all([this.initBoards(), this.initNotes()]))
+              .then(() => Promise.all([this.initBoards(), this.initNotes(), this.initSecrets()]))
               .then(() => this.$router.push(this.$route.query.from ? this.$route.query.from : "/"))
           })
           .catch(() => this.snackbar = true)
