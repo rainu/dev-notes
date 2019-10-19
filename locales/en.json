@@ -192,13 +192,81 @@
   },
   "backup": {
     "title": "Backup",
-    "import": {
-      "file": "Import file",
-      "failed": "The import failed. Error: {err}",
-      "success": "The import was successful."
+    "file": {
+      "title": "File",
+      "import": {
+        "title": "Import file",
+        "failed": "The import failed. Error: {err}",
+        "success": "The import was successful."
+      },
+      "export": {
+        "title": "Export file"
+      }
     },
-    "export": {
-      "file": "Export file"
+    "aws": {
+      "settings": {
+        "access-key": "Access Key",
+        "secret": "Password",
+        "region": "Region",
+        "region-values": {
+          "us-east-1": "US East (N. Virginia)",
+          "us-east-2": "US East (Ohio)",
+          "us-west-1": "US West (N. California)",
+          "us-west-2": "US West (Oregon)",
+          "ca-central-1": "Canada (Central)",
+          "cn-north-1": "China (Beijing)",
+          "cn-northwest-1": "China (Ningxia)",
+          "eu-central-1": "EU (Frankfurt)",
+          "eu-west-1": "EU (Ireland)",
+          "eu-west-2": "EU (London)",
+          "eu-west-3": "EU (Paris)",
+          "eu-north-1": "EU (Stockholm)",
+          "ap-east-1": "Asia Pacific (Hong Kong)",
+          "ap-northeast-1": "Asien-Pazifik (Tokio)",
+          "ap-northeast-2": "Asia Pacific (Seoul)",
+          "ap-northeast-3": "Asia Pacific (Osaka-Local)",
+          "ap-southeast-1": "Asia Pacific (Singapore)",
+          "ap-southeast-2": "Asia Pacific (Sydney)",
+          "ap-north-1": "Asia Pacific (Tokyo)",
+          "ap-south-1": "Asia Pacific (Mumbai)",
+          "me-south-1": "Middle East (Bahrain)",
+          "sa-east-1": "South America (Sao Paulo)"
+        },
+        "warn": {
+          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+        }
+      },
+      "s3": {
+        "settings": {
+          "bucket": "Bucket Name",
+          "filename": "File Name"
+        },
+        "title": "Amazon Web Services - S3",
+        "help": {
+          "title": "AWS - S3 help",
+          "content": "To use the [S3-Service](https://aws.amazon.com/s3/) provided by [Amazon Web Services](https://aws.amazon.com/) (AWS), the following precautions must be taken:\n### 1. Create an AWS user\nIt will recommend creating a dedicated user for S3 access. To do this, go into [Identity and Access Management (IAM)](https://aws.amazon.com/iam/) and create a new user. The access type should be set to **programmatic access**.\n### 2. Set the required rights\nIn order for the user to use the S3 service, he must be [given](https://aws.amazon.com/iam/details/manage-permissions/) the correct rights. To do this, select the desired user and assign it to the predefined **policy** named **AmazonS3FullAccess**.\n### 3. Create access key\nFor DevNotes to use the S3 service, an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) must be created for the user.\n### 4. Create S3 bucket\nIn a bucket, files can be stored. Set up a [new bucket](https://docs.aws.amazon.com/de_de/AmazonS3/latest/dev/UsingBucket.html#create-bucket-intro). It should be noted that the *public access* may **not** be blocked!\n### 5. CORS configuration\nThe default settings of an S3 bucket deny any access outside the Amazon cloud! For DevNotes to save / load files, a CORS configuration must [be set](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors). You can copy the following configuration:\n```xml\n<CORSConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<CORSRule>\n    <AllowedOrigin>{corsOrigin}</AllowedOrigin>\n    <AllowedMethod>HEAD</AllowedMethod>\n    <AllowedMethod>GET</AllowedMethod>\n    <AllowedMethod>PUT</AllowedMethod>\n    <AllowedMethod>POST</AllowedMethod>\n    <AllowedMethod>DELETE</AllowedMethod>\n    <ExposeHeader>ETag</ExposeHeader>\n    <ExposeHeader>x-amz-meta-custom-header</ExposeHeader>\n    <AllowedHeader>*</AllowedHeader>\n</CORSRule>\n</CORSConfiguration>\n```"
+        },
+        "export": {
+          "title": "S3 upload",
+          "loading": "Export file...",
+          "error": {
+            "forbidden": "The user does not have the required rights.",
+            "invalid": "The user does not exist.",
+            "general":"The file could not be exported! Error: {err}"
+          },
+          "success": "The file was exported successfully."
+        },
+        "import": {
+          "title": "S3 download",
+          "loading": "Import file...",
+          "error": {
+            "forbidden": "The user does not have the required rights.",
+            "invalid": "The user does not exist.",
+            "general":"The file could not be imported! Error: {err}"
+          },
+          "success": "The file was imported successfully."
+        }
+      }
     }
   },
   "encryption": {
@@ -207,7 +275,7 @@
     "invalid": "The password is invalid!",
     "help": {
       "title": "Encryption help",
-      "content": "The data is stored on your device! It is explicitly **not** stored on a server. Nevertheless, by default it is stored **unencrypted** - and thus in readable form. If you do not want this, you can have the data encrypted. As a result, the notes are safe even if you lose the device!\n\nTo encrypt the data, you need a (good) **password**. From now on, you must enter it when starting the application.\n\n**ATTENTION:** If you lose the password, your data **can not** be recovered! Because the password **is not** saved!.\n\nIt is no problem if you already have some unencrypted notes! These can also be encrypted later. The reverse is also true: you can have your data stored in decrypted form and you do not have to enter a password at the start from then on!"
+      "content": "The data is stored on your device! It is explicitly **not** stored on a server. Nevertheless, by default it is stored **unencrypted** - and thus in readable form. If you do not want this, you can have the data encrypted. As a result, the notes and other sensible data are safe even if you lose the device!\n\nTo encrypt the data, you need a (good) **password**. From now on, you must enter it when starting the application.\n\n**ATTENTION:** If you lose the password, your data **can not** be recovered! Because the password **is not** saved!.\n\nIt is no problem if you already have some unencrypted notes! These can also be encrypted later. The reverse is also true: you can have your data stored in decrypted form and you do not have to enter a password at the start from then on!"
     },
     "actions": {
       "unlock": "Unlock"

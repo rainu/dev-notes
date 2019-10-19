@@ -2,7 +2,7 @@
   <div>
     <v-btn block color="primary" @click="onDownloadFile">
       <v-icon>cloud_download</v-icon>
-      {{$t('backup.export.file')}}
+      {{$t('backup.file.export.title')}}
     </v-btn>
     <a hidden ref="downloadLink"></a>
   </div>

@@ -192,13 +192,81 @@
   },
   "backup": {
     "title": "Sicherung",
-    "import": {
-      "file": "Datei importieren",
-      "failed": "Die Datei konnte nicht importiert werden! Fehler: {err}",
-      "success": "Die Datei wurde erfolgreich importiert."
+    "file": {
+      "title": "Datei",
+      "import": {
+        "title": "Datei importieren",
+        "failed": "Die Datei konnte nicht importiert werden! Fehler: {err}",
+        "success": "Die Datei wurde erfolgreich importiert."
+      },
+      "export": {
+        "title": "Datei exportieren"
+      }
     },
-    "export": {
-      "file": "Datei exportieren"
+    "aws": {
+      "settings": {
+        "access-key": "Zugriffsschlüssel",
+        "secret": "Passwort",
+        "region": "Region",
+        "region-values": {
+          "us-east-1": "USA Ost (Nord-Virginia)",
+          "us-east-2": "USA Ost (Ohio)",
+          "us-west-1": "USA West (Nordkalifornien)",
+          "us-west-2": "USA West (Oregon)",
+          "ca-central-1": "Kanada (Zentral)",
+          "cn-north-1": "China (Peking)",
+          "cn-northwest-1": "China (Ningxia)",
+          "eu-central-1": "EU (Frankfurt)",
+          "eu-west-1": "EU (Irland)",
+          "eu-west-2": "EU (London)",
+          "eu-west-3": "EU (Paris)",
+          "eu-north-1": "EU (Stockholm)",
+          "ap-east-1": "Asien-Pazifik (Hongkong)",
+          "ap-northeast-1": "Asien-Pazifik (Tokio)",
+          "ap-northeast-2": "Asien-Pazifik (Seoul)",
+          "ap-northeast-3": "Asien-Pazifik (Osaka-Lokal)",
+          "ap-southeast-1": "Asien-Pazifik (Singapur)",
+          "ap-southeast-2": "Asien-Pazifik (Sydney)",
+          "ap-north-1": "Asien-Pazifik (Tokio)",
+          "ap-south-1": "Asien-Pazifik (Mumbai)",
+          "me-south-1": "Naher Osten (Bahrain)",
+          "sa-east-1": "Südamerika (São Paulo)"
+        },
+        "warn": {
+          "decrypted": "Warnung: Ihre Zugriffsdaten werden unverschlüsselt gespeichert! Es wird empfohlen, Zugriffsdaten niemals im Klartext zu speichern! Im Einstellungsbereich können Sie die Verschlüsselung aktivieren."
+        }
+      },
+      "s3": {
+        "settings": {
+          "bucket": "Bucketname",
+          "filename": "Dateiname"
+        },
+        "title": "Amazon Web Services - S3",
+        "help": {
+          "title": "Hilfe zu AWS - S3",
+          "content": "Um den [S3-Service](https://aws.amazon.com/de/s3/) von [Amazon Web Services](https://aws.amazon.com/de/) (AWS) verwenden zu können, müssen folgende Vorkehrungen getroffen werden:\n### 1. Einen AWS Benutzer anlegen\nEs wird empfholen einen dedizierten Benutzer für den S3-Zugriff anzulegen. Dazu gehen Sie in das [Identity and Access Management (IAM)](https://aws.amazon.com/de/iam/) und legen einen neuen Benutzer an. Der Zugriffstyp sollt hierbei auf **Programmgesteuerter Zugriff** gestellt werden.\n### 2. Die benötigten Rechte einstellen\nDamit der Benutzer den S3 Service verwenden kann, muss ihm die richtigen Rechte [zugeteilt](https://aws.amazon.com/de/iam/details/manage-permissions/) werden. Dazu wählen Sie den gewünschten Benutzer aus und teilen ihn die vordefinierte **Richtlinie** namens **AmazonS3FullAccess** zu.\n### 3. Zugriffsschlüssel erstellen\nDamit DevNotes den S3 Service verwenden kann, muss ein [Zugriffsschlüssel](https://docs.aws.amazon.com/de_de/IAM/latest/UserGuide/id_credentials_access-keys.html) für den Benutzer angelegt werden.\n### 4. S3 Bucket erstellen\nIn einem Bucket können Datein abgelegt werden. Richten Sie dazu ein [neuen Bucket](https://docs.aws.amazon.com/de_de/AmazonS3/latest/dev/UsingBucket.html#create-bucket-intro) ein. Dabei ist zu beachten, dass der *öffentlichen Zugriff* **nicht** blockiert werden darf!\n### 5. CORS-Konfiguration\nDie Standardeinstellungen eines S3-Buckets verweigern jeglichen Zugriff außerhalb der Amazon-Cloud! Damit DevNotes Dateien ablegen/laden kann, muss eine CORS-Konfiguration [eingestellt](https://docs.aws.amazon.com/de_de/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) werden. Dazu können Sie folgende Konfiguration kopieren:\n```xml\n<CORSConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<CORSRule>\n    <AllowedOrigin>{corsOrigin}</AllowedOrigin>\n    <AllowedMethod>HEAD</AllowedMethod>\n    <AllowedMethod>GET</AllowedMethod>\n    <AllowedMethod>PUT</AllowedMethod>\n    <AllowedMethod>POST</AllowedMethod>\n    <AllowedMethod>DELETE</AllowedMethod>\n    <ExposeHeader>ETag</ExposeHeader>\n    <ExposeHeader>x-amz-meta-custom-header</ExposeHeader>\n    <AllowedHeader>*</AllowedHeader>\n</CORSRule>\n</CORSConfiguration>\n```"
+        },
+        "export": {
+          "title": "S3 hochladen",
+          "loading": "Die Daten werden exportiert...",
+          "error": {
+            "forbidden": "Der Benutzer hat nicht die benötigten Rechte.",
+            "invalid": "Der Benutzer existiert nicht.",
+            "general":"Die Datei konnte nicht exportiert werden! Fehler: {err}"
+          },
+          "success": "Die Datei wurde erfolgreich exportiert."
+        },
+        "import": {
+          "title": "S3 herunterladen",
+          "loading": "Die Daten werden importiert...",
+          "error": {
+            "forbidden": "Der Benutzer hat nicht die benötigten Rechte.",
+            "invalid": "Der Benutzer existiert nicht.",
+            "general":"Die Datei konnte nicht importiert werden! Fehler: {err}"
+          },
+          "success": "Die Datei wurde erfolgreich importiert."
+        }
+      }
     }
   },
   "encryption": {
@@ -207,7 +275,7 @@
     "invalid": "Das Passwort ist ungültig!",
     "help": {
       "title": "Hilfe zur Verschlüsselung",
-      "content": "Die Daten befinden sich lokal auf Ihrem Gerät! Sie werden explizit **nicht** auf einem Server gespeichert. Dennoch werden sie standardmäßig **unverschlüsselt** - und damit in lesbarer Form - abgelegt. Möchten Sie das nicht, können Sie die Daten verschlüsselt ablegen lassen. Dadurch sind die Notizen auch dann Sicher, wenn sie das Gerät verlieren!\n\nUm die Daten verschlüsseln zu lassen, benötigen Sie ein (gutes) **Passwort**. Dies müssen Sie fortan beim Start der Anwendung eingeben.\n\n **ACHTUNG:** Verlieren Sie das Passwort, können Ihre Daten **nicht** wiederhergestellt werden! Da das Passwort **nicht** gespeichert wird.\n\nSollten Sie bereits Daten unverschlüsselt gespeichert haben, ist dies kein Problem! Diese können auch nachträglich verschlüsselt werden. Andersherum gilt dies auch: Sie können Ihre Daten wieder entschlüsselt ablegen lassen und müssen ab dann auch kein Passwort beim Start eingeben!"
+      "content": "Die Daten befinden sich lokal auf Ihrem Gerät! Sie werden explizit **nicht** auf einem Server gespeichert. Dennoch werden sie standardmäßig **unverschlüsselt** - und damit in lesbarer Form - abgelegt. Möchten Sie das nicht, können Sie die Daten verschlüsselt ablegen lassen. Dadurch sind die Notizen und andere sensible Daten auch dann sicher, wenn Sie das Gerät verlieren!\n\nUm die Daten verschlüsseln zu lassen, benötigen Sie ein (gutes) **Passwort**. Dies müssen Sie fortan beim Start der Anwendung eingeben.\n\n **ACHTUNG:** Verlieren Sie das Passwort, können Ihre Daten **nicht** wiederhergestellt werden! Da das Passwort **nicht** gespeichert wird.\n\nSollten Sie bereits Daten unverschlüsselt gespeichert haben, ist dies kein Problem! Diese können auch nachträglich verschlüsselt werden. Andersherum gilt dies auch: Sie können Ihre Daten wieder entschlüsselt ablegen lassen und müssen ab dann auch kein Passwort beim Start eingeben!"
     },
     "actions": {
       "unlock": "Entsperren"

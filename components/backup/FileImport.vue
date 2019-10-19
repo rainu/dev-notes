@@ -2,19 +2,19 @@
   <div>
     <v-btn block color="primary" @click="$refs.fileInput.click()">
       <v-icon>cloud_upload</v-icon>
-      {{$t('backup.import.file')}}
+      {{$t('backup.file.import.title')}}
 
       <input hidden ref="fileInput" type="file" @change="onUploadFile" />
     </v-btn>
 
     <v-snackbar v-model="snackbar.error" color="error" class="text-center" :timeout="5000">
-      {{$t('backup.import.failed', { err: uploadError })}}
+      {{$t('backup.file.import.failed', { err: uploadError })}}
       <v-btn text @click="snackbar.error = false" >
         <v-icon>close</v-icon>
       </v-btn>
     </v-snackbar>
     <v-snackbar v-model="snackbar.success" color="success" class="text-center" :timeout="5000">
-      {{$t('backup.import.success')}}
+      {{$t('backup.file.import.success')}}
       <v-btn text @click="snackbar.success = false" >
         <v-icon>close</v-icon>
       </v-btn>
