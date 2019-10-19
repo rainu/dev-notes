@@ -1,3 +1,10 @@
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
 /**
  * @copyright 2017 Alex Regan
  * @license MIT
@@ -5,13 +12,6 @@
  */
 
 /*! https://mths.be/punycode v1.4.1 by @mathias */
-
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
- */
 
 /**
  * vuex v3.1.1

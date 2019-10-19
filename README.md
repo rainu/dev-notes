@@ -28,10 +28,13 @@
     * dark
     * light
 * Backup-Mechanism
-    * Download as file
-    * Upload a file
+    * Download/Upload file
+    * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
     
 ## Changelog
+
+### 0.9.6
+* implements a new backup mechanism for AWS S3 [#13](https://github.com/rainu/dev-notes/issues/13)
 
 ### 0.9.5
 * implements new note types:
