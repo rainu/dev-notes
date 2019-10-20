@@ -1,3 +1,5 @@
+import SimpleCrypto from "simple-crypto-js/build/SimpleCrypto";
+
 const migrationSteps = [
   (data) => data, //there is already a version 1 out there
   (data) => {
@@ -26,32 +28,56 @@ const migrationSteps = [
     }
 
     return data
+  },
+  (data) => {
+    //IN: { ... }
+    //OUT: { encryption: { enabled: false, check: null } }
+
+    data.encryption = {
+      enabled: false,
+      check: null,
+    }
+
+    return data
   }
 ]
 
 const CURRENT_VERSION = migrationSteps.length
+const ENCRYPTION_CHECK = "ENCRYPTION_CHECK"
 
-export const exportAll = (notes, boards, boardOrder, noteOrder) => {
+export const exportAll = (password, notes, boards, boardOrder, noteOrder) => {
   let exportObj = {
     version: CURRENT_VERSION,
+    encryption: {
+      enabled: false,
+    },
     notes: {},
     boards: {},
     boardOrder: boardOrder,
     noteOrder: noteOrder,
   }
 
+  let encrypt = (data) => data
+  if(password) {
+    exportObj.encryption.enabled = true
+
+    const cryptoModule = new SimpleCrypto(password)
+    encrypt = (data) => cryptoModule.encrypt(JSON.stringify(data))
+    exportObj.encryption.check = encrypt(ENCRYPTION_CHECK)
+  }
+
   for(let note of notes) {
-    exportObj.notes[note.id] = note
+    exportObj.notes[note.id] = encrypt(note)
   }
 
   for(let board of boards) {
-    exportObj.boards[board.id] = board
+    exportObj.boards[board.id] = encrypt(board)
   }
 
   return exportObj
 }
 
-export const importAll = (json) => {
+export const importAll = (json, pwCallback) => {
   let parsed = {}
   try {
     parsed = JSON.parse(json)
@@ -63,15 +89,44 @@ export const importAll = (json) => {
     parsed = migrate(parsed)
   }
 
-  let notes = []
-  let boards = []
-
-  if(parsed.notes) for(let noteId of Object.keys(parsed.notes)) notes.push(parsed.notes[noteId])
-  if(parsed.boards) for(let boardId of Object.keys(parsed.boards)) boards.push(parsed.boards[boardId])
-
-  return {
-    notes, boards
+  let pwPromise = Promise.resolve(null)
+  if(parsed.encryption.enabled) {
+    pwPromise = pwCallback
   }
+
+  return pwPromise.then(
+    (password) => {
+      return new Promise((resolve, reject) => {
+        let decrypt = (data) => data
+
+        if(parsed.encryption.enabled) {
+          try{
+            const cryptoModule = new SimpleCrypto(password)
+            decrypt = (data) => JSON.parse(cryptoModule.decrypt(data))
+
+            //here we check if the user choose the right password
+            if(decrypt(parsed.encryption.check) !== ENCRYPTION_CHECK){
+              reject(new Error("password is incorrect"))
+              return
+            }
+          }catch(e) {
+            reject(e)
+            return
+          }
+        }
+
+        let notes = []
+        let boards = []
+
+        if(parsed.notes) for(let noteId of Object.keys(parsed.notes)) notes.push(decrypt(parsed.notes[noteId]))
+        if(parsed.boards) for(let boardId of Object.keys(parsed.boards)) boards.push(decrypt(parsed.boards[boardId]))
+
+        resolve({
+          notes, boards
+        })
+      })
+    }
+  )
 }
 
 const migrate = (data) => {

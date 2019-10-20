@@ -192,6 +192,20 @@
   },
   "backup": {
     "title": "Backup",
+    "encryption": {
+      "title": "Encryption",
+      "enable": "Enabled",
+      "password": {
+        "1st": "Password",
+        "2nd": "Password repeat",
+        "different": "Password is different!",
+        "invalid": "The password is invalid!"
+      },
+      "unlock": "Unlock",
+      "actions": {
+        "unlock": "Unlock"
+      }
+    },
     "file": {
       "title": "File",
       "import": {

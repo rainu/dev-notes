@@ -5,6 +5,8 @@
       {{$t('backup.aws.s3.import.title')}}
     </v-btn>
 
+    <BackupUnlock v-if="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
+
     <v-dialog v-model="loading" persistent width="300">
       <v-card color="primary">
         <v-card-text>
@@ -32,9 +34,11 @@
   import { mapMutations, mapGetters } from 'vuex';
   import AWS from 'aws-sdk'
   import { importAll } from "../../../common/importExport";
+  import BackupUnlock from "../Unlock";
 
   export default {
     name: "S3Import",
+    components: {BackupUnlock},
     props: {
       filename: {
         required: false,
@@ -44,6 +48,10 @@
     data(){
       return {
         uploadError: null,
+        unlock: {
+          show: false,
+          providePasswordCallback: null
+        },
         loading: false,
         snackbar: {
           error: false,
@@ -96,23 +104,39 @@
             return
           }
 
-          let importResult = importAll(data.Body)
-          if(importResult instanceof Error) {
-            this.uploadError = importResult
+          const pwCallback = new Promise((resolve, reject) => {
+            this.unlock.providePasswordCallback = resolve
+            this.unlock.show = true
+          })
+
+          importAll(data.Body, pwCallback).then(importResult => {
+            if(importResult instanceof Error) {
+              this.uploadError = importResult
+              this.snackbar.error = true
+              return
+            }
+
+            this.clearNotes()
+            this.clearBoards()
+
+            for(let note of importResult.notes) {
+              this.addNote(note)
+            }
+            for(let board of importResult.boards) {
+              this.addBoard(board)
+            }
+
+            this.unlock.show = false
+            this.unlock.providePasswordCallback = null
+            this.snackbar.success = true
+          }).catch(e => {
+            //at the moment this is called if the provided password is wrong!
+
+            this.unlock.show = false
+            this.unlock.providePasswordCallback = null
+            this.uploadError = this.$t('backup.encryption.password.invalid')
             this.snackbar.error = true
-            return
-          }
-
-          this.clearNotes()
-          this.clearBoards()
-
-          for(let note of importResult.notes) {
-            this.addNote(note)
-          }
-          for(let board of importResult.boards) {
-            this.addBoard(board)
-          }
-          this.snackbar.success = true
+          })
         })
       }
     }

@@ -7,6 +7,8 @@
       <input hidden ref="fileInput" type="file" @change="onUploadFile" />
     </v-btn>
 
+    <BackupUnlock v-if="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
+
     <v-snackbar v-model="snackbar.error" color="error" class="text-center" :timeout="5000">
       {{$t('backup.file.import.failed', { err: uploadError })}}
       <v-btn text @click="snackbar.error = false" >
@@ -24,13 +26,19 @@
 
 <script>
   import { mapMutations } from 'vuex';
-  import { importAll } from "../../common/importExport";
+  import { importAll } from "../../../common/importExport";
+  import BackupUnlock from "../Unlock";
 
   export default {
     name: "FileImport",
+    components: {BackupUnlock},
     data(){
       return {
         uploadError: null,
+        unlock: {
+          show: false,
+          providePasswordCallback: null
+        },
         snackbar: {
           error: false,
           success: false,
@@ -45,30 +53,47 @@
         addBoard: 'board/addBoard',
       }),
       onUploadFile(){
+        if(!this.$refs.fileInput.files[0]) return
         this.uploadError = null
 
         let fileReader = new FileReader()
         fileReader.readAsText(this.$refs.fileInput.files[0], 'UTF-8')
 
         fileReader.addEventListener('load', (e) => {
-          let importResult = importAll(e.target.result)
+          const pwCallback = new Promise((resolve, reject) => {
+            this.unlock.providePasswordCallback = resolve
+            this.unlock.show = true
+          })
 
-          if(importResult instanceof Error) {
-            this.uploadError = importResult
+          importAll(e.target.result, pwCallback).then(importResult => {
+            if(importResult instanceof Error) {
+              this.uploadError = importResult
+              this.snackbar.error = true
+              return
+            }
+
+            this.clearNotes()
+            this.clearBoards()
+
+            for(let note of importResult.notes) {
+              this.addNote(note)
+            }
+            for(let board of importResult.boards) {
+              this.addBoard(board)
+            }
+            this.unlock.show = false
+            this.unlock.providePasswordCallback = null
+            this.snackbar.success = true
+            this.$refs.fileInput.value = ''
+          }).catch(e => {
+            //at the moment this is called if the provided password is wrong!
+
+            this.unlock.show = false
+            this.unlock.providePasswordCallback = null
+            this.uploadError = this.$t('backup.encryption.password.invalid')
             this.snackbar.error = true
-            return
-          }
-
-          this.clearNotes()
-          this.clearBoards()
-
-          for(let note of importResult.notes) {
-            this.addNote(note)
-          }
-          for(let board of importResult.boards) {
-            this.addBoard(board)
-          }
-          this.snackbar.success = true
+            this.$refs.fileInput.value = ''
+          })
         });
       }
     }

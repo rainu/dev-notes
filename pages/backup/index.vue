@@ -1,34 +1,24 @@
 <template>
   <v-container fluid>
     <v-layout column justify-center>
+      <!-- Password -->
+      <v-row align="center">
+        <v-col cols="12">
+          <BackupEncryption @onPasswordChange="onPasswordChange"/>
+        </v-col>
+      </v-row>
+
       <!-- FILE  -->
       <v-row align="center">
         <v-col cols="12">
-          <v-card class="elevation-12">
-            <v-toolbar color="primary" flat>
-              <v-toolbar-title>{{$t('backup.file.title')}}</v-toolbar-title>
-              <div class="flex-grow-1"></div>
-            </v-toolbar>
-
-            <v-card-actions>
-              <v-row align="center">
-                <v-col md12 lg6>
-                  <FileExport />
-                </v-col>
-                <v-col md12 lg6>
-                  <FileImport />
-                </v-col>
-              </v-row>
-            </v-card-actions>
-
-          </v-card>
+          <BackupFile :password.sync="password" />
         </v-col>
       </v-row>
 
       <!-- AWS S3 -->
       <v-row align="center">
         <v-col cols="12">
-          <S3 />
+          <S3 :password.sync="password" />
         </v-col>
       </v-row>
     </v-layout>
@@ -36,12 +26,23 @@
 </template>
 
 <script>
-  import FileExport from "../../components/backup/FileExport";
-  import FileImport from "../../components/backup/FileImport";
   import S3 from "../../components/backup/aws/S3";
+  import BackupEncryption from "../../components/backup/Encryption";
+  import BackupFile from "../../components/backup/file/File";
 
   export default {
-    components: {FileImport, FileExport, S3}
+    components: {BackupEncryption, BackupFile, S3},
+    data(){
+      return {
+        password: null,
+      }
+    },
+    methods: {
+      onPasswordChange(password){
+        this.password = password
+        console.log("password change", password)
+      }
+    }
   }
 </script>
 

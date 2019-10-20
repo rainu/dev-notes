@@ -39,6 +39,9 @@
       filename: {
         required: false,
         default: 'dev_notes_backup.json'
+      },
+      password: {
+        required: false,
       }
     },
     data(){
@@ -69,7 +72,7 @@
       onDownloadFile(){
         this.loading = true
 
-        let exportData = exportAll(this.notes, this.boards, this.boardOrder)
+        let exportData = exportAll(this.password, this.notes, this.boards, this.boardOrder)
         let blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/json;charset=UTF-8' } );
         let s3 = new AWS.S3({
           apiVersion: '2006-03-01',
