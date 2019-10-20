@@ -8,7 +8,7 @@
 * No need for external server (such like a database)
     * The whole content will be stored locally
 * optional encryption
-    * The note-content can be stored encrypted
+    * The note-content or other sensible data can be stored encrypted
 * Note-Types:
     * Textual
     * Markdown
@@ -32,6 +32,9 @@
     * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
     
 ## Changelog
+
+### 0.9.7
+* implements the possibility to encrypt the backup files [#16](https://github.com/rainu/dev-notes/issues/16)
 
 ### 0.9.6
 * implements a new backup mechanism for AWS S3 [#13](https://github.com/rainu/dev-notes/issues/13)
