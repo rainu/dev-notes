@@ -30,8 +30,13 @@
 * Backup-Mechanism
     * Download/Upload file
     * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
+    * Download/Upload from [gist](https://gist.github.com/)
     
 ## Changelog
+
+### 0.9.8
+* reduce application size (dont use the whole aws-sdk)
+* implements a new backup mechanism for gist [#14](https://github.com/rainu/dev-notes/issues/14)
 
 ### 0.9.7
 * implements the possibility to encrypt the backup files [#16](https://github.com/rainu/dev-notes/issues/16)
