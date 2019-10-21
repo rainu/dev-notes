@@ -32,7 +32,7 @@
 
 <script>
   import { mapMutations, mapGetters } from 'vuex';
-  import AWS from 'aws-sdk'
+  import S3 from 'aws-sdk/clients/s3'
   import { importAll } from "../../../common/importExport";
   import BackupUnlock from "../Unlock";
 
@@ -75,7 +75,7 @@
         this.uploadError = null
         this.loading = true
 
-        let s3 = new AWS.S3({
+        let s3 = new S3({
           apiVersion: '2006-03-01',
           accessKeyId: this.s3Settings.accessKey,
           secretAccessKey: this.s3Settings.secret,
