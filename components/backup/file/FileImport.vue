@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn block color="primary" @click="$refs.fileInput.click()">
-      <v-icon>cloud_upload</v-icon>
+      <v-icon>cloud_download</v-icon>
       {{$t('backup.file.import.title')}}
 
       <input hidden ref="fileInput" type="file" @change="onUploadFile" />

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn block color="primary" @click="onDownloadFile">
-      <v-icon>cloud_download</v-icon>
+      <v-icon>cloud_upload</v-icon>
       {{$t('backup.file.export.title')}}
     </v-btn>
     <a hidden ref="downloadLink"></a>

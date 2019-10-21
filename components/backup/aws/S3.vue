@@ -64,10 +64,10 @@
     <v-card-actions>
       <v-row align="center">
         <v-col md12 lg6>
-          <S3Import :filename.sync="filename" />
+          <S3Export :filename.sync="filename" :password="password" />
         </v-col>
         <v-col md12 lg6>
-          <S3Export :filename.sync="filename" :password="password" />
+          <S3Import :filename.sync="filename" />
         </v-col>
       </v-row>
     </v-card-actions>
