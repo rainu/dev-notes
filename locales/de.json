@@ -217,6 +217,46 @@
         "title": "Datei exportieren"
       }
     },
+    "gist": {
+      "title": "Github - gist",
+      "help": {
+        "title": "Hilfe zu github's gist",
+        "content": "Um die Speicherung per [gist](https://gist.github.com/) verwenden zu können, müssen Vorkehrungen getroffen werden:\n### Zugriffstoken erstellen\nDamit DevNotes die gist-API benutzen kann, muss zuvor ein Zugriffstoken erstellt werden. Dazu gehen Sie in die **Settings => Developer settings**. Anschließend kann unter **Personal access tokens** ein neues Token generiert werden.\n### Gist auswählen\nNachdem Sie den Zugriffstoken eingetragen haben, können Sie ein gist auswählen. Sie können entweder ein *bereits bestehendes*, *ein neues* oder *ein fremdes* gist auswählen."
+      },
+      "settings": {
+        "token": "Zugriffstoken",
+        "gist": "gist",
+        "filename": "Dateiname",
+        "user": {
+          "title": "Gist-Benutzername",
+          "default": "Eigentümer"
+        },
+        "warn": {
+          "decrypted": "Warnung: Der Zugriffstoken wird unverschlüsselt gespeichert! Es wird empfohlen, Zugriffsdaten niemals im Klartext zu speichern! Im Einstellungsbereich können Sie die Verschlüsselung aktivieren."
+        }
+      },
+      "no-description": "Keine Beschreibung.",
+      "create-new-public": "Neues öffentliches gist anlegen.",
+      "create-new-private": "Neues privates gist anlegen.",
+      "export": {
+        "title": "Gist hochladen",
+        "loading": "Die Daten werden exportiert...",
+        "error": {
+          "forbidden": "Das hochladen in dieses gist ist nicht erlaubt.",
+          "invalid": "Ungültiger Zugriffsstoken.",
+          "general":"Die Datei konnte nicht exportiert werden! Fehler: {err}"
+        },
+        "success": "Die Datei wurde erfolgreich exportiert."
+      },
+      "import": {
+        "title": "Gist herunterladen",
+        "loading": "Die Daten werden importiert...",
+        "error": {
+          "general":"Die Datei konnte nicht importiert werden! Fehler: {err}"
+        },
+        "success": "Die Datei wurde erfolgreich importiert."
+      }
+    },
     "aws": {
       "settings": {
         "access-key": "Zugriffsschlüssel",

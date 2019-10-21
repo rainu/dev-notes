@@ -79,10 +79,15 @@ export const exportAll = (password, notes, boards, boardOrder, noteOrder) => {
 
 export const importAll = (json, pwCallback) => {
   let parsed = {}
-  try {
-    parsed = JSON.parse(json)
-  }catch(e) {
-    return new Error(e)
+
+  if(json && json.version) {
+    parsed = json
+  } else {
+    try {
+      parsed = JSON.parse(json)
+    } catch (e) {
+      return Promise.reject(new Error(e))
+    }
   }
 
   if(parsed.version !== CURRENT_VERSION) {

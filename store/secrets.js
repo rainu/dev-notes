@@ -17,6 +17,9 @@ export const mutations = {
 export const getters = {
   getAWSS3Settings(state) {
     return state.secrets['aws.s3']
+  },
+  getGistSettings(state) {
+    return state.secrets['gist']
   }
 }
 
@@ -37,6 +40,9 @@ export const actions = {
   },
   setAWSS3Settings(store, settings) {
     store.commit('setSecret', {key: 'aws.s3', value: settings})
+  },
+  setGistSettings(store, settings) {
+    store.commit('setSecret', {key: 'gist', value: settings})
   }
 }
 

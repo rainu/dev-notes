@@ -217,6 +217,46 @@
         "title": "Export file"
       }
     },
+    "gist": {
+      "title": "Github - gist",
+      "help": {
+        "title": "Github - gist help",
+        "content": "In order to be able to use storage by [gist](https://gist.github.com/), precautions must be taken:\n### Create access token\nIn order for DevNotes to be able to use the gist API, an access token must first be created. Go to **Settings => Developer settings**. Then a new token can be generated under **Personal access tokens**.\n### Select Gist\nAfter you have entered the access token, you can select a gist. You can either select *an existing*, *a new* or *a foreign* gist."
+      },
+      "settings": {
+        "token": "Access Token",
+        "gist": "gist",
+        "filename": "Filename",
+        "user": {
+          "title": "Gist Username",
+          "default": "Owner"
+        },
+        "warn": {
+          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+        }
+      },
+      "no-description": "No description.",
+      "create-new-public": "Create a new public gist.",
+      "create-new-private": "Create a new private gist.",
+      "export": {
+        "title": "Gist upload",
+        "loading": "Export file...",
+        "error": {
+          "forbidden": "The export to this gist is not allowed.",
+          "invalid": "Invalid access token.",
+          "general":"The file could not be exported! Error: {err}"
+        },
+        "success": "The file was exported successfully."
+      },
+      "import": {
+        "title": "Gist download",
+        "loading": "Import file...",
+        "error": {
+          "general":"The file could not be imported! Error: {err}"
+        },
+        "success": "The file was imported successfully."
+      }
+    },
     "aws": {
       "settings": {
         "access-key": "Access Key",
