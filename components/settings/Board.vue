@@ -40,8 +40,6 @@
             </v-card-actions>
           </v-card>
         </v-card-text>
-        <transition-group>
-        </transition-group>
       </draggable>
 
       <v-card-actions>

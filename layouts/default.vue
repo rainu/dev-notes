@@ -98,11 +98,12 @@ export default {
   computed: {
     ...mapState({
       boards: state => state.board.boards,
+      boardOrder: state => state.board.boardOrder,
     }),
   },
   methods: {
-    applyBoards(boards){
-      this.links = boards.map(board => {
+    applyBoards(){
+      this.links = this.boardOrder.map(bId => this.boards.find(b => b.id === bId)).map(board => {
         return {
           text: board.title,
           icon: board.icon,
@@ -115,15 +116,18 @@ export default {
     }
   },
   watch: {
-    boards(boards){
-      this.applyBoards(boards)
+    boards(){
+      this.applyBoards()
+    },
+    boardOrder(){
+      this.applyBoards()
     },
     '$route.query'() {
       this.applyBoardInfo()
     },
   },
   mounted() {
-    this.applyBoards(this.boards)
+    this.applyBoards()
     this.applyBoardInfo()
   }
 }
