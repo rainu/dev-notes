@@ -66,7 +66,7 @@
         notes: state => state.note.notes,
         boards: state => state.board.boards,
         boardOrder: state => state.board.boardOrder,
-        noteOrder: state => state.board.noteOrder,
+        noteOrder: state => state.note.noteOrder,
       }),
     },
     methods:{

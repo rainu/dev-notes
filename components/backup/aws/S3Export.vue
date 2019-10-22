@@ -66,13 +66,14 @@
         notes: state => state.note.notes,
         boards: state => state.board.boards,
         boardOrder: state => state.board.boardOrder,
+        noteOrder: state => state.note.noteOrder,
       }),
     },
     methods:{
       onDownloadFile(){
         this.loading = true
 
-        let exportData = exportAll(this.password, this.notes, this.boards, this.boardOrder)
+        let exportData = exportAll(this.password, this.notes, this.boards, this.boardOrder, this.noteOrder)
         let blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/json;charset=UTF-8' } );
         let s3 = new S3({
           apiVersion: '2006-03-01',

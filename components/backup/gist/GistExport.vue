@@ -66,11 +66,12 @@
         notes: state => state.note.notes,
         boards: state => state.board.boards,
         boardOrder: state => state.board.boardOrder,
+        noteOrder: state => state.note.noteOrder,
       }),
     },
     methods:{
       onDownloadFile(){
-        let exportData = exportAll(this.password, this.notes, this.boards, this.boardOrder)
+        let exportData = exportAll(this.password, this.notes, this.boards, this.boardOrder, this.noteOrder)
         let client = newGistClient(this.gistSettings.token)
 
         this.loading = true
