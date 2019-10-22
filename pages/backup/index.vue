@@ -2,11 +2,12 @@
   <v-container fluid>
     <v-layout column justify-center>
       <!-- Password -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupEncryption @onPasswordChange="onPasswordChange"/>
-        </v-col>
-      </v-row>
+      <v-dialog v-model="dialog.encryption.open">
+        <BackupEncryption @onPasswordChange="onPasswordChange">
+          <div class="flex-grow-1"></div>
+          <v-btn color="primary" @click="dialog.encryption.open = false">{{$t('common.confirmation.close')}}</v-btn>
+        </BackupEncryption>
+      </v-dialog>
 
       <!-- FILE  -->
       <v-row align="center">
@@ -36,6 +37,19 @@
         </v-col>
       </v-row>
     </v-layout>
+
+    <v-footer app class="pa-0">
+      <v-toolbar dense color="footer">
+        <div class="flex-grow-1"></div>
+        <v-toolbar-items >
+          <v-btn @click="dialog.encryption.open = true" :color="password ? 'primary' : ''">
+            <v-icon left>{{password ? 'lock' : 'lock_open'}}</v-icon>
+            {{$t('backup.encryption.title')}}
+          </v-btn>
+        </v-toolbar-items>
+
+      </v-toolbar>
+    </v-footer>
   </v-container>
 </template>
 
@@ -51,6 +65,11 @@
     data(){
       return {
         password: null,
+        dialog: {
+          encryption: {
+            open: false
+          }
+        }
       }
     },
     methods: {
