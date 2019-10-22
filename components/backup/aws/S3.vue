@@ -82,7 +82,7 @@
   import HelpAWSS3 from "../../help/aws/S3";
 
   export default {
-    name: "S3",
+    name: "BackupS3",
     components: {HelpAWSS3, S3Import, S3Export},
     props: {
       defaultFilename: {

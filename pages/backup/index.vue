@@ -25,7 +25,14 @@
       <!-- AWS S3 -->
       <v-row align="center">
         <v-col cols="12">
-          <S3 :password.sync="password" />
+          <BackupS3 :password.sync="password" />
+        </v-col>
+      </v-row>
+
+      <!-- Dropbox -->
+      <v-row align="center">
+        <v-col cols="12">
+          <BackupDropbox :password.sync="password" />
         </v-col>
       </v-row>
     </v-layout>
@@ -33,13 +40,14 @@
 </template>
 
 <script>
-  import S3 from "../../components/backup/aws/S3";
+  import BackupS3 from "../../components/backup/aws/S3";
   import BackupEncryption from "../../components/backup/Encryption";
   import BackupFile from "../../components/backup/file/File";
   import BackupGist from "../../components/backup/gist/Gist";
+  import BackupDropbox from "../../components/backup/dropbox/Dropbox";
 
   export default {
-    components: {BackupGist, BackupEncryption, BackupFile, S3},
+    components: {BackupGist, BackupEncryption, BackupFile, BackupS3, BackupDropbox},
     data(){
       return {
         password: null,

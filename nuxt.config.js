@@ -3,12 +3,12 @@ import colors from 'vuetify/es5/util/colors'
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    middleware: ['encryption'],
+    middleware: ['encryption', 'dropbox'],
     base: '/dev-notes/'
   }
 } : {
   router: {
-    middleware: ['encryption'],
+    middleware: ['encryption', 'dropbox'],
     base: '/'
   }
 }
@@ -41,7 +41,11 @@ export default {
     appName: process.env.npm_package_name,
     routerBase: routerBase.router.base,
     version: process.env.npm_package_version,
-    revision: process.env.COMMIT_HASH || 'development'
+    revision: process.env.COMMIT_HASH || 'development',
+    dropbox: {
+      clientId: process.env.DROPBOX_CLIENT_ID || 'h89z3y690lntrca',
+      redirectUrl: process.env.DROPBOX_REDIRECT_URL || '/auth/dropbox'
+    },
   },
 
   manifest: {
