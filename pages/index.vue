@@ -252,8 +252,13 @@ export default {
       return Object.keys(tags).sort()
     },
     filteredNotes(){
+      let noteMap = {}
+      for(let note of this.notes) {
+        noteMap[note.id] = note
+      }
+
       if(!this.availableTags || this.availableTags.length === 0){
-        return this.notes
+        return this.noteOrder.map(nId => noteMap[nId])
       }
 
       let blacklist = {}
@@ -264,11 +269,6 @@ export default {
 
         if(tagValue === true) whitelist[tagName] = true
         else if(tagValue === false) blacklist[tagName] = true
-      }
-
-      let noteMap = {}
-      for(let note of this.notes) {
-        noteMap[note.id] = note
       }
 
       return this.noteOrder.map(nId => noteMap[nId]).filter(note => {
