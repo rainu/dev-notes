@@ -61,7 +61,7 @@
       </v-row>
     </v-card-text>
 
-    <v-card-actions>
+    <v-card-actions v-show="isValid">
       <v-row align="center">
         <v-col md12 lg6>
           <S3Export :filename.sync="filename" :password="password" />
@@ -111,7 +111,6 @@
         region: null,
         bucket: null,
         filename: this.defaultFilename,
-        valid: false
       }
     },
     computed: {
@@ -128,6 +127,9 @@
             value: region
           }
         })
+      },
+      isValid(){
+        return this.accessKey && this.secret && this.region && this.bucket
       }
     },
     methods:{

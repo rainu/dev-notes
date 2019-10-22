@@ -115,7 +115,7 @@
       </v-row>
     </v-card-text>
 
-    <v-card-actions>
+    <v-card-actions v-show="isValid">
       <v-row align="center">
         <v-col cols="12" sm="6">
           <GistExport :filename.sync="filename" :password="password" />
@@ -161,7 +161,6 @@
         },
         availableGists: [],
         filename: this.defaultFilename,
-        valid: false
       }
     },
     computed: {
@@ -171,6 +170,9 @@
       ...mapState({
         isEncrypted: state => state.settings.encrypted
       }),
+      isValid(){
+        return this.token && this.gist.id
+      }
     },
     methods:{
       ...mapActions({

@@ -52,7 +52,7 @@
       </v-row>
     </v-card-text>
 
-    <v-card-actions>
+    <v-card-actions v-show="isValid">
       <v-row align="center">
         <v-col cols="12" sm="6">
           <DropboxExport :filepath.sync="filePath" :password="password" />
@@ -94,7 +94,6 @@
         showToken: false,
         filename: this.defaultFilename,
         directory: this.defaultDirectory,
-        valid: false
       }
     },
     computed: {
@@ -117,6 +116,9 @@
       },
       filePath(){
         return `${this.directory}/${this.filename}`.replace("//", "/")
+      },
+      isValid(){
+        return this.isAuthenticated && this.directory && this.filename
       }
     },
     methods:{
