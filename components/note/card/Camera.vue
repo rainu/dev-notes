@@ -16,7 +16,9 @@
         </v-toolbar>
 
         <v-img :src="note.content.image"></v-img>
-        <pre v-if="note.content.description" class="pt-2">{{note.content.description}}</pre>
+        <v-card-text v-if="note.content.description">
+          <pre class="pt-2">{{note.content.description}}</pre>
+        </v-card-text>
 
         <v-card-actions>
           <v-btn icon class="error" @click="onDelete()">
@@ -35,7 +37,10 @@
 
     <div :class="viewClass">
       <v-img :src="note.content.image" ></v-img>
-      <pre v-if="note.content.description" class="pt-2">{{note.content.description}}</pre>
+
+      <v-card-text v-if="note.content.description">
+        <pre>{{note.content.description}}</pre>
+      </v-card-text>
     </div>
 
     <div class="text-center pt-2 px-2" v-show="showTags">
