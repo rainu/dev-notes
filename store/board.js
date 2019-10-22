@@ -44,7 +44,7 @@ export const mutations = {
     let index = state.boards.findIndex(r => r.id === boardId)
     state.boards.splice(index, 1)
 
-    index = state.boardOrder.findIndex(r => r.id === boardId)
+    index = state.boardOrder.findIndex(bId => bId === boardId)
     state.boardOrder.splice(index, 1)
 
     this.$localStore.removeBoard(boardId)

@@ -44,7 +44,7 @@ export const mutations = {
     let index = state.notes.findIndex(r => r.id === noteId)
     state.notes.splice(index, 1)
 
-    index = state.noteOrder.findIndex(r => r.id === noteId)
+    index = state.noteOrder.findIndex(nId => nId === noteId)
     state.noteOrder.splice(index, 1)
 
     this.$localStore.removeNote(noteId)
