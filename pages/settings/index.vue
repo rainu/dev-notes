@@ -2,12 +2,6 @@
   <v-container fluid>
     <v-layout column justify-center>
       <v-row align="center">
-
-        <!-- Board options -->
-        <v-col cols="12">
-          <SettingsBoard />
-        </v-col>
-
         <!-- Encryption -->
         <v-col cols="12" >
           <SettingsEncryption />
@@ -36,6 +30,10 @@
           </v-card>
         </v-col>
 
+        <!-- Board options -->
+        <v-col cols="12">
+          <SettingsBoard />
+        </v-col>
       </v-row>
     </v-layout>
   </v-container>
