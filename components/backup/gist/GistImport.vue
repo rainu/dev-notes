@@ -69,7 +69,9 @@
         clearNotes: 'note/clearNotes',
         clearBoards: 'board/clearBoards',
         addNote: 'note/addNote',
+        setNoteOrder: 'note/setNoteOrder',
         addBoard: 'board/addBoard',
+        setBoardOrder: 'board/setBoardOrder',
       }),
       onUploadFile(){
         this.downloadError = null
@@ -98,9 +100,12 @@
               for(let note of importResult.notes) {
                 this.addNote(note)
               }
+              this.setNoteOrder(importResult.noteOrder)
+
               for(let board of importResult.boards) {
                 this.addBoard(board)
               }
+              this.setBoardOrder(importResult.boardOrder)
 
               this.unlock.show = false
               this.unlock.providePasswordCallback = null

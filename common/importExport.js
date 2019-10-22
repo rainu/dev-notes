@@ -127,7 +127,10 @@ export const importAll = (json, pwCallback) => {
         if(parsed.boards) for(let boardId of Object.keys(parsed.boards)) boards.push(decrypt(parsed.boards[boardId]))
 
         resolve({
-          notes, boards
+          notes,
+          boards,
+          noteOrder: parsed.noteOrder ? parsed.noteOrder : [],
+          boardOrder: parsed.boardOrder ? parsed.boardOrder : [],
         })
       })
     }
