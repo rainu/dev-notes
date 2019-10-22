@@ -22,7 +22,8 @@ export default function ({ isHMR, app, store, route, params, error, redirect }) 
   //this middleware is responsible for reading the dropbox auth token and store
   //them into our store
 
-  if(route.path !== process.env.dropbox.redirectUrl) {
+  let recall = route.query.recall && route.query.recall === 'dropbox' && route.hash
+  if(!recall) {
     refreshToken(store)
     return
   }

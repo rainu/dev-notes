@@ -31,8 +31,19 @@
     * Download/Upload file
     * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
     * Download/Upload from [gist](https://gist.github.com/)
+    * Download/Upload from [dropbox](https://www.dropbox.com/)
     
 ## Changelog
+
+### 0.9.9
+* board settings moved to the bottom of the settings page
+* file encryption settings moved to the footer
+* note order will no be apply if there are no tags used
+* file imports apply now the defined board- and note- order
+* file exports contains now the note-order
+* implements a new backup mechanism for dropbox [#15](https://github.com/rainu/dev-notes/issues/15)
+* the board-order will no be applied [#19](https://github.com/rainu/dev-notes/issues/19)
+* deletion of notes/boards causes no errors anymore [#20](https://github.com/rainu/dev-notes/issues/20)
 
 ### 0.9.8
 * reduce application size (dont use the whole aws-sdk)

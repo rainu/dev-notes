@@ -44,7 +44,7 @@ export default {
     revision: process.env.COMMIT_HASH || 'development',
     dropbox: {
       clientId: process.env.DROPBOX_CLIENT_ID || 'h89z3y690lntrca',
-      redirectUrl: process.env.DROPBOX_REDIRECT_URL || '/auth/dropbox'
+      redirectUrl: ( routerBase.router.base + '?recall=dropbox' )
     },
   },
 
