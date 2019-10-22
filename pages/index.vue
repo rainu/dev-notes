@@ -147,7 +147,7 @@
             <v-list>
               <v-list-item v-for="type in note.types" :key="type.id">
                 <v-btn block @click="onNewNote(type)">
-                  <v-icon>{{type.icon}}</v-icon>
+                  <v-icon left>{{type.icon}}</v-icon>
                   {{$t(type.text)}}
                 </v-btn>
               </v-list-item>

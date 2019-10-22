@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn block color="primary" @click="onDownloadFile">
-      <v-icon>cloud_upload</v-icon>
+      <v-icon left>cloud_upload</v-icon>
       {{$t('backup.aws.s3.export.title')}}
     </v-btn>
 

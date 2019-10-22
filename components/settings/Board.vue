@@ -14,7 +14,7 @@
         <v-card-text v-for="boardId of boardOrder" :key="boardId">
           <v-card >
             <v-card-title>
-              <v-icon>{{boardMap[boardId].icon}}</v-icon>
+              <v-icon left>{{boardMap[boardId].icon}}</v-icon>
               {{boardMap[boardId].title}}
             </v-card-title>
 
@@ -44,7 +44,7 @@
 
       <v-card-actions>
         <v-btn block color="primary" @click="dialog.new.open = true">
-          <v-icon>dashboard</v-icon>
+          <v-icon left>dashboard</v-icon>
           {{$t('board.actions.new')}}
         </v-btn>
       </v-card-actions>

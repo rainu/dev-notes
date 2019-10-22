@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn block color="primary" @click="onUploadFile" >
-      <v-icon>cloud_download</v-icon>
+      <v-icon left>cloud_download</v-icon>
       {{$t('backup.gist.import.title')}}
     </v-btn>
 
