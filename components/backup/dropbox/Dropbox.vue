@@ -3,12 +3,14 @@
     <v-toolbar color="primary" flat>
       <v-toolbar-title>{{$t('backup.dropbox.title')}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
-      <v-btn icon @click="showHelp = true">
-        <v-icon>help</v-icon>
-      </v-btn>
     </v-toolbar>
 
     <v-card-text>
+      <v-row v-if="!isEncrypted">
+        <v-col cols="12">
+          <v-alert type="warning" dense dismissible>{{$t('backup.dropbox.settings.warn.decrypted')}}</v-alert>
+        </v-col>
+      </v-row>
       <v-row>
         <template v-if="isAuthenticated">
           <v-col cols="4" sm="4" align-self="center">
@@ -53,10 +55,10 @@
     <v-card-actions>
       <v-row align="center">
         <v-col cols="12" sm="6">
-          test
+          <DropboxExport :filepath.sync="filePath" :password="password" />
         </v-col>
         <v-col cols="12" sm="6">
-          test2
+          <DropboxImport :filepath.sync="filePath" />
         </v-col>
       </v-row>
     </v-card-actions>
@@ -66,11 +68,13 @@
 
 <script>
   import { mapActions, mapGetters, mapState } from 'vuex';
+  import DropboxExport from "./DropboxExport";
+  import DropboxImport from "./DropboxImport";
   import { Dropbox } from 'dropbox'
 
   export default {
     name: "BackupDropbox",
-    components: {},
+    components: {DropboxImport, DropboxExport},
     props: {
       defaultFilename: {
         required: false,
@@ -99,6 +103,9 @@
         dropboxUser: 'secrets/getDropboxUser',
         dropboxSettings: 'secrets/getDropboxSettings',
       }),
+      ...mapState({
+        isEncrypted: state => state.settings.encrypted
+      }),
       isAuthenticated(){
         return this.dropboxAuth && this.dropboxAuth.access_token && this.dropboxUser && this.dropboxUser.name
       },
@@ -107,6 +114,9 @@
           clientId: process.env.dropbox.clientId,
         })
         return dbx.getAuthenticationUrl(`${window.location.origin}${process.env.dropbox.redirectUrl}`)
+      },
+      filePath(){
+        return `${this.directory}/${this.filename}`.replace("//", "/")
       }
     },
     methods:{

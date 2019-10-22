@@ -321,6 +321,35 @@
           "success": "The file was imported successfully."
         }
       }
+    },
+    "dropbox": {
+      "title": "Dropbox",
+      "user": "Benutzer",
+      "login": "Dropbox login",
+      "logout": "Dropbox logout",
+      "settings": {
+        "directory": "Directory",
+        "filename": "Filename",
+        "warn": {
+          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+        }
+      },
+      "export": {
+        "title": "Dropbox upload",
+        "loading": "Export file...",
+        "error": {
+          "general":"The file could not be exported! Error: {err}"
+        },
+        "success": "The file was exported successfully."
+      },
+      "import": {
+        "title": "Dropbox download",
+        "loading": "Import file...",
+        "error": {
+          "general":"The file could not be imported! Error: {err}"
+        },
+        "success": "The file was imported successfully."
+      }
     }
   },
   "encryption": {
