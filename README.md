@@ -32,8 +32,20 @@
     * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
     * Download/Upload from [gist](https://gist.github.com/)
     * Download/Upload from [dropbox](https://www.dropbox.com/)
+    * Download/Upload via [WebDAV](http://www.webdav.org/)
+        * [Nextcloud](https://nextcloud.com/) ¹
+        * [ownCloud](https://owncloud.org/) ¹
+        * ...
+
+¹ These services will work if CORS is correctly configured to return the proper headers. This may not work by default.
     
 ## Changelog
+
+### 0.9.10
+* don't make app unusable after importing a file [#23](https://github.com/rainu/dev-notes/issues/23)
+* implements a new backup mechanism for WebDAV [#18](https://github.com/rainu/dev-notes/issues/18)
+* show export action buttons only after settings are valid [#24](https://github.com/rainu/dev-notes/issues/24)
+* beautify button icons (dont squash them to the text)
 
 ### 0.9.9
 * board settings moved to the bottom of the settings page

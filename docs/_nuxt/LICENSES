@@ -45,6 +45,10 @@
  * @license  MIT
  */
 
+/*! http://mths.be/base64 v0.1.0 by @mathias | MIT license */
+
+/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
+
 /*!
  * vue-no-ssr v1.1.1
  * (c) 2018-present egoist <0x142857@gmail.com>
