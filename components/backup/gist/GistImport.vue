@@ -5,7 +5,7 @@
       {{$t('backup.gist.import.title')}}
     </v-btn>
 
-    <BackupUnlock v-if="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
+    <BackupUnlock :show.sync="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
 
     <v-dialog v-model="loading" persistent width="300">
       <v-card color="primary">

@@ -7,7 +7,7 @@
       <input hidden ref="fileInput" type="file" @change="onUploadFile" />
     </v-btn>
 
-    <BackupUnlock v-if="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
+    <BackupUnlock :show.sync="unlock.show" :providePassword.sync="unlock.providePasswordCallback" />
 
     <v-snackbar v-model="snackbar.error" color="error" class="text-center" :timeout="5000">
       {{$t('backup.file.import.failed', { err: uploadError })}}
