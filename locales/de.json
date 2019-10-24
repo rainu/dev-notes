@@ -217,6 +217,39 @@
         "title": "Datei exportieren"
       }
     },
+    "webdav": {
+      "title": "WebDAV",
+      "settings": {
+        "url": "Server-URL",
+        "url-example": "https://example.com/webdav/",
+        "user": "Benutzer",
+        "password": "Passwort",
+        "directory": "Verzeichnis",
+        "filename": "Dateiname",
+        "warn": {
+          "decrypted": "Warnung: Ihre Zugriffsdaten werden unverschlüsselt gespeichert! Es wird empfohlen, Zugriffsdaten niemals im Klartext zu speichern! Im Einstellungsbereich können Sie die Verschlüsselung aktivieren."
+        }
+      },
+      "export": {
+        "title": "WebDAV hochladen",
+        "loading": "Die Daten werden exportiert...",
+        "error": {
+          "invalid": "Der Benutzer existiert nicht oder hat nicht die benötigten Rechte.",
+          "general":"Die Datei konnte nicht exportiert werden! Fehler: {err}"
+        },
+        "success": "Die Datei wurde erfolgreich exportiert."
+      },
+      "import": {
+        "title": "WebDAV herunterladen",
+        "loading": "Die Daten werden importiert...",
+        "error": {
+          "invalid": "Der Benutzer existiert nicht oder hat nicht die benötigten Rechte.",
+          "not-found": "Die Datei konnte nicht gefunden werden.",
+          "general": "Die Datei konnte nicht importiert werden! Fehler: {err}"
+        },
+        "success": "Die Datei wurde erfolgreich importiert."
+      }
+    },
     "gist": {
       "title": "Github - gist",
       "help": {

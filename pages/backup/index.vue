@@ -16,6 +16,13 @@
         </v-col>
       </v-row>
 
+      <!-- WebDAV  -->
+      <v-row align="center">
+        <v-col cols="12">
+          <BackupWebdav :password.sync="password" />
+        </v-col>
+      </v-row>
+
       <!-- Gist  -->
       <v-row align="center">
         <v-col cols="12">
@@ -59,9 +66,10 @@
   import BackupFile from "../../components/backup/file/File";
   import BackupGist from "../../components/backup/gist/Gist";
   import BackupDropbox from "../../components/backup/dropbox/Dropbox";
+  import BackupWebdav from "../../components/backup/webdav/Webdav";
 
   export default {
-    components: {BackupGist, BackupEncryption, BackupFile, BackupS3, BackupDropbox},
+    components: {BackupWebdav, BackupGist, BackupEncryption, BackupFile, BackupS3, BackupDropbox},
     data(){
       return {
         password: null,

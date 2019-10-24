@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog :value="true" persistent>
+    <v-dialog :value="show" persistent>
       <v-card>
         <v-card-title>
           <span class="headline">{{$t('backup.encryption.unlock')}}</span>
@@ -30,9 +30,15 @@
   export default {
     name: "BackupUnlock",
     props: {
+      show: {
+        type: Boolean,
+        required: false,
+        default: true,
+      },
       providePassword: {
         type: Function,
-        required: true,
+        required: false,
+        default: () => {},
       },
     },
     data(){

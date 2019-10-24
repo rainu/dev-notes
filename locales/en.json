@@ -217,6 +217,39 @@
         "title": "Export file"
       }
     },
+    "webdav": {
+      "title": "WebDAV",
+      "settings": {
+        "url": "Server-URL",
+        "url-example": "https://example.com/webdav/",
+        "user": "Username",
+        "password": "Password",
+        "directory": "Directory",
+        "filename": "Filename",
+        "warn": {
+          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+        }
+      },
+      "export": {
+        "title": "WebDAV upload",
+        "loading": "Export file...",
+        "error": {
+          "invalid": "The user does not have the required rights or does not exists.",
+          "general": "The file could not be exported! Error: {err}"
+        },
+        "success": "The file was exported successfully."
+      },
+      "import": {
+        "title": "WebDAV download",
+        "loading": "Import file...",
+        "error": {
+          "invalid": "The user does not have the required rights or does not exists.",
+          "not-found": "The file could not be found.",
+          "general": "The file could not be imported! Error: {err}"
+        },
+        "success": "The file was imported successfully."
+      }
+    },
     "gist": {
       "title": "Github - gist",
       "help": {

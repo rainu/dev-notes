@@ -26,6 +26,9 @@ export const getters = {
   getGistSettings(state) {
     return state.secrets['gist']
   },
+  getWebdavSettings(state) {
+    return state.secrets['webdav']
+  },
   getDropboxAuth(state) {
     return state.secrets['dropbox.auth']
   },
@@ -58,6 +61,10 @@ export const actions = {
 
   setGistSettings(store, settings) {
     store.commit('setSecret', {key: 'gist', value: settings})
+  },
+
+  setWebdavSettings(store, settings) {
+    store.commit('setSecret', {key: 'webdav', value: settings})
   },
 
   setDropboxAuth(store, settings) {
