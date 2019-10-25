@@ -11,6 +11,7 @@ const refreshToken = (store) => {
 
     dbx.usersGetCurrentAccount()
       .then(user => store.commit('secrets/setDropboxUser', user))
+      .catch(() => store.dispatch('secrets/removeDropboxAuth'))
   }
 }
 
