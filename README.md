@@ -1,13 +1,13 @@
 # DevNotes
 
-> A progressive web application (PWA) for notes.
+> A progressive web application (PWA) for notes that **is fun**!
 
 [Try it out!](https://rainu.github.io/dev-notes/)
 
 ## Features
-* No need for external server (such like a database)
-    * The whole content will be stored locally
-* optional encryption
+* **No need** for external server (such like a database)
+    * The whole content will be **stored locally**
+* optional **encryption**
     * The note-content or other sensible data can be stored encrypted
 * Note-Types:
     * Textual
@@ -16,10 +16,10 @@
     * Photo
     * Credentials
     * Template - text with customizable placeholder
-* Filterable notes - each note can have multiple tags
+* Filterable notes - each note can have **multiple tags**
 * Customizable boards
     * a board is a user-predefined set of filters
-* Copy note-content to clipboard
+* **Copy** note-content **to clipboard**
 * Multilingual
     * english
     * german
