@@ -130,7 +130,7 @@
       "username": "Username",
       "password": "Password",
       "warn": {
-        "decrypted": "Warning: Your notes are stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+        "decrypted": "Warning: Your notes are stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption."
       }
     },
     "tags": {
@@ -195,6 +195,8 @@
     "encryption": {
       "title": "Encryption",
       "enable": "Enabled",
+      "persistent": "Remember",
+      "insecure": "Warning: Your password will be stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption.",
       "password": {
         "1st": "Password",
         "2nd": "Password repeat",
@@ -227,7 +229,7 @@
         "directory": "Directory",
         "filename": "Filename",
         "warn": {
-          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption."
         }
       },
       "export": {
@@ -265,7 +267,7 @@
           "default": "Owner"
         },
         "warn": {
-          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption."
         }
       },
       "no-description": "No description.",
@@ -320,7 +322,7 @@
           "sa-east-1": "South America (Sao Paulo)"
         },
         "warn": {
-          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+          "decrypted": "Warning: Your credentials are stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption."
         }
       },
       "s3": {
@@ -364,7 +366,7 @@
         "directory": "Directory",
         "filename": "Filename",
         "warn": {
-          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in clear text! In the settings area you can enable the encryption."
+          "decrypted": "Warning: Your access token will be stored unencrypted! It is recommended never to save passwords in plain text! In the settings area you can enable the encryption."
         }
       },
       "export": {

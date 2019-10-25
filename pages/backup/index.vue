@@ -61,6 +61,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import BackupS3 from "../../components/backup/aws/S3";
   import BackupEncryption from "../../components/backup/Encryption";
   import BackupFile from "../../components/backup/file/File";
@@ -80,9 +81,19 @@
         }
       }
     },
+    computed: {
+      ...mapGetters({
+        persistedPassword: 'secrets/getBackupPassword',
+      }),
+    },
     methods: {
       onPasswordChange(password){
         this.password = password
+      }
+    },
+    mounted() {
+      if(this.persistedPassword) {
+        this.password = this.persistedPassword
       }
     }
   }

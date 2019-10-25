@@ -14,12 +14,19 @@ export const mutations = {
     Vue.set(state.secrets, key, value)
     this.$localStore.setSecret(key, value)
   },
+  removeSecret(state, key){
+    Vue.delete(state.secrets, key)
+    this.$localStore.removeSecret(key)
+  },
   setDropboxUser(state, user){
     Vue.set(state.secrets, 'dropbox.user', user)
   }
 }
 
 export const getters = {
+  getBackupPassword(state) {
+    return state.secrets['backup.password']
+  },
   getAWSS3Settings(state) {
     return state.secrets['aws.s3']
   },
@@ -55,6 +62,14 @@ export const actions = {
       store.commit('applySecret', secret)
     }
   },
+
+  setBackupPassword(store, password) {
+    store.commit('setSecret', {key: 'backup.password', value: password})
+  },
+  removeBackupPassword(store) {
+    store.commit('removeSecret', 'backup.password')
+  },
+
   setAWSS3Settings(store, settings) {
     store.commit('setSecret', {key: 'aws.s3', value: settings})
   },

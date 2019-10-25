@@ -143,6 +143,9 @@ export function newLocalStore() {
         .then(() => store.settings.setItem('encrypted', false))
     },
 
+    removeSecret(key) {
+      return store.secrets.removeItem(key)
+    },
     setSecret(key, value) {
       return store.secrets.setItem(key, store.cryptoModule.encrypt(value))
     },

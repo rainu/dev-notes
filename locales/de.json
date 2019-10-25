@@ -195,6 +195,8 @@
     "encryption": {
       "title": "Verschlüsselung",
       "enable": "Aktiviert",
+      "persistent": "Merken",
+      "insecure": "Warnung: Ihr Passwort wird unverschlüsselt gespeichert! Es wird empfohlen, Passwörter niemals im Klartext zu speichern! Im Einstellungsbereich können Sie die Verschlüsselung aktivieren.",
       "password": {
         "1st": "Passwort",
         "2nd": "Passwort wiederholen",
