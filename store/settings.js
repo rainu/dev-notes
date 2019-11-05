@@ -42,6 +42,14 @@ export const mutations = {
     state.theme.dark = dark
 
     this.$localStore.setThemeDarkMode(dark)
+  },
+  setDateTimeFormat(state, format) {
+    state.date.timeFormat = format
+    this.$localStore.setDateTimeFormat(format)
+  },
+  setDateFirstDay(state, day) {
+    state.date.firstDayOfWeek = day
+    this.$localStore.setDateFirstDay(day)
   }
 }
 
@@ -73,6 +81,18 @@ export const actions = {
         .then(noteSize => {
           if(noteSize) {
             return ctx.commit('setNoteSize', noteSize)
+          }
+        }),
+      this.$localStore.getDateTimeFormat()
+        .then(format => {
+          if(format) {
+            return ctx.commit('setDateTimeFormat', format)
+          }
+        }),
+      this.$localStore.getDateFirstDay()
+        .then(day => {
+          if(day) {
+            return ctx.commit('setDateFirstDay', day)
           }
         })
     ])

@@ -448,6 +448,23 @@
     "theme": {
       "dark": "Nachtmodus"
     },
+    "date": {
+      "time-format": {
+        "title": "Zeitformat",
+        "24hr": "24 Stunden",
+        "ampm": "AM/PM"
+      },
+      "first-day": {
+        "title": "Erster Tag der Woche",
+        "sunday": "Sonntag",
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag"
+      }
+    },
     "language": {
       "title": "Sprache"
     },

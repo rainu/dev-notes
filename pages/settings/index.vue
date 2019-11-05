@@ -25,6 +25,9 @@
                 <v-col cols="12" sm="6">
                   <SettingsLanguage />
                 </v-col>
+                <v-col cols="12" >
+                  <SettingsDateTime />
+                </v-col>
               </v-row>
             </v-card-text>
           </v-card>
@@ -45,9 +48,11 @@
   import SettingsNote from "../../components/settings/Note";
   import SettingsBoard from "../../components/settings/Board";
   import SettingsEncryption from "../../components/settings/Encryption";
+  import SettingsDateTime from "../../components/settings/DateTime";
 
   export default {
     components: {
+      SettingsDateTime,
       SettingsEncryption,
       SettingsBoard,
       SettingsNote,

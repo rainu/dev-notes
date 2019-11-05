@@ -171,6 +171,18 @@ export function newLocalStore() {
     getThemeDarkMode() {
       return store.settings.getItem('theme.dark')
     },
+    setDateTimeFormat(format) {
+      return store.settings.setItem('date.timeFormat', format)
+    },
+    getDateTimeFormat() {
+      return store.settings.getItem('date.timeFormat')
+    },
+    setDateFirstDay(day) {
+      return store.settings.setItem('date.firstDay', day)
+    },
+    getDateFirstDay() {
+      return store.settings.getItem('date.firstDay')
+    },
     getNoteSize(){
       return store.settings.getItem('note.size')
     },
