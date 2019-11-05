@@ -18,6 +18,14 @@
     "alert": "Warning",
     "success": "Success",
     "info": "Information",
+    "datetime": {
+      "locale": "en-US",
+      "format": {
+        "date": "yyyy-MM-dd",
+        "time": "HH:mm",
+        "datetime": "yyyy-MM-dd HH:mm"
+      }
+    },
     "confirmation": {
       "title": "Warning",
       "agree": "Yes",
@@ -67,6 +75,13 @@
     "text": {
       "title": "Text",
       "help": "This is a simple text note. If you copy this note you the shown text is copied. It is also possible to write the content in **Markdown**.",
+      "content": "Content",
+      "markdown": "Markdown"
+    },
+    "reminder": {
+      "title": "Reminder",
+      "date": "Date",
+      "time": "Time",
       "content": "Content",
       "markdown": "Markdown"
     },

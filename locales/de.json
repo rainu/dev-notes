@@ -18,6 +18,14 @@
     "alert": "Warnung",
     "success": "Erfolgreich",
     "info": "Information",
+    "datetime": {
+      "locale": "de-DE",
+      "format": {
+        "date": "dd.MM.yyyy",
+        "time": "HH:mm",
+        "datetime": "dd.MM.yyyy HH:mm"
+      }
+    },
     "confirmation": {
       "title": "Warnung",
       "agree": "Ja",
@@ -67,6 +75,13 @@
     "text": {
       "title": "Text",
       "help": "Dies ist eine eine einfache Text Notiz. Wenn Sie diese Notiz kopieren, kopieren Sie den Text, den Sie sehen. Es ist außerdem möglich den Inhalt in **Markdown** zu schreiben.",
+      "content": "Inhalt",
+      "markdown": "Markdown"
+    },
+    "reminder": {
+      "title": "Erinnerung",
+      "date": "Datum",
+      "time": "Uhrzeit",
       "content": "Inhalt",
       "markdown": "Markdown"
     },

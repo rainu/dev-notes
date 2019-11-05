@@ -5,6 +5,10 @@ export const state = () => ({
   locale: i18n.defaultLocale,
   setupCrypto: false,
   encrypted: false,
+  date: {
+    timeFormat: '24hr',
+    firstDayOfWeek: 1
+  },
   notes: {
     fixed: false,
     size: null

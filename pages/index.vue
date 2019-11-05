@@ -14,6 +14,11 @@
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
                       @onDelete="onDeleteRequest(note.id)" />
+        <NoteCardReminder v-if="note.type === 'reminder'" :note="note"
+                      :show-tags="showTags"
+                      @onCopy="onCopyNote"
+                      @onEdit="onEditRequest(note)"
+                      @onDelete="onDeleteRequest(note.id)" />
         <NoteCardCredentials v-if="note.type === 'credentials'" :note="note"
                       :show-tags="showTags"
                       @onCopy="onCopyNote"
@@ -45,6 +50,7 @@
         </v-card-title>
         <v-card-text>
           <NoteFormText form-id="note-new-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
+          <NoteFormReminder form-id="note-new-form" v-if="dialog.new.type.id === 'reminder'" @onSubmit="onSaveNewNote"></NoteFormReminder>
           <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-new-form" v-if="dialog.new.type.id === 'template'" @onSubmit="onSaveNewNote"></NoteFormTemplate>
           <NoteFormCredentials form-id="note-new-form" v-if="dialog.new.type.id === 'credentials'" @onSubmit="onSaveNewNote"></NoteFormCredentials>
@@ -65,6 +71,7 @@
         </v-card-title>
         <v-card-text>
           <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
+          <NoteFormReminder form-id="note-edit-form" v-if="dialog.edit.note.type === 'reminder'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormReminder>
           <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
           <NoteFormTemplate form-id="note-edit-form" v-if="dialog.edit.note.type === 'template'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormTemplate>
           <NoteFormCredentials form-id="note-edit-form" v-if="dialog.edit.note.type === 'credentials'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCredentials>
@@ -178,9 +185,13 @@ import NoteFormCredentials from "../components/note/form/Credentials";
 import NoteCardCredentials from "../components/note/card/Credentials";
 import NoteFormCamera from "../components/note/form/Camera";
 import NoteCardCamera from "../components/note/card/Camera";
+import NoteFormReminder from "../components/note/form/Reminder";
+import NoteCardReminder from "../components/note/card/Reminder";
 
 export default {
   components: {
+    NoteCardReminder,
+    NoteFormReminder,
     NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
@@ -230,6 +241,7 @@ export default {
           { id: 'credentials', icon: 'fingerprint', text: 'note.credentials.title' },
           { id: 'picture', icon: 'photo', text: 'note.picture.title' },
           { id: 'camera', icon: 'camera', text: 'note.camera.title' },
+          { id: 'reminder', icon: 'alarm', text: 'note.reminder.title' },
           { id: 'text', icon: 'notes', text: 'note.text.title' },
         ]
       }
