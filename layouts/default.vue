@@ -73,6 +73,7 @@
     </v-app-bar>
 
     <v-content>
+      <OverdueNotifications />
       <nuxt />
     </v-content>
   </v-app>
@@ -82,9 +83,10 @@
 import { mapState } from 'vuex';
 import { generateBoardQuery, readBoardQuery } from '../common/boardQuery'
 import Info from "../components/Info";
+import OverdueNotifications from "../components/note/OverdueNotifications";
 
 export default {
-  components: {Info},
+  components: {OverdueNotifications, Info},
   data () {
     return {
       clipped: false,

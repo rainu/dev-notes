@@ -2,7 +2,8 @@ import Vue from 'vue'
 
 export const state = () => ({
   notes: [],
-  noteOrder: []
+  noteOrder: [],
+  overdueAlarm: []
 })
 
 export const mutations = {
@@ -56,6 +57,21 @@ export const mutations = {
 
     this.$localStore.clearNotes()
   },
+  triggerOverdueAlarm(state, noteId) {
+    if(!state.overdueAlarm.includes(noteId)) {
+      state.overdueAlarm.push(noteId)
+    }
+  },
+  removeOverdueAlarm(state, noteId) {
+    let index = state.overdueAlarm.findIndex(n => n.id === noteId)
+    if(index) {
+      state.overdueAlarm.splice(index, 1)
+    }
+
+    let note = state.notes.find(n => n.id === noteId)
+    note.content.noticed = true
+    this.$localStore.setNote(note)
+  }
 }
 
 export const getters = {
@@ -73,6 +89,9 @@ export const getters = {
     }
 
     return Object.keys(tagMap).sort()
+  },
+  getOverdueNotes(state) {
+    return state.overdueAlarm.map(nId => state.notes.find(n => n.id === nId))
   }
 }
 
@@ -80,6 +99,16 @@ export const actions = {
   init(ctx) {
     return Promise.all([this.$localStore.getNotes(), this.$localStore.getNoteOrder()])
       .then(([notes, order]) => ctx.commit('loadNotes', {notes, order}))
+  },
+  checkOverdueNotes(ctx) {
+    ctx.state.notes
+      .filter(n => n.type === 'reminder')
+      .filter(n => n.content.date)
+      .filter(n => new Date() > n.content.date)
+      .filter(n => !n.content.noticed)
+      .forEach(n => {
+        ctx.commit('triggerOverdueAlarm', n.id)
+      })
   }
 }
 

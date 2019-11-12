@@ -3,15 +3,14 @@ import colors from 'vuetify/es5/util/colors'
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    middleware: ['encryption', 'dropbox'],
     base: '/dev-notes/'
   }
 } : {
   router: {
-    middleware: ['encryption', 'dropbox'],
     base: '/'
   }
 }
+routerBase.router.middleware = ['encryption', 'dropbox']
 
 export default {
   ...routerBase,
@@ -82,6 +81,8 @@ export default {
     '~/plugins/i18n',
     '~/plugins/init',
     '~/plugins/style',
+    '~/plugins/notification',
+    '~/plugins/reminder',
   ],
   /*
   ** Nuxt.js dev-modules

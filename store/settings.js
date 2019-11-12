@@ -15,6 +15,10 @@ export const state = () => ({
   },
   theme: {
     dark: true,
+  },
+  notification: {
+    supported: false,
+    granted: false,
   }
 })
 
@@ -31,6 +35,12 @@ export const mutations = {
 
       this.$localStore.setLanguage(lang)
     }
+  },
+  setNotificationSupported(state, supported) {
+    state.notification.supported = supported
+  },
+  setNotificationGranted(state, granted) {
+    state.notification.granted = granted
   },
   setNoteSize(state, {fixed, size}) {
     state.notes.fixed = fixed
@@ -50,6 +60,12 @@ export const mutations = {
   setDateFirstDay(state, day) {
     state.date.firstDayOfWeek = day
     this.$localStore.setDateFirstDay(day)
+  }
+}
+
+export const getters = {
+  isNotificationEnabled(state){
+    return state.notification.supported && state.notification.granted
   }
 }
 
@@ -130,5 +146,6 @@ export default {
   namespaced: true,
   state,
   mutations,
+  getters,
   actions
 }

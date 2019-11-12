@@ -185,6 +185,7 @@
         data.tags = this.note.tags
         data.content = {}
         data.content.date = this.note.date
+        data.content.noticed = false
 
         if(this.note.markdown) data.content.markdown = this.note.content
         else data.content.text = this.note.content
