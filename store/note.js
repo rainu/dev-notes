@@ -8,6 +8,13 @@ export const state = () => ({
 
 export const mutations = {
   loadNotes(state, {notes, order}) {
+    //transfer date-strings to date
+    for(let note of notes) {
+      if(note && note.content && note.content.date) {
+        note.content.date = new Date(note.content.date)
+      }
+    }
+
     state.notes.push(...notes)
     state.noteOrder.push(...order)
   },

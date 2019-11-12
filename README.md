@@ -42,6 +42,9 @@
     
 ## Changelog
 
+### 0.9.12
+* fix crash if you have a reminder note and encryption enabled
+
 ### 0.9.11
 * add built date into info screen
 * add a close button in note order view [#29](https://github.com/rainu/dev-notes/issues/29)
