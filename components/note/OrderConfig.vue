@@ -10,6 +10,9 @@
       <v-toolbar color="primary" flat>
         <v-toolbar-title>{{$t('note.order.title')}}</v-toolbar-title>
         <div class="flex-grow-1"></div>
+        <v-btn icon @click="dialog.show = false">
+          <v-icon>close</v-icon>
+        </v-btn>
       </v-toolbar>
 
 
