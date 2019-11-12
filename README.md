@@ -12,6 +12,7 @@
 * Note-Types:
     * Textual
     * Markdown
+    * Reminder
     * Image
     * Photo
     * Credentials
@@ -40,6 +41,12 @@
 ¹ These services will work if CORS is correctly configured to return the proper headers. This may not work by default.
     
 ## Changelog
+
+### 0.9.11
+* add built date into info screen
+* add a close button in note order view [#29](https://github.com/rainu/dev-notes/issues/29)
+* implements a new note type: reminder [#21](https://github.com/rainu/dev-notes/issues/21)
+* implements mechanism for remembering the backup password [#27](https://github.com/rainu/dev-notes/issues/27)
 
 ### 0.9.10
 * don't make app unusable after importing a file [#23](https://github.com/rainu/dev-notes/issues/23)
