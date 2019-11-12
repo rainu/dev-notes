@@ -32,6 +32,7 @@
           <v-list-item-content>
             <v-list-item-subtitle>{{$t('about.version')}}</v-list-item-subtitle>
             <v-list-item-title>{{version}} - <a :href="'https://github.com/rainu/dev-notes/tree/' + revision.long" target="_blank">{{revision.short}}</a></v-list-item-title>
+            <v-list-item-title>{{formattedBuiltDate}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -84,17 +85,25 @@
 </template>
 
 <script>
+  import * as dateFN from 'date-fns'
+
   export default {
     name: "Info",
     data(){
       return {
         routerBase: process.env.routerBase,
         version: process.env.version,
+        builtDate: new Date(process.env.builtDate),
         revision: {
           long: process.env.revision,
           short: process.env.revision.substr(0, 8),
         },
         dialog: false
+      }
+    },
+    computed: {
+      formattedBuiltDate(){
+        return dateFN.format(this.builtDate, this.$t('common.datetime.format.date'))
       }
     }
   }

@@ -40,6 +40,7 @@ export default {
     appName: process.env.npm_package_name,
     routerBase: routerBase.router.base,
     version: process.env.npm_package_version,
+    builtDate: new Date(),
     revision: process.env.COMMIT_HASH || 'development',
     dropbox: {
       clientId: process.env.DROPBOX_CLIENT_ID || 'h89z3y690lntrca',
