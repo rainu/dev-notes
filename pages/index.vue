@@ -43,48 +43,6 @@
       </v-col>
     </v-row>
 
-    <v-dialog v-model="dialog.new.open" scrollable>
-      <v-card v-if="dialog.new.type">
-        <v-card-title>
-          <span class="headline">{{$t(dialog.new.type.text)}}</span>
-        </v-card-title>
-        <v-card-text>
-          <NoteFormText form-id="note-new-form" v-if="dialog.new.type.id === 'text'" @onSubmit="onSaveNewNote"></NoteFormText>
-          <NoteFormReminder form-id="note-new-form" v-if="dialog.new.type.id === 'reminder'" @onSubmit="onSaveNewNote"></NoteFormReminder>
-          <NoteFormPicture form-id="note-new-form" v-if="dialog.new.type.id === 'picture'" @onSubmit="onSaveNewNote"></NoteFormPicture>
-          <NoteFormTemplate form-id="note-new-form" v-if="dialog.new.type.id === 'template'" @onSubmit="onSaveNewNote"></NoteFormTemplate>
-          <NoteFormCredentials form-id="note-new-form" v-if="dialog.new.type.id === 'credentials'" @onSubmit="onSaveNewNote"></NoteFormCredentials>
-          <NoteFormCamera form-id="note-new-form" v-if="dialog.new.type.id === 'camera'" @onSubmit="onSaveNewNote"></NoteFormCamera>
-        </v-card-text>
-        <v-card-actions>
-          <div class="flex-grow-1"></div>
-          <v-btn color="error" @click="dialog.new.open = false">{{$t('note.actions.abort')}}</v-btn>
-          <v-btn color="primary" type="submit" form="note-new-form">{{$t('note.actions.save')}}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-dialog v-model="dialog.edit.open" scrollable>
-      <v-card v-if="dialog.edit.note">
-        <v-card-title>
-          <span class="headline">{{$t('note.edit.title')}}</span>
-        </v-card-title>
-        <v-card-text>
-          <NoteFormText form-id="note-edit-form" v-if="dialog.edit.note.type === 'text'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormText>
-          <NoteFormReminder form-id="note-edit-form" v-if="dialog.edit.note.type === 'reminder'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormReminder>
-          <NoteFormPicture form-id="note-edit-form" v-if="dialog.edit.note.type === 'picture'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormPicture>
-          <NoteFormTemplate form-id="note-edit-form" v-if="dialog.edit.note.type === 'template'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormTemplate>
-          <NoteFormCredentials form-id="note-edit-form" v-if="dialog.edit.note.type === 'credentials'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCredentials>
-          <NoteFormCamera form-id="note-edit-form" v-if="dialog.edit.note.type === 'camera'" :data="dialog.edit.note" @onSubmit="onSaveNote"></NoteFormCamera>
-        </v-card-text>
-        <v-card-actions>
-          <div class="flex-grow-1"></div>
-          <v-btn color="error" @click="dialog.edit.open = false">{{$t('note.actions.abort')}}</v-btn>
-          <v-btn color="primary" type="submit" form="note-edit-form">{{$t('note.actions.save')}}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
     <v-dialog v-model="dialog.delete.open" max-width="290">
       <v-card>
         <v-card-title class="headline">{{$t('common.confirmation.title')}}</v-card-title>
@@ -105,12 +63,6 @@
     <v-snackbar v-model="snackbar.copied" color="success" class="text-center" :timeout="1000">
       {{$t('note.copy.successful')}}
       <v-btn text @click="snackbar.copied = false" >
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-snackbar>
-    <v-snackbar v-model="snackbar.saved" color="success" class="text-center" :timeout="1000">
-      {{$t('note.saved.successful')}}
-      <v-btn text @click="snackbar.saved = false" >
         <v-icon>close</v-icon>
       </v-btn>
     </v-snackbar>
@@ -155,7 +107,7 @@
               <v-list-item v-for="type in note.types" :key="type.id">
                 <v-btn block @click="onNewNote(type)">
                   <v-icon left>{{type.icon}}</v-icon>
-                  {{$t(type.text)}}
+                  {{$t(`note.${type.id}.title`)}}
                 </v-btn>
               </v-list-item>
             </v-list>
@@ -170,7 +122,6 @@
 import { mapGetters, mapState, mapMutations } from 'vuex';
 import Vue from 'vue'
 import copy from 'copy-to-clipboard';
-import uuid4 from 'uuid4';
 
 import { readBoardQuery } from '../common/boardQuery'
 import NoteCardText from "../components/note/card/Text";
@@ -208,14 +159,6 @@ export default {
   data(){
     return {
       dialog: {
-        new: {
-          open: false,
-          type: null
-        },
-        edit: {
-          open: false,
-          note: null
-        },
         delete: {
           open: false,
           noteId: null
@@ -230,19 +173,18 @@ export default {
       },
 
       snackbar: {
-        copied: false,
-        saved: false,
+        copied: false
       },
 
       note: {
         data: {},
         types: [
-          { id: 'template', icon: 'ballot', text: 'note.template.title' },
-          { id: 'credentials', icon: 'fingerprint', text: 'note.credentials.title' },
-          { id: 'picture', icon: 'photo', text: 'note.picture.title' },
-          { id: 'camera', icon: 'camera', text: 'note.camera.title' },
-          { id: 'reminder', icon: 'alarm', text: 'note.reminder.title' },
-          { id: 'text', icon: 'notes', text: 'note.text.title' },
+          { id: 'template', icon: 'ballot' },
+          { id: 'credentials', icon: 'fingerprint' },
+          { id: 'picture', icon: 'photo' },
+          { id: 'camera', icon: 'camera' },
+          { id: 'reminder', icon: 'alarm' },
+          { id: 'text', icon: 'notes' },
         ]
       }
     }
@@ -310,21 +252,13 @@ export default {
   },
   methods: {
     ...mapMutations({
-      addNote: 'note/addNote',
-      editNote: 'note/editNote',
       deleteNote: 'note/deleteNote',
     }),
     onNewNote(type) {
-      this.dialog.new.open = true
-      this.dialog.new.type = type
+      this.$router.push("/notes/new/" + type.id)
     },
-    onSaveNewNote(note){
-      this.addNote({
-        id: uuid4(),
-        type: this.dialog.new.type.id,
-        ...note
-      })
-      this.dialog.new.open = false
+    onEditRequest(note) {
+      this.$router.push("/notes/edit/" + note.id)
     },
     onDeleteRequest(id) {
       this.dialog.delete.open = true
@@ -334,20 +268,6 @@ export default {
       this.deleteNote(this.dialog.delete.noteId)
       this.dialog.delete.open = false
       this.dialog.delete.noteId = null
-    },
-    onEditRequest(note) {
-      this.dialog.edit.note = note
-      this.dialog.edit.open = true
-    },
-    onSaveNote(note) {
-      this.snackbar.saved = false
-      this.editNote({
-        id: this.dialog.edit.note.id,
-        type: this.dialog.edit.note.type,
-        ...note,
-      })
-      this.dialog.edit.open = false
-      this.snackbar.saved = true
     },
     onCopyNote(content) {
       this.snackbar.copied = false

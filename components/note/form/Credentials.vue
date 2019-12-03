@@ -67,7 +67,7 @@
       clearAfterSubmit: {
         type: Boolean,
         required: false,
-        default: true
+        default: false
       }
     },
     data() {

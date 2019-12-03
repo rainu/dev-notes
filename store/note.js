@@ -82,7 +82,7 @@ export const mutations = {
 }
 
 export const getters = {
-  getNoteById(state, id) {
+  getNoteById: (state) => (id) => {
     return state.notes.filter(n => n.id === id)[0]
   },
   getAvailableTags(state) {
