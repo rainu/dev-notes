@@ -39,8 +39,32 @@
         * ...
 
 ¹ These services will work if CORS is correctly configured to return the proper headers. This may not work by default.
-    
+
+## Build Setup
+
+``` bash
+# install dependencies
+$ npm run install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
 ## Changelog
+
+### 0.9.13
+* a mechanism for faster deletion of notes (trash bin)
+* make note titles optional [#22](https://github.com/rainu/dev-notes/issues/22)
+* split note view in own views (one for edit one for creating new one) [#30](https://github.com/rainu/dev-notes/issues/30)
 
 ### 0.9.12
 * fix crash if you have a reminder note and encryption enabled
@@ -112,21 +136,3 @@
 ### 0.9.0
 * implements all base features
 
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm run install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
