@@ -66,6 +66,7 @@
   },
   "note": {
     "title": "Title",
+    "untitled": "Untitled",
     "help": {
       "first-steps": {
         "title": "Welcome to {appName}",

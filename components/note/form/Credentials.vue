@@ -8,22 +8,12 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-text-field v-model="note.title" :label="$t('note.title')" :rules="ruleRequired" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field v-model="note.url" :label="$t('note.credentials.url')" ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-textarea v-model="note.description" :label="$t('note.credentials.description')" ></v-textarea>
+          <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')" ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field v-model="note.username" :label="$t('note.credentials.username')" :rules="ruleRequired" required></v-text-field>
+          <v-text-field v-model="note.username" :label="$t('note.credentials.username')" autofocus></v-text-field>
         </v-col>
         <v-col cols="12" sm="6">
           <v-text-field :type="showPassword ? 'text' : 'password'"
@@ -33,6 +23,16 @@
                         @click:append="showPassword = !showPassword"
                         :rules="ruleRequired"
                         required />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-textarea v-model="note.description" :label="$t('note.credentials.description')" ></v-textarea>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-text-field v-model="note.url" :label="$t('note.credentials.url')" ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -81,7 +81,7 @@
       }
 
       if(this.data) {
-        note.title = this.data.title
+        note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
         note.url = this.data.content.url
         note.description = this.data.content.description
@@ -124,7 +124,7 @@
         let data = {
           content: {}
         }
-        data.title = this.note.title
+        data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
         data.content.url = this.note.url
         data.content.description = this.note.description
@@ -140,7 +140,7 @@
     },
     watch: {
       data(newData) {
-        this.note.title = newData.title
+        this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
         this.note.url = newData.content.url
         this.note.description = newData.content.description

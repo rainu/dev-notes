@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-text-field v-model="note.title" :label="$t('note.title')" :rules="ruleRequired" required></v-text-field>
+          <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
         </v-col>
       </v-row>
 
@@ -70,7 +70,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-textarea v-model="note.content" :label="$t('note.reminder.content')" :auto-grow="true" :rules="ruleRequired" required></v-textarea>
+          <v-textarea v-model="note.content" :label="$t('note.reminder.content')" :auto-grow="true" :rules="ruleRequired" required autofocus></v-textarea>
         </v-col>
       </v-row>
       <v-row>
@@ -121,7 +121,7 @@
       }
 
       if(this.data) {
-        note.title = this.data.title
+        note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
         note.date = this.data.content.date
         note.markdown = !!this.data.content.markdown
@@ -181,7 +181,7 @@
         if(!this.valid) return
 
         let data = {}
-        data.title = this.note.title
+        data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
         data.content = {}
         data.content.date = this.note.date
@@ -209,7 +209,7 @@
         this.recalcNoteDate()
       },
       data(newData) {
-        this.note.title = newData.title
+        this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
         this.note.date = newData.content.date
         this.note.markdown = !!newData.content.markdown
