@@ -13,13 +13,6 @@
 
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
-/**!
- * Sortable 1.10.0
- * @author	RubaXa   <trash@rubaxa.org>
- * @author	owenm    <owen23355@gmail.com>
- * @license MIT
- */
-
 /**
  * vuex v3.1.1
  * (c) 2019 Evan You
@@ -48,6 +41,13 @@
 /*! http://mths.be/base64 v0.1.0 by @mathias | MIT license */
 
 /*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
+
+/**!
+ * Sortable 1.10.0
+ * @author	RubaXa   <trash@rubaxa.org>
+ * @author	owenm    <owen23355@gmail.com>
+ * @license MIT
+ */
 
 /*!
  * vue-no-ssr v1.1.1
