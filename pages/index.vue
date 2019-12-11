@@ -66,6 +66,12 @@
         <v-icon>close</v-icon>
       </v-btn>
     </v-snackbar>
+    <v-snackbar v-model="snackbar.trash" color="success" class="text-center" :timeout="1000">
+      {{$t('note.delete.trash')}}
+      <v-btn text @click="snackbar.trash = false" >
+        <v-icon>close</v-icon>
+      </v-btn>
+    </v-snackbar>
 
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
@@ -173,7 +179,8 @@ export default {
       },
 
       snackbar: {
-        copied: false
+        copied: false,
+        trash: false
       },
 
       note: {
@@ -196,7 +203,8 @@ export default {
     }),
     ...mapState({
       notes: state => state.note.notes,
-      noteOrder: state => state.note.noteOrder
+      noteOrder: state => state.note.noteOrder,
+      noteDeleteHard: state => state.settings.notes.deleteHard
     }),
     availableTags() {
       let tags = {}
@@ -253,6 +261,7 @@ export default {
   methods: {
     ...mapMutations({
       deleteNote: 'note/deleteNote',
+      deleteNoteSoft: 'note/deleteNoteSoft',
     }),
     onNewNote(type) {
       this.$router.push("/notes/new/" + type.id)
@@ -261,8 +270,13 @@ export default {
       this.$router.push("/notes/edit/" + note.id)
     },
     onDeleteRequest(id) {
-      this.dialog.delete.open = true
-      this.dialog.delete.noteId = id
+      if(this.noteDeleteHard) {
+        this.dialog.delete.open = true
+        this.dialog.delete.noteId = id
+      } else {
+        this.deleteNoteSoft(id)
+        this.snackbar.trash = true
+      }
     },
     onDeleteNote() {
       this.deleteNote(this.dialog.delete.noteId)

@@ -2,20 +2,27 @@ import Vue from 'vue'
 
 export const state = () => ({
   notes: [],
+  deletedNotes: [],
   noteOrder: [],
   overdueAlarm: []
 })
 
 export const mutations = {
-  loadNotes(state, {notes, order}) {
+  loadNotes(state, {notes, order, deleted}) {
     //transfer date-strings to date
     for(let note of notes) {
       if(note && note.content && note.content.date) {
         note.content.date = new Date(note.content.date)
       }
     }
+    for(let note of deleted) {
+      if(note && note.content && note.content.date) {
+        note.content.date = new Date(note.content.date)
+      }
+    }
 
     state.notes.push(...notes)
+    state.deletedNotes.push(...deleted)
     state.noteOrder.push(...order)
   },
   setNoteOrder(state, order) {
@@ -52,10 +59,40 @@ export const mutations = {
     let index = state.notes.findIndex(r => r.id === noteId)
     state.notes.splice(index, 1)
 
+    index = state.deletedNotes.findIndex(r => r.id === noteId)
+    state.deletedNotes.splice(index, 1)
+
     index = state.noteOrder.findIndex(nId => nId === noteId)
     state.noteOrder.splice(index, 1)
 
     this.$localStore.removeNote(noteId)
+    this.$localStore.removeDeletedNote(noteId)
+    this.$localStore.setNoteOrder(state.noteOrder)
+  },
+  deleteNoteSoft(state, noteId){
+    let index = state.notes.findIndex(r => r.id === noteId)
+    const toDelete = state.notes[index]
+    state.notes.splice(index, 1)
+
+    index = state.noteOrder.findIndex(nId => nId === noteId)
+    state.noteOrder.splice(index, 1)
+
+    state.deletedNotes.push(toDelete)
+
+    this.$localStore.removeNote(noteId)
+    this.$localStore.setDeletedNote(toDelete)
+    this.$localStore.setNoteOrder(state.noteOrder)
+  },
+  restoreDeletedNote(state, noteId) {
+    let index = state.deletedNotes.findIndex(r => r.id === noteId)
+    const toRestore = state.deletedNotes[index]
+    state.deletedNotes.splice(index, 1)
+
+    state.notes.push(toRestore)
+    state.noteOrder.push(noteId)
+
+    this.$localStore.removeDeletedNote(noteId)
+    this.$localStore.setNote(toRestore)
     this.$localStore.setNoteOrder(state.noteOrder)
   },
   clearNotes(state){
@@ -63,6 +100,11 @@ export const mutations = {
     state.noteOrder = []
 
     this.$localStore.clearNotes()
+  },
+  clearDeletedNotes(state){
+    state.deletedNotes = []
+
+    this.$localStore.clearDeletedNotes()
   },
   triggerOverdueAlarm(state, noteId) {
     if(!state.overdueAlarm.includes(noteId)) {
@@ -99,13 +141,16 @@ export const getters = {
   },
   getOverdueNotes(state) {
     return state.overdueAlarm.map(nId => state.notes.find(n => n.id === nId))
+  },
+  hasDeletedNotes: (state) => {
+    return state.deletedNotes.length > 0
   }
 }
 
 export const actions = {
   init(ctx) {
-    return Promise.all([this.$localStore.getNotes(), this.$localStore.getNoteOrder()])
-      .then(([notes, order]) => ctx.commit('loadNotes', {notes, order}))
+    return Promise.all([this.$localStore.getNotes(), this.$localStore.getNoteOrder(), this.$localStore.getDeletedNotes()])
+      .then(([notes, order, deleted]) => ctx.commit('loadNotes', {notes, order, deleted}))
   },
   checkOverdueNotes(ctx) {
     ctx.state.notes

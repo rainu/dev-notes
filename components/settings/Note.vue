@@ -16,6 +16,11 @@
           ></v-select>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-switch v-model="notes.deleteFast" :label="$t('settings.notes.delete.fast')" color="primary"></v-switch>
+        </v-col>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -30,6 +35,7 @@
         notes: {
           size: 'small',
           fixedSize: false,
+          deleteFast: true
         },
         noteSizes: [
           {label: 'settings.notes.size.small', value: 'small'},
@@ -46,6 +52,7 @@
     methods: {
       ...mapMutations({
         setNoteSize: 'settings/setNoteSize',
+        setNoteDeleteHard: 'settings/setNoteDeleteHard',
       }),
       getNoteSizeItemLabel(item){
         return this.$t(item.label)
@@ -53,6 +60,7 @@
       updateNoteSettings(settings){
         this.notes.fixedSize = settings.fixed
         this.notes.size = settings.size
+        this.notes.deleteFast = !settings.deleteHard
       },
     },
     watch: {
@@ -67,8 +75,9 @@
         handler(notes) {
           this.setNoteSize({
             fixed: notes.fixedSize,
-            size: notes.size
+            size: notes.size,
           })
+          this.setNoteDeleteHard(!notes.deleteFast)
         }
       },
     },

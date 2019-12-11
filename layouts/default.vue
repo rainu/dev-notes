@@ -32,6 +32,16 @@
 
         <v-divider />
 
+        <v-list-item router to="/trash/">
+          <v-list-item-action>
+            <v-icon v-if="hasDeletedNotes">delete</v-icon>
+            <v-icon v-else>delete_outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="$t('navigation.trash')" />
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item router to="/backup/">
           <v-list-item-action>
             <v-icon>import_export</v-icon>
@@ -80,7 +90,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { generateBoardQuery, readBoardQuery } from '../common/boardQuery'
 import Info from "../components/Info";
 import OverdueNotifications from "../components/note/OverdueNotifications";
@@ -101,6 +111,9 @@ export default {
     ...mapState({
       boards: state => state.board.boards,
       boardOrder: state => state.board.boardOrder,
+    }),
+    ...mapGetters({
+      hasDeletedNotes: 'note/hasDeletedNotes',
     }),
   },
   methods: {

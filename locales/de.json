@@ -60,6 +60,7 @@
   },
   "navigation": {
     "home": "Alle",
+    "trash": "Papierkorb",
     "settings": "Einstellungen",
     "backup": "Sicherung",
     "help": "Hilfe"
@@ -177,7 +178,15 @@
     "saved": {
       "successful": "Inhalt wurde gespeichert."
     },
+    "restored": {
+      "successful": "Die Notiz wurde wiederhergestellt."
+    },
     "delete": {
+      "all": {
+        "action": "Papierkorb leeren",
+        "confirmation": "Sind Sie sicher, dass Sie all diese Notizen löschen wollen?"
+      },
+      "trash": "Die Notiz wurde in den Papierkorb verschoben.",
       "confirmation": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?"
     }
   },
@@ -444,6 +453,9 @@
         "small": "Klein",
         "medium": "Mittel",
         "large": "Groß"
+      },
+      "delete": {
+        "fast": "Schnelles Löschen"
       }
     },
     "theme": {

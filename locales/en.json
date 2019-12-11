@@ -60,6 +60,7 @@
   },
   "navigation": {
     "home": "All",
+    "trash": "Trash",
     "settings": "Settings",
     "backup": "Backup",
     "help": "Help"
@@ -177,7 +178,15 @@
     "saved": {
       "successful": "Content was saved successfully."
     },
+    "restored": {
+      "successful": "The note was restored successfully."
+    },
     "delete": {
+      "all": {
+        "action": "Delete all",
+        "confirmation": "Are you sure you want to delete all this notes?"
+      },
+      "trash": "The note was moved to trash.",
       "confirmation": "Are you sure you want to delete this note?"
     }
   },
@@ -444,6 +453,9 @@
         "small": "Small",
         "medium": "Medium",
         "large": "Large"
+      },
+      "delete": {
+        "fast": "Fast Delete"
       }
     },
     "theme": {

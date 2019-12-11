@@ -11,7 +11,8 @@ export const state = () => ({
   },
   notes: {
     fixed: false,
-    size: null
+    size: null,
+    deleteHard: false
   },
   theme: {
     dark: true,
@@ -60,6 +61,10 @@ export const mutations = {
   setDateFirstDay(state, day) {
     state.date.firstDayOfWeek = day
     this.$localStore.setDateFirstDay(day)
+  },
+  setNoteDeleteHard(state, mode) {
+    state.notes.deleteHard = mode
+    this.$localStore.setNoteDeleteHard(mode)
   }
 }
 
@@ -110,7 +115,13 @@ export const actions = {
           if(day) {
             return ctx.commit('setDateFirstDay', day)
           }
-        })
+        }),
+      this.$localStore.getNoteDeleteHard()
+        .then(mode => {
+          if(mode) {
+            return ctx.commit('setNoteDeleteHard', mode)
+          }
+        }),
     ])
   },
   applyLanguage(ctx, lang) {

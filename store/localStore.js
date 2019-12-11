@@ -46,6 +46,12 @@ export function newLocalStore() {
       version: 1.0,
       storeName: 'notes', // Should be alphanumeric, with underscores.
     }),
+    deletedNotes: localforage.createInstance({
+      name: process.env.appName,
+      driver: localforage.INDEXEDDB,
+      version: 1.0,
+      storeName: 'deleted_notes', // Should be alphanumeric, with underscores.
+    }),
     boards: localforage.createInstance({
       name: process.env.appName,
       driver: localforage.INDEXEDDB,
@@ -60,6 +66,7 @@ export function newLocalStore() {
         store.meta.ready(),
         store.settings.ready(),
         store.notes.ready(),
+        store.deletedNotes.ready(),
         store.boards.ready(),
       ])
       .then(() => this.isEncrypted())
@@ -191,6 +198,12 @@ export function newLocalStore() {
         fixed, size
       })
     },
+    getNoteDeleteHard(){
+      return store.settings.getItem('note.deleteHard')
+    },
+    setNoteDeleteHard(mode){
+      return store.settings.setItem('note.deleteHard', mode)
+    },
     getNote(id) {
       return store.notes.getItem(id)
         .then(note => store.cryptoModule.decrypt(note))
@@ -206,6 +219,21 @@ export function newLocalStore() {
     removeNote(id) {
       return store.notes.removeItem(id)
     },
+    setDeletedNote(note) {
+      return store.deletedNotes.setItem(note.id, store.cryptoModule.encrypt(note))
+    },
+    removeDeletedNote(id) {
+      return store.deletedNotes.removeItem(id)
+    },
+    getDeletedNote(id) {
+      return store.deletedNotes.getItem(id)
+      .then(note => store.cryptoModule.decrypt(note))
+    },
+    getDeletedNotes(){
+      return store.deletedNotes.keys()
+      .then(keys => keys.map(id => this.getDeletedNote(id)))
+      .then(promises => Promise.all(promises))
+    },
     getNoteOrder(){
       return store.notes.getItem(ORDER_KEY)
         .then(order => !order ? [] : order)
@@ -215,6 +243,9 @@ export function newLocalStore() {
     },
     clearNotes(){
       return store.notes.clear()
+    },
+    clearDeletedNotes(){
+      return store.deletedNotes.clear()
     },
     getBoard(id) {
       return store.boards.getItem(id)

@@ -48,8 +48,11 @@
       <v-btn icon class="error" @click="onDelete()">
         <v-icon>delete</v-icon>
       </v-btn>
-      <v-btn icon class="primary" @click="onEdit()">
+      <v-btn icon class="primary" @click="onEdit()" v-if="editable">
         <v-icon>edit</v-icon>
+      </v-btn>
+      <v-btn icon class="primary" @click="onRestore()" v-if="restorable">
+        <v-icon>restore_from_trash</v-icon>
       </v-btn>
 
       <div class="flex-grow-1"></div>
@@ -85,6 +88,16 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      editable: {
+        type: Boolean,
+        required: false,
+        default: true
+      },
+      restorable: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
     data(){
@@ -104,6 +117,9 @@
     methods: {
       onEdit(){
         this.$emit('onEdit')
+      },
+      onRestore(){
+        this.$emit('onRestore')
       },
       onDelete(){
         this.$emit('onDelete')
