@@ -6,6 +6,7 @@
 
 [Try it out!](https://rainu.github.io/dev-notes/)
 
+
 ## Features
 * **Serverless** note app (no server or database required)
     * The whole content will be **stored locally**
