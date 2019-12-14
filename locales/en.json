@@ -66,7 +66,7 @@
     "help": "Help"
   },
   "note": {
-    "title": "Title",
+    "title": "Title (Optional)",
     "untitled": "Untitled",
     "help": {
       "first-steps": {
@@ -78,7 +78,7 @@
     "text": {
       "title": "Text",
       "help": "This is a simple text note. If you copy this note you the shown text is copied. It is also possible to write the content in **Markdown**.",
-      "content": "Content",
+      "content": "Text",
       "markdown": "Markdown"
     },
     "reminder": {
@@ -153,6 +153,7 @@
     },
     "tags": {
       "title": "Tags",
+      "notags": "No tags set",
       "action": {
         "add": {
           "title": "Add tag",

@@ -81,7 +81,7 @@
                 <div class="flex-grow-1"></div>
 
                 <v-toolbar-items>
-                    <v-btn @click="showTags = !showTags">
+                    <v-btn @click="showTags = !showTags" v-if="availableTags.length > 0">
                         <v-icon :color="showTags ? 'primary' : ''">flag</v-icon>
                     </v-btn>
 

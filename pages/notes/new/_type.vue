@@ -2,9 +2,7 @@
   <v-container fluid>
 
     <v-card>
-      <v-card-title>
-        <span class="headline">{{$t(`note.${noteType}.title`)}}</span>
-      </v-card-title>
+
       <v-card-text>
         <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" ></NoteFormText>
         <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" ></NoteFormReminder>

@@ -3,10 +3,10 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
-        </v-col>
-        <v-col cols="12">
           <v-textarea v-model="note.content" :label="$t('note.text.content')" :auto-grow="true" :rules="ruleRequired" required autofocus></v-textarea>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
         </v-col>
         <v-col cols="6">
           <v-switch v-model="note.markdown" :label="$t('note.text.markdown')" color="primary"></v-switch>

@@ -18,15 +18,13 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider />
 
         <!-- CUSTOMER generated Links -->
         <v-list-item v-for="link in links" :key="link.route" router exact :to="link.route">
           <v-list-item-action>
-            <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="link.text" />
+            <v-list-item-title v-text="link.text + ' ('+2+')'" style="text-transform: capitalize;"/>
           </v-list-item-content>
         </v-list-item>
 

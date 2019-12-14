@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn block color="primary" @click="$refs.fileInput.click()">
+    <v-btn block @click="$refs.fileInput.click()">
       <v-icon left>cloud_download</v-icon>
       {{$t('backup.file.import.title')}}
 

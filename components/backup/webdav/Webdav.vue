@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar color="primary" flat>
+    <v-toolbar flat>
       <v-toolbar-title>{{$t('backup.webdav.title')}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
     </v-toolbar>

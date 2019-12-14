@@ -1,14 +1,14 @@
 <template>
-  <v-card class="elevation-6">
-    <v-toolbar color="primary" flat>
+  <v-card class="elevation-6"  style="overflow: hidden">
+    <v-toolbar color="primary" flat v-if="note.title !== 'Untitled'">
       <v-toolbar-title>{{note.title}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
     </v-toolbar>
 
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <v-card>
-        <v-toolbar color="primary" flat>
-          <v-toolbar-title>{{note.title}}</v-toolbar-title>
+      <v-card >
+        <v-toolbar color="primary" flat >
+          <v-toolbar-title  v-if="note.title !== 'Untitled'">{{note.title}}</v-toolbar-title>
           <div class="flex-grow-1"></div>
           <v-btn icon @click="fullscreen = false">
             <v-icon>fullscreen_exit</v-icon>
@@ -42,6 +42,8 @@
 
     <div class="text-center pt-2 px-2" v-show="showTags">
       <v-chip v-for="tag of note.tags" :key="tag" class="ma-1">{{tag}}</v-chip>
+      <span v-if="note.tags.length === 0" >{{$t('note.tags.notags')}}</span>
+
     </div>
 
     <v-card-actions>
@@ -57,7 +59,7 @@
 
       <div class="flex-grow-1"></div>
 
-      <v-btn icon :color="showTags ? 'primary' : ''" @click="showTags = !showTags">
+      <v-btn icon :color="showTags ? 'primary' : ''" @click="showTags = !showTags" v-if="note.tags.length > 0">
         <v-icon>flag</v-icon>
       </v-btn>
       <v-btn icon @click="fullscreen = true">

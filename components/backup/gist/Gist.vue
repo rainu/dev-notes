@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar color="primary" flat>
+    <v-toolbar flat>
       <v-toolbar-title>{{$t('backup.gist.title')}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-btn icon @click="showHelp = true">
@@ -11,7 +11,7 @@
     <v-dialog v-model="showHelp" scrollable>
       <HelpGist>
         <div class="flex-grow-1"></div>
-        <v-btn color="primary" @click="showHelp = false">
+        <v-btn @click="showHelp = false">
           {{$t('common.confirmation.close')}}
         </v-btn>
       </HelpGist>
