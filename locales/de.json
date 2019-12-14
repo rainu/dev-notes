@@ -71,7 +71,8 @@
     "help": {
       "first-steps": {
         "title": "Willkommen in {appName}",
-        "preamble": "Fügen Sie einfach eine neue Notiz hinzu, indem Sie auf das **Plus-Symbol** in der **unteren rechten Ecke** klicken.\n\nEs gibt verschiedene Arten von Notizen."
+        "preamble": "Fügen Sie einfach eine neue Notiz hinzu, indem Sie auf das **Plus-Symbol** in der **unteren rechten Ecke** klicken.\n\nEs gibt verschiedene Arten von Notizen.",
+        "preamble2": "Learn more about the different types of notes."
       }
     },
     "text": {

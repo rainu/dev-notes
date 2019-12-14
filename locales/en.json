@@ -59,8 +59,8 @@
     }
   },
   "navigation": {
-    "home": "All",
-    "trash": "Trash",
+    "home": "Dev Notes",
+    "trash": "Deleted Notes",
     "settings": "Settings",
     "backup": "Backup",
     "help": "Help"
@@ -71,7 +71,8 @@
     "help": {
       "first-steps": {
         "title": "Welcome to {appName}",
-        "preamble": "Just add a new note by clicking on the **plus icon** in the **lower right corner**.\n\nThere are different types of notes."
+        "preamble": "Add a note by clicking on the **plus icon** in the **lower right corner**",
+        "preamble2": "Different types of notes."
       }
     },
     "text": {
