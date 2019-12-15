@@ -1,16 +1,12 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar flat>
-      <v-toolbar-title>{{$t('backup.file.title')}}</v-toolbar-title>
-      <div class="flex-grow-1"></div>
-    </v-toolbar>
 
     <v-card-actions>
       <v-row align="center">
-        <v-col md12 lg6>
+        <v-col md="6">
           <FileExport :password.sync="password" />
         </v-col>
-        <v-col md12 lg6>
+        <v-col md="6">
           <FileImport />
         </v-col>
       </v-row>

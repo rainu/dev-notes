@@ -1,10 +1,5 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar flat>
-      <v-toolbar-title>{{$t('backup.dropbox.title')}}</v-toolbar-title>
-      <div class="flex-grow-1"></div>
-    </v-toolbar>
-
     <v-card-text>
       <v-row v-if="!isEncrypted">
         <v-col cols="12">
@@ -29,7 +24,7 @@
           </v-col>
         </template>
         <template v-else>
-          <v-col cols="12" >
+          <v-col cols="12" sm="6">
             <v-btn :href="authenticationUrl" block color="primary">
               {{$t('backup.dropbox.login')}}
             </v-btn>

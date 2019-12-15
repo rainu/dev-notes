@@ -75,12 +75,11 @@
 
         <v-footer app padless>
             <v-toolbar dense color="footer" v-if="existNotes">
-                <v-toolbar-items>
-                    <NoteOrderConfig/>
-                </v-toolbar-items>
                 <div class="flex-grow-1"></div>
 
                 <v-toolbar-items>
+                    <NoteOrderConfig/>
+
                     <v-btn @click="showTags = !showTags" v-if="availableTags.length > 0">
                         <v-icon :color="showTags ? 'primary' : ''">flag</v-icon>
                     </v-btn>
@@ -103,9 +102,11 @@
                             </v-list-item>
                         </v-list>
                     </v-menu>
+
+
                     <v-menu offset-y top>
                         <template v-slot:activator="{ on }">
-                            <v-btn v-on="on">
+                            <v-btn v-on="on" @click="onNewNote({id: 'text'})">
                                 <v-icon>add_circle</v-icon>
                             </v-btn>
                         </template>
@@ -128,7 +129,7 @@
 
                 <v-menu offset-y top>
                   <template v-slot:activator="{ on }">
-                    <v-btn v-on="on">
+                    <v-btn v-on="on" @click="onNewNote({id: 'text'})">
                       <v-icon>add_circle</v-icon>
                     </v-btn>
                   </template>

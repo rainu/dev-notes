@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-6">
-    <v-toolbar color="primary" flat>
+    <v-toolbar color="primary" flat v-if="note.title !== 'Untitled'">
       <v-toolbar-title>{{note.title}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
     </v-toolbar>
@@ -77,7 +77,7 @@
 
       <div class="flex-grow-1"></div>
 
-      <v-btn icon :color="showTags ? 'primary' : ''" @click="showTags = !showTags">
+      <v-btn icon :color="showTags ? 'primary' : ''" @click="showTags = !showTags" v-if="note.tags.length > 0">
         <v-icon>flag</v-icon>
       </v-btn>
       <v-btn icon @click="fullscreen = true">

@@ -8,7 +8,7 @@
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card >
         <v-toolbar color="primary" flat >
-          <v-toolbar-title  v-if="note.title !== 'Untitled'">{{note.title}}</v-toolbar-title>
+          <v-toolbar-title >{{note.title}}</v-toolbar-title>
           <div class="flex-grow-1"></div>
           <v-btn icon @click="fullscreen = false">
             <v-icon>fullscreen_exit</v-icon>

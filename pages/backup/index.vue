@@ -10,39 +10,56 @@
       </v-dialog>
 
       <!-- FILE  -->
+
       <v-row align="center">
         <v-col cols="12">
-          <BackupFile :password.sync="password" />
+          <v-expansion-panels v-model="panel" accordion>
+
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.file.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupFile :password.sync="password" />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <!-- WebDAV  -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.webdav.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupWebdav :password.sync="password" />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+          <!-- Gist  -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>{{$t('backup.gist.title')}}</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <BackupGist :password.sync="password" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <!-- AWS S3 -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>{{$t('backup.aws.s3.title')}}</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <BackupS3 :password.sync="password" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+            <!-- Dropbox -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.dropbox.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupDropbox :password.sync="password" />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+
+          </v-expansion-panels>
+
         </v-col>
       </v-row>
 
-      <!-- WebDAV  -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupWebdav :password.sync="password" />
-        </v-col>
-      </v-row>
-
-      <!-- Gist  -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupGist :password.sync="password" />
-        </v-col>
-      </v-row>
-
-      <!-- AWS S3 -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupS3 :password.sync="password" />
-        </v-col>
-      </v-row>
-
-      <!-- Dropbox -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupDropbox :password.sync="password" />
-        </v-col>
-      </v-row>
     </v-layout>
 
     <v-footer app class="pa-0">
@@ -78,7 +95,8 @@
           encryption: {
             open: false
           }
-        }
+        },
+        panel: 0
       }
     },
     computed: {

@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-6">
-    <v-toolbar color="primary" flat>
+    <v-toolbar color="primary" flat v-if="note.title !== 'Untitled'">
       <v-toolbar-title>{{note.title}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
     </v-toolbar>

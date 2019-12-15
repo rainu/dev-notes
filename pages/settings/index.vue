@@ -16,25 +16,26 @@
             </v-toolbar>
             <v-card-text class="pb-0">
               <v-row>
-                <v-col cols="4" >
-                  <SettingsNote />
-                </v-col>
-                <v-col cols="4" sm="4">
-                  <SettingsTheme />
-                </v-col>
-                <v-col cols="4" sm="4">
+                <v-col cols="12" sm="6">
                   <SettingsLanguage />
                 </v-col>
-                <v-col cols="4" >
+                <v-col cols="12" sm="6" >
                   <SettingsDateTime />
                 </v-col>
+                <v-col cols="12" sm="6">
+                  <SettingsNote />
+                </v-col>
+                <v-col cols="12" sm="6"">
+                  <SettingsTheme />
+                </v-col>
+
               </v-row>
             </v-card-text>
           </v-card>
         </v-col>
 
         <!-- Board options -->
-        <v-col cols="4">
+        <v-col cols="12">
           <SettingsBoard />
         </v-col>
       </v-row>

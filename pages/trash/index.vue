@@ -86,17 +86,16 @@
 
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
-        <v-toolbar-items>
-          <v-btn @click="onDeleteAllRequest" color="error">
-            <v-icon >delete_forever</v-icon>
-            {{$t('note.delete.all.action')}}
-          </v-btn>
-        </v-toolbar-items>
+
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
           <v-btn @click="showTags = !showTags">
             <v-icon :color="showTags ? 'primary' : ''">flag</v-icon>
+          </v-btn>
+          <v-btn @click="onDeleteAllRequest" color="error">
+            <v-icon >delete_forever</v-icon>
+            {{$t('note.delete.all.action')}}
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
