@@ -39,7 +39,7 @@
     </v-dialog>
 
     <div :class="viewClass">
-      <v-img :src="note.content.image" ></v-img>
+      <v-img :src="note.content.image" v-if="note.content.image != null"></v-img>
 
       <v-card-text v-if="note.content.description">
         <pre>{{note.content.description}}</pre>
