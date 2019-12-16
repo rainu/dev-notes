@@ -59,25 +59,26 @@
     }
   },
   "navigation": {
-    "home": "All",
-    "trash": "Trash",
+    "home": "Dev Notes",
+    "trash": "Deleted Notes",
     "settings": "Settings",
     "backup": "Backup",
     "help": "Help"
   },
   "note": {
-    "title": "Title",
+    "title": "Title (Optional)",
     "untitled": "Untitled",
     "help": {
       "first-steps": {
         "title": "Welcome to {appName}",
-        "preamble": "Just add a new note by clicking on the **plus icon** in the **lower right corner**.\n\nThere are different types of notes."
+        "preamble": "Add a note by clicking on the **plus icon** in the **lower right corner**",
+        "preamble2": "Different types of notes."
       }
     },
     "text": {
       "title": "Text",
       "help": "This is a simple text note. If you copy this note you the shown text is copied. It is also possible to write the content in **Markdown**.",
-      "content": "Content",
+      "content": "Text",
       "markdown": "Markdown"
     },
     "reminder": {
@@ -152,6 +153,7 @@
     },
     "tags": {
       "title": "Tags",
+      "notags": "No tags set",
       "action": {
         "add": {
           "title": "Add tag",
@@ -482,7 +484,7 @@
       "title": "Language"
     },
     "others": {
-      "title": "Others"
+      "title": "General Settings"
     }
   }
 }

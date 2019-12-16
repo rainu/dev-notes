@@ -18,7 +18,7 @@
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
-          <v-btn color="primary" type="submit" form="login-form" :disabled="!password" @click="onUnlock">{{$t('backup.encryption.actions.unlock')}}</v-btn>
+          <v-btn type="submit" form="login-form" :disabled="!password" @click="onUnlock">{{$t('backup.encryption.actions.unlock')}}</v-btn>
         </v-card-actions>
 
       </v-card>

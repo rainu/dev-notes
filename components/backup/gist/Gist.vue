@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-12">
-    <v-toolbar color="primary" flat>
-      <v-toolbar-title>{{$t('backup.gist.title')}}</v-toolbar-title>
+    <v-toolbar flat>
+      <v-toolbar-title v-if="!isEncrypted"> <v-alert type="warning" dense dismissible>{{$t('backup.gist.settings.warn.decrypted')}}</v-alert></v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-btn icon @click="showHelp = true">
         <v-icon>help</v-icon>
@@ -11,18 +11,13 @@
     <v-dialog v-model="showHelp" scrollable>
       <HelpGist>
         <div class="flex-grow-1"></div>
-        <v-btn color="primary" @click="showHelp = false">
+        <v-btn @click="showHelp = false">
           {{$t('common.confirmation.close')}}
         </v-btn>
       </HelpGist>
     </v-dialog>
 
     <v-card-text>
-      <v-row v-if="!isEncrypted">
-        <v-col cols="12">
-          <v-alert type="warning" dense dismissible>{{$t('backup.gist.settings.warn.decrypted')}}</v-alert>
-        </v-col>
-      </v-row>
       <v-row>
         <v-col cols="12" sm="4">
           <v-text-field

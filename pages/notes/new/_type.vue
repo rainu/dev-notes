@@ -2,10 +2,25 @@
   <v-container fluid>
 
     <v-card>
-      <v-card-title>
-        <span class="headline">{{$t(`note.${noteType}.title`)}}</span>
-      </v-card-title>
+
       <v-card-text>
+        <v-select
+                @change="onNewNote"
+                :items="note.types"
+                solo
+        >
+          <template v-slot:item="{item}">
+            <v-icon>{{item.icon}}</v-icon> {{$t(`note.${item.id}.title`)}}
+          </template>
+          <template v-slot:label>
+            <v-icon>{{note.types[0].icon}}</v-icon>
+            {{note.types[noteTypeIndex].text}}{{$t(`note.${note.types[noteTypeIndex].id}.title`)}}
+          </template>
+          <template v-slot:selection="{item}">
+            <v-icon>{{item.icon}}</v-icon> {{$t(`note.${item.id}.title`)}}
+          </template>
+        </v-select>
+
         <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" ></NoteFormText>
         <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" ></NoteFormReminder>
         <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" ></NoteFormPicture>
@@ -60,17 +75,36 @@ export default {
     NoteFormCamera
   },
   data(){
-    return {}
+    return {
+      note: {
+        data: {},
+        types: [
+          {id: 'template', icon: 'ballot'},
+          {id: 'credentials', icon: 'fingerprint'},
+          {id: 'picture', icon: 'photo'},
+          {id: 'camera', icon: 'camera'},
+          {id: 'reminder', icon: 'alarm'},
+          {id: 'text', icon: 'notes'},
+        ]
+      }
+    }
   },
   computed: {
     noteType(){
       return this.$route.params.type
     },
+    noteTypeIndex(){
+      var self = this
+      return this.note.types.findIndex(t => t.id === self.noteType)
+    }
   },
   methods: {
     ...mapMutations({
       addNote: 'note/addNote',
     }),
+    onNewNote(type) {
+      this.$router.push("/notes/new/" + type.id)
+    },
     onAbort(){
       this.$router.back()
     },

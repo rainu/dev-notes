@@ -8,41 +8,40 @@
       fixed
       app
     >
-      <v-list dense>
+      <v-list>
         <v-list-item router exact to="/">
           <v-list-item-action>
             <v-icon>bookmarks</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="$t('navigation.home')" />
+            <v-list-item-title v-text="$t('navigation.home') + ' (' + notes.length + ')'" />
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider />
 
         <!-- CUSTOMER generated Links -->
         <v-list-item v-for="link in links" :key="link.route" router exact :to="link.route">
           <v-list-item-action>
-            <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="link.text" />
+            <v-list-item-title v-text="link.text + ' ('+2+')'" style="text-transform: capitalize;"/>
           </v-list-item-content>
         </v-list-item>
 
         <v-divider />
 
-        <v-list-item router to="/trash/">
+      </v-list>
+        <v-list dense>
+        <v-list-item router to="/trash/" v-if="hasDeletedNotes">
           <v-list-item-action>
-            <v-icon v-if="hasDeletedNotes">delete</v-icon>
-            <v-icon v-else>delete_outline</v-icon>
+            <v-icon>delete</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="$t('navigation.trash')" />
+            <v-list-item-title v-text="$t('navigation.trash')+ ' (' + deletedNotes.length + ')'" />
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item router to="/backup/">
+        <v-list-item router to="/backup/" v-if="notes.length > 0 ">
           <v-list-item-action>
             <v-icon>import_export</v-icon>
           </v-list-item-action>
@@ -111,6 +110,8 @@ export default {
     ...mapState({
       boards: state => state.board.boards,
       boardOrder: state => state.board.boardOrder,
+      deletedNotes: state => state.note.deletedNotes,
+      notes: state => state.note.notes,
     }),
     ...mapGetters({
       hasDeletedNotes: 'note/hasDeletedNotes',

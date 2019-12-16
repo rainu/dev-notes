@@ -7,18 +7,28 @@
 
     <v-card-text>
       <vue-markdown :source="$t('note.help.first-steps.preamble', textArgs)" />
-      <div v-for="type of types" :key="type.name">
-        <h3>
-          <v-icon>{{type.icon}}</v-icon>
-          {{$t(`note.${type.name}.title`, textArgs)}}
-        </h3>
-        <vue-markdown :source="$t(`note.${type.name}.help`, textArgs)" />
-      </div>
+
+
+      <v-expansion-panels >
+        <v-expansion-panel>
+          <v-expansion-panel-header><vue-markdown :source="$t('note.help.first-steps.preamble2', textArgs)" /></v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <div v-for="type of types" :key="type.name">
+                <v-icon>{{type.icon}}</v-icon>
+                {{$t(`note.${type.name}.title`, textArgs)}}
+              <vue-markdown :source="$t(`note.${type.name}.help`, textArgs)" />
+            </div>        </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+
+  import { mapState, mapGetters } from 'vuex';
   import VueMarkdown from 'vue-markdown'
 
   export default {
@@ -52,6 +62,12 @@
           appName: process.env.appName,
         }
       },
+      ...mapGetters({
+        hasDeletedNotes: 'note/hasDeletedNotes',
+      }),
+      ...mapState({
+        notes: state => state.note.notes,
+      }),
     }
   }
 </script>

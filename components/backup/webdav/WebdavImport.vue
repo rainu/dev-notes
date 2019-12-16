@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn block color="primary" @click="onUploadFile" >
+    <v-btn block @click="onUploadFile" >
       <v-icon left>cloud_download</v-icon>
       {{$t('backup.webdav.import.title')}}
     </v-btn>

@@ -10,24 +10,25 @@
         <!-- Other options -->
         <v-col cols="12">
           <v-card class="elevation-12">
-            <v-toolbar color="primary" flat>
+            <v-toolbar flat>
               <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
               <div class="flex-grow-1"></div>
             </v-toolbar>
             <v-card-text class="pb-0">
               <v-row>
-                <v-col cols="12" >
-                  <SettingsNote />
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <SettingsTheme />
-                </v-col>
                 <v-col cols="12" sm="6">
                   <SettingsLanguage />
                 </v-col>
-                <v-col cols="12" >
+                <v-col cols="12" sm="6" >
                   <SettingsDateTime />
                 </v-col>
+                <v-col cols="12" sm="6">
+                  <SettingsNote />
+                </v-col>
+                <v-col cols="12" sm="6"">
+                  <SettingsTheme />
+                </v-col>
+
               </v-row>
             </v-card-text>
           </v-card>

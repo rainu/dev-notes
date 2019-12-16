@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn block color="primary" @click="onDownloadFile">
+    <v-btn block @click="onDownloadFile">
       <v-icon left>cloud_upload</v-icon>
       {{$t('backup.dropbox.export.title')}}
     </v-btn>
