@@ -2,14 +2,17 @@
 
 > A progressive web application (PWA) for notes that **is fun**!
 
+## DEMO
+
 [Try it out!](https://rainu.github.io/dev-notes/)
 
+
 ## Features
-* **No need** for external server (such like a database)
+* **Serverless** note app (no server or database required)
     * The whole content will be **stored locally**
-* optional **encryption**
-    * The note-content or other sensible data can be stored encrypted
-* Note-Types:
+* Support for full **encryption**
+    * Data can be stored encrypted
+* Different Note-Types for better user experience:
     * Textual
     * Markdown
     * Reminder
@@ -17,18 +20,18 @@
     * Photo
     * Credentials
     * Template - text with customizable placeholder
-* Filterable notes - each note can have **multiple tags**
+* Filter your notes easily by using **tags**
 * Customizable boards
     * a board is a user-predefined set of filters
-* **Copy** note-content **to clipboard**
+* **Copy** your note-content **to clipboard**
 * Multilingual
     * english
     * german
-* Responsive - looks great at mobile and desktop
-* Different Themes:
+* Responsive - looks great on mobile and desktop
+* 2 different themes:
     * dark
     * light
-* Backup-Mechanism
+* Backup-Mechanisms
     * Download/Upload file
     * Download/Upload from [AWS S3](https://aws.amazon.com/s3/)
     * Download/Upload from [gist](https://gist.github.com/)
@@ -40,11 +43,11 @@
 
 ¹ These services will work if CORS is correctly configured to return the proper headers. This may not work by default.
 
-## Build Setup
+## Quickstart
 
 ``` bash
 # install dependencies
-$ npm run install
+$ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
