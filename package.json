@@ -1,6 +1,6 @@
 {
   "name": "DevNotes",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "description": "A progressive web application (PWA) for notes.",
   "author": "rainu",
   "private": true,
@@ -21,7 +21,7 @@
     "localforage": "^1.7.3",
     "markdown-it": "^9.1.0",
     "material-design-icons-iconfont": "^5.0.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.10.2",
     "simple-crypto-js": "^2.2.0",
     "uuid4": "^1.1.4",
     "vue-i18n": "^8.14.0",
@@ -29,5 +29,8 @@
     "vue-web-cam": "^1.8.0",
     "vuedraggable": "^2.23.1",
     "webdav": "^2.10.0"
+  },
+  "devDependencies": {
+    "babel-runtime": "^6.26.0"
   }
 }

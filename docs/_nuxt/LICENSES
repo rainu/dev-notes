@@ -5,16 +5,10 @@
  * @license  MIT
  */
 
-/**
- * @copyright 2017 Alex Regan
- * @license MIT
- * @see https://github.com/alexsasharegan/vue-functional-data-merge
- */
-
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
 /**
- * vuex v3.1.1
+ * vuex v3.1.2
  * (c) 2019 Evan You
  * @license MIT
  */
@@ -26,7 +20,7 @@
   */
 
 /*!
- * Vue.js v2.6.10
+ * Vue.js v2.6.11
  * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
@@ -43,7 +37,7 @@
 /*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
 /**!
- * Sortable 1.10.0
+ * Sortable 1.10.1
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>
  * @license MIT
@@ -62,7 +56,7 @@
  */
 
 /*!
- * vue-i18n v8.14.0 
+ * vue-i18n v8.15.1 
  * (c) 2019 kazuya kawaguchi
  * Released under the MIT License.
  */
