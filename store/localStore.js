@@ -24,37 +24,31 @@ export function newLocalStore() {
     cryptoModule: noCrypto,
     meta: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'meta', // Should be alphanumeric, with underscores.
     }),
     secrets: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'secrets', // Should be alphanumeric, with underscores.
     }),
     settings: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'settings', // Should be alphanumeric, with underscores.
     }),
     notes: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'notes', // Should be alphanumeric, with underscores.
     }),
     deletedNotes: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'deleted_notes', // Should be alphanumeric, with underscores.
     }),
     boards: localforage.createInstance({
       name: process.env.appName,
-      driver: localforage.INDEXEDDB,
       version: 1.0,
       storeName: 'boards', // Should be alphanumeric, with underscores.
     }),

@@ -61,6 +61,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.14
+* dont force usage of indexedDB so that DevNotes als work with older browsers
+
 ### 0.9.13
 * a mechanism for faster deletion of notes (trash bin)
 * make note titles optional [#22](https://github.com/rainu/dev-notes/issues/22)
