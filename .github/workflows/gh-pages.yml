@@ -1,0 +1,32 @@
+name: GH-Pages
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      - name: Build and generate application
+        run: |
+          npm install
+          npm run generate
+      - name: Configure git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git remote add target-repo https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      - name: Commit generated files
+        env:
+          TARGET_BRANCH: master
+        run: |
+          git add ${GITHUB_WORKSPACE}/docs
+          git commit -m "build version $(git describe --tags)"
+          git push target-repo HEAD:${TARGET_BRANCH}
