@@ -64,6 +64,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.15
+* autofocus the password field at unlock screen
+
 ### 0.9.14
 * dont force usage of indexedDB so that DevNotes als work with older browsers
 
