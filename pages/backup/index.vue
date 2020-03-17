@@ -5,42 +5,59 @@
       <v-dialog v-model="dialog.encryption.open">
         <BackupEncryption @onPasswordChange="onPasswordChange">
           <div class="flex-grow-1"></div>
-          <v-btn color="primary" @click="dialog.encryption.open = false">{{$t('common.confirmation.close')}}</v-btn>
+          <v-btn color="primary" @click="dialog.encryption.open = false">
+            {{$t('common.confirmation.close')}}
+          </v-btn>
         </BackupEncryption>
       </v-dialog>
 
       <!-- FILE  -->
       <v-row align="center">
         <v-col cols="12">
-          <BackupFile :password.sync="password" />
-        </v-col>
-      </v-row>
+          <v-expansion-panels accordion>
 
-      <!-- WebDAV  -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupWebdav :password.sync="password" />
-        </v-col>
-      </v-row>
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.file.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupFile :password.sync="password"/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
 
-      <!-- Gist  -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupGist :password.sync="password" />
-        </v-col>
-      </v-row>
+            <!-- WebDAV  -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.webdav.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupWebdav :password.sync="password"/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
 
-      <!-- AWS S3 -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupS3 :password.sync="password" />
-        </v-col>
-      </v-row>
+            <!-- Gist  -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.gist.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupGist :password.sync="password"/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
 
-      <!-- Dropbox -->
-      <v-row align="center">
-        <v-col cols="12">
-          <BackupDropbox :password.sync="password" />
+            <!-- AWS S3 -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.aws.s3.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupS3 :password.sync="password"/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <!-- Dropbox -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('backup.dropbox.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <BackupDropbox :password.sync="password"/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+
+          </v-expansion-panels>
+
         </v-col>
       </v-row>
     </v-layout>
@@ -48,7 +65,7 @@
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
         <div class="flex-grow-1"></div>
-        <v-toolbar-items >
+        <v-toolbar-items>
           <v-btn @click="dialog.encryption.open = true" :color="password ? 'primary' : ''">
             <v-icon left>{{password ? 'lock' : 'lock_open'}}</v-icon>
             {{$t('backup.encryption.title')}}
@@ -61,7 +78,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import {mapGetters} from 'vuex';
   import BackupS3 from "../../components/backup/aws/S3";
   import BackupEncryption from "../../components/backup/Encryption";
   import BackupFile from "../../components/backup/file/File";
@@ -71,7 +88,7 @@
 
   export default {
     components: {BackupWebdav, BackupGist, BackupEncryption, BackupFile, BackupS3, BackupDropbox},
-    data(){
+    data() {
       return {
         password: null,
         dialog: {
@@ -87,12 +104,12 @@
       }),
     },
     methods: {
-      onPasswordChange(password){
+      onPasswordChange(password) {
         this.password = password
       }
     },
     mounted() {
-      if(this.persistedPassword) {
+      if (this.persistedPassword) {
         this.password = this.persistedPassword
       }
     }

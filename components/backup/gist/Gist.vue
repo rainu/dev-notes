@@ -1,7 +1,6 @@
 <template>
-  <v-card class="elevation-12">
-    <v-toolbar color="primary" flat>
-      <v-toolbar-title>{{$t('backup.gist.title')}}</v-toolbar-title>
+  <v-card>
+    <v-toolbar flat>
       <div class="flex-grow-1"></div>
       <v-btn icon @click="showHelp = true">
         <v-icon>help</v-icon>
