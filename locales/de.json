@@ -456,6 +456,9 @@
       },
       "delete": {
         "fast": "Schnelles Löschen"
+      },
+      "type": {
+        "default": "Standard Notizart"
       }
     },
     "theme": {

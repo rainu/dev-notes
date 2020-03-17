@@ -12,7 +12,8 @@ export const state = () => ({
   notes: {
     fixed: false,
     size: null,
-    deleteHard: false
+    deleteHard: false,
+    defaultType: 'text'
   },
   theme: {
     dark: true,
@@ -65,6 +66,10 @@ export const mutations = {
   setNoteDeleteHard(state, mode) {
     state.notes.deleteHard = mode
     this.$localStore.setNoteDeleteHard(mode)
+  },
+  setNoteDefaultType(state, type) {
+    state.notes.defaultType = type
+    this.$localStore.setNoteDefaultType(type)
   }
 }
 
@@ -120,6 +125,12 @@ export const actions = {
         .then(mode => {
           if(mode) {
             return ctx.commit('setNoteDeleteHard', mode)
+          }
+        }),
+      this.$localStore.getNoteDefaultType()
+        .then(mode => {
+          if(mode) {
+            return ctx.commit('setNoteDefaultType', mode)
           }
         }),
     ])

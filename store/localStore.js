@@ -198,6 +198,12 @@ export function newLocalStore() {
     setNoteDeleteHard(mode){
       return store.settings.setItem('note.deleteHard', mode)
     },
+    getNoteDefaultType(){
+      return store.settings.getItem('note.defaultType')
+    },
+    setNoteDefaultType(type){
+      return store.settings.setItem('note.defaultType', type)
+    },
     getNote(id) {
       return store.notes.getItem(id)
         .then(note => store.cryptoModule.decrypt(note))

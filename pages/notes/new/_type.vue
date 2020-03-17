@@ -2,10 +2,17 @@
   <v-container fluid>
 
     <v-card>
-      <v-card-title>
-        <span class="headline">{{$t(`note.${noteType}.title`)}}</span>
-      </v-card-title>
       <v-card-text>
+        <v-select
+          :items="noteTypes"
+          :item-text="getNoteTypeLabel"
+          item-value="id"
+          :value="noteType"
+          @change="onNewNote"
+          solo
+        >
+        </v-select>
+
         <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" ></NoteFormText>
         <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" ></NoteFormReminder>
         <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" ></NoteFormPicture>
@@ -41,6 +48,7 @@ import NoteFormCamera from "../../../components/note/form/Camera";
 import NoteCardCamera from "../../../components/note/card/Camera";
 import NoteFormReminder from "../../../components/note/form/Reminder";
 import NoteCardReminder from "../../../components/note/card/Reminder";
+import noteTypes from "../../../components/note/types";
 
 export default {
   components: {
@@ -60,7 +68,9 @@ export default {
     NoteFormCamera
   },
   data(){
-    return {}
+    return {
+      noteTypes: noteTypes
+    }
   },
   computed: {
     noteType(){
@@ -81,6 +91,12 @@ export default {
         ...note
       })
       this.$router.back()
+    },
+    getNoteTypeLabel(item){
+      return this.$t(`note.${item.id}.title`)
+    },
+    onNewNote(type) {
+      this.$router.replace("/notes/new/" + type)
     },
   }
 }

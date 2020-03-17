@@ -103,9 +103,9 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <v-menu offset-y top>
+          <v-menu offset-y top open-on-hover>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on">
+              <v-btn v-on="on" @click="onNewDefaultNote">
                 <v-icon>add_circle</v-icon>
               </v-btn>
             </template>
@@ -126,6 +126,7 @@
 
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex';
+import noteTypes from '../components/note/types'
 import Vue from 'vue'
 import copy from 'copy-to-clipboard';
 
@@ -185,14 +186,7 @@ export default {
 
       note: {
         data: {},
-        types: [
-          { id: 'template', icon: 'ballot' },
-          { id: 'credentials', icon: 'fingerprint' },
-          { id: 'picture', icon: 'photo' },
-          { id: 'camera', icon: 'camera' },
-          { id: 'reminder', icon: 'alarm' },
-          { id: 'text', icon: 'notes' },
-        ]
+        types: noteTypes
       }
     }
   },
@@ -204,7 +198,8 @@ export default {
     ...mapState({
       notes: state => state.note.notes,
       noteOrder: state => state.note.noteOrder,
-      noteDeleteHard: state => state.settings.notes.deleteHard
+      noteDeleteHard: state => state.settings.notes.deleteHard,
+      noteDefaultType: state => state.settings.notes.defaultType
     }),
     availableTags() {
       let tags = {}
@@ -265,6 +260,9 @@ export default {
     }),
     onNewNote(type) {
       this.$router.push("/notes/new/" + type.id)
+    },
+    onNewDefaultNote(){
+      this.$router.push("/notes/new/" + this.noteDefaultType)
     },
     onEditRequest(note) {
       this.$router.push("/notes/edit/" + note.id)

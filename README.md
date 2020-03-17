@@ -65,6 +65,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## Changelog
 
 ### 0.9.16
+* UX: redesign the new-note workflow
 * UX: redesign the backup view
 
 ### 0.9.15

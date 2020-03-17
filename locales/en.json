@@ -456,6 +456,9 @@
       },
       "delete": {
         "fast": "Fast Delete"
+      },
+      "type": {
+        "default": "Default note type"
       }
     },
     "theme": {
