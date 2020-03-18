@@ -17,7 +17,6 @@ export const mutations = {
     }
 
     state.boardOrder = order
-    this.$localStore.setBoardOrder(state.boardOrder)
   },
   addBoard(state, board) {
     if(!board || !board.id || !board.title || !board.icon || !board.filter) {
@@ -27,8 +26,6 @@ export const mutations = {
 
     state.boards.push(board)
     state.boardOrder.push(board.id)
-    this.$localStore.setBoard(board)
-    this.$localStore.setBoardOrder(state.boardOrder)
   },
   editBoard(state, board) {
     let index = state.boards.findIndex(r => r.id === board.id)
@@ -38,7 +35,6 @@ export const mutations = {
     }
 
     Vue.set(state.boards, index, board)
-    this.$localStore.setBoard(board)
   },
   deleteBoard(state, boardId) {
     let index = state.boards.findIndex(r => r.id === boardId)
@@ -46,15 +42,10 @@ export const mutations = {
 
     index = state.boardOrder.findIndex(bId => bId === boardId)
     state.boardOrder.splice(index, 1)
-
-    this.$localStore.removeBoard(boardId)
-    this.$localStore.setBoardOrder(state.boardOrder)
   },
   clearBoards(state){
     state.boards = []
     state.boardOrder = []
-
-    this.$localStore.clearBoards()
   },
 }
 
@@ -80,7 +71,36 @@ export const actions = {
   init(ctx) {
     return Promise.all([this.$localStore.getBoards(), this.$localStore.getBoardOrder()])
       .then(([boards, order]) => ctx.commit('loadBoards', {boards, order}))
-  }
+  },
+
+  setBoardOrder(ctx, order) {
+    ctx.commit('setBoardOrder', order)
+    return this.$localStore.setBoardOrder(ctx.state.boardOrder)
+  },
+  addBoard(ctx, board) {
+    ctx.commit('addBoard', board)
+
+    return Promise.all([
+      this.$localStore.setBoard(board),
+      this.$localStore.setBoardOrder(ctx.state.boardOrder)
+    ])
+  },
+  editBoard(ctx, board) {
+    ctx.commit('editBoard', board)
+    return this.$localStore.setBoard(board)
+  },
+  deleteBoard(ctx, boardId) {
+    ctx.commit('deleteBoard', boardId)
+
+    return Promise.all([
+      this.$localStore.removeBoard(boardId),
+      this.$localStore.setBoardOrder(ctx.state.boardOrder)
+    ])
+  },
+  clearBoards(ctx){
+    ctx.commit('clearBoards')
+    return this.$localStore.clearBoards()
+  },
 }
 
 export default {

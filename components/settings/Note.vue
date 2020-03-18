@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   import noteTypes from '../../components/note/types'
 
   export default {
@@ -68,7 +68,7 @@
       }
     },
     methods: {
-      ...mapMutations({
+      ...mapActions({
         setNoteSize: 'settings/setNoteSize',
         setNoteDeleteHard: 'settings/setNoteDeleteHard',
         setNoteDefaultType: 'settings/setNoteDefaultType',

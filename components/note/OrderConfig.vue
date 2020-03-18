@@ -56,7 +56,7 @@
           return this.$store.state.note.noteOrder
         },
         set(value) {
-          this.$store.commit('note/setNoteOrder', value)
+          this.$store.dispatch('note/setNoteOrder', value)
         }
       },
       noteMap(){

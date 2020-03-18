@@ -32,7 +32,6 @@ export const mutations = {
     }
 
     state.noteOrder = order
-    this.$localStore.setNoteOrder(state.noteOrder)
   },
   addNote(state, note) {
     if(!note || !note.id || !note.type || !note.title || !note.content) {
@@ -42,8 +41,6 @@ export const mutations = {
 
     state.notes.push(note)
     state.noteOrder.push(note.id)
-    this.$localStore.setNote(note)
-    this.$localStore.setNoteOrder(state.noteOrder)
   },
   editNote(state, note) {
     let index = state.notes.findIndex(r => r.id === note.id)
@@ -53,7 +50,6 @@ export const mutations = {
     }
 
     Vue.set(state.notes, index, note)
-    this.$localStore.setNote(note)
   },
   deleteNote(state, noteId) {
     let index = state.notes.findIndex(r => r.id === noteId)
@@ -64,10 +60,6 @@ export const mutations = {
 
     index = state.noteOrder.findIndex(nId => nId === noteId)
     state.noteOrder.splice(index, 1)
-
-    this.$localStore.removeNote(noteId)
-    this.$localStore.removeDeletedNote(noteId)
-    this.$localStore.setNoteOrder(state.noteOrder)
   },
   deleteNoteSoft(state, noteId){
     let index = state.notes.findIndex(r => r.id === noteId)
@@ -78,10 +70,6 @@ export const mutations = {
     state.noteOrder.splice(index, 1)
 
     state.deletedNotes.push(toDelete)
-
-    this.$localStore.removeNote(noteId)
-    this.$localStore.setDeletedNote(toDelete)
-    this.$localStore.setNoteOrder(state.noteOrder)
   },
   restoreDeletedNote(state, noteId) {
     let index = state.deletedNotes.findIndex(r => r.id === noteId)
@@ -90,21 +78,13 @@ export const mutations = {
 
     state.notes.push(toRestore)
     state.noteOrder.push(noteId)
-
-    this.$localStore.removeDeletedNote(noteId)
-    this.$localStore.setNote(toRestore)
-    this.$localStore.setNoteOrder(state.noteOrder)
   },
   clearNotes(state){
     state.notes = []
     state.noteOrder = []
-
-    this.$localStore.clearNotes()
   },
   clearDeletedNotes(state){
     state.deletedNotes = []
-
-    this.$localStore.clearDeletedNotes()
   },
   triggerOverdueAlarm(state, noteId) {
     if(!state.overdueAlarm.includes(noteId)) {
@@ -119,7 +99,6 @@ export const mutations = {
 
     let note = state.notes.find(n => n.id === noteId)
     note.content.noticed = true
-    this.$localStore.setNote(note)
   }
 }
 
@@ -161,6 +140,63 @@ export const actions = {
       .forEach(n => {
         ctx.commit('triggerOverdueAlarm', n.id)
       })
+  },
+  setNoteOrder(ctx, order) {
+    ctx.commit('setNoteOrder', order)
+    return this.$localStore.setNoteOrder(ctx.state.noteOrder)
+  },
+  addNote(ctx, note) {
+    ctx.commit('addNote', note)
+    return Promise.all([
+      this.$localStore.setNote(note),
+      this.$localStore.setNoteOrder(ctx.state.noteOrder)
+    ])
+  },
+  editNote(ctx, note) {
+    ctx.commit('editNote', note)
+    return this.$localStore.setNote(note)
+  },
+  deleteNote(ctx, noteId) {
+    ctx.commit('deleteNote', noteId)
+    return Promise.all([
+      this.$localStore.removeNote(noteId),
+      this.$localStore.removeDeletedNote(noteId),
+      this.$localStore.setNoteOrder(ctx.state.noteOrder)
+    ])
+  },
+  deleteNoteSoft(ctx, noteId){
+    ctx.commit('deleteNoteSoft', noteId)
+    const toDelete = ctx.state.deletedNotes[ctx.state.deletedNotes.length - 1]
+
+    return Promise.all([
+      this.$localStore.removeNote(noteId),
+      this.$localStore.setDeletedNote(toDelete),
+      this.$localStore.setNoteOrder(ctx.state.noteOrder)
+    ])
+  },
+  restoreDeletedNote(ctx, noteId) {
+    ctx.commit('restoreDeletedNote', noteId)
+    const toRestore = ctx.state.notes[ctx.state.notes.length - 1]
+
+    return Promise.all([
+      this.$localStore.removeDeletedNote(noteId),
+      this.$localStore.setNote(toRestore),
+      this.$localStore.setNoteOrder(ctx.state.noteOrder)
+    ])
+  },
+  clearNotes(ctx){
+    ctx.commit('clearNotes')
+    return this.$localStore.clearNotes()
+  },
+  clearDeletedNotes(ctx){
+    ctx.commit('clearDeletedNotes')
+    return this.$localStore.clearDeletedNotes()
+  },
+  removeOverdueAlarm(ctx, noteId) {
+    ctx.commit('removeOverdueAlarm', noteId)
+    let note = ctx.state.notes.find(n => n.id === noteId)
+
+    return this.$localStore.setNote(note)
   }
 }
 

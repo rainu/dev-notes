@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapMutations } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 import noteTypes from '../components/note/types'
 import Vue from 'vue'
 import copy from 'copy-to-clipboard';
@@ -254,7 +254,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       deleteNote: 'note/deleteNote',
       deleteNoteSoft: 'note/deleteNoteSoft',
     }),

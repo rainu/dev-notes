@@ -14,7 +14,7 @@ const checkOverdue = (store, env) => {
               requireInteraction: true,
             })
             activeNotifications[overdueNote.id].onclick = () => {
-              store.commit('note/removeOverdueAlarm', overdueNote.id)
+              store.dispatch('note/removeOverdueAlarm', overdueNote.id)
               delete activeNotifications[overdueNote.id]
             }
           }

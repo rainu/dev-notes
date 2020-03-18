@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapGetters } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
   import { importAll } from "../../../common/importExport";
   import BackupUnlock from "../Unlock";
   import webdav from 'webdav'
@@ -65,13 +65,13 @@
       }),
     },
     methods:{
-      ...mapMutations({
-        clearNotes: 'note/clearNotes',
-        clearBoards: 'board/clearBoards',
-        addNote: 'note/addNote',
-        setNoteOrder: 'note/setNoteOrder',
-        addBoard: 'board/addBoard',
+      ...mapActions({
         setBoardOrder: 'board/setBoardOrder',
+        addBoard: 'board/addBoard',
+        clearBoards: 'board/clearBoards',
+        setNoteOrder: 'note/setNoteOrder',
+        addNote: 'note/addNote',
+        clearNotes: 'note/clearNotes',
       }),
       onUploadFile(){
         this.downloadError = null

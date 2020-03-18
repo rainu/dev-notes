@@ -34,8 +34,6 @@ export const mutations = {
   setLang(state, lang) {
     if (state.locales.indexOf(lang) !== -1) {
       state.locale = lang
-
-      this.$localStore.setLanguage(lang)
     }
   },
   setNotificationSupported(state, supported) {
@@ -47,29 +45,21 @@ export const mutations = {
   setNoteSize(state, {fixed, size}) {
     state.notes.fixed = fixed
     state.notes.size = size
-
-    this.$localStore.setNoteSize(fixed, size)
   },
   setThemeDarkMode(state, dark) {
     state.theme.dark = dark
-
-    this.$localStore.setThemeDarkMode(dark)
   },
   setDateTimeFormat(state, format) {
     state.date.timeFormat = format
-    this.$localStore.setDateTimeFormat(format)
   },
   setDateFirstDay(state, day) {
     state.date.firstDayOfWeek = day
-    this.$localStore.setDateFirstDay(day)
   },
   setNoteDeleteHard(state, mode) {
     state.notes.deleteHard = mode
-    this.$localStore.setNoteDeleteHard(mode)
   },
   setNoteDefaultType(state, type) {
     state.notes.defaultType = type
-    this.$localStore.setNoteDefaultType(type)
   }
 }
 
@@ -135,13 +125,43 @@ export const actions = {
         }),
     ])
   },
+
+  setLang(ctx, lang) {
+    ctx.commit('setLang', lang)
+    return this.$localStore.setLanguage(ctx.state.locale)
+  },
+  setNoteSize(ctx, {fixed, size}) {
+    ctx.commit('setNoteSize', {fixed, size})
+    return this.$localStore.setNoteSize(fixed, size)
+  },
+  setThemeDarkMode(ctx, dark) {
+    ctx.commit('setThemeDarkMode', dark)
+    return this.$localStore.setThemeDarkMode(dark)
+  },
+  setDateTimeFormat(ctx, format) {
+    ctx.commit('setDateTimeFormat', format)
+    return this.$localStore.setDateTimeFormat(format)
+  },
+  setDateFirstDay(ctx, day) {
+    ctx.commit('setDateFirstDay', day)
+    return this.$localStore.setDateFirstDay(day)
+  },
+  setNoteDeleteHard(ctx, mode) {
+    ctx.commit('setNoteDeleteHard', mode)
+    return this.$localStore.setNoteDeleteHard(mode)
+  },
+  setNoteDefaultType(ctx, type) {
+    ctx.commit('setNoteDefaultType', type)
+    return this.$localStore.setNoteDefaultType(type)
+  },
+
   applyLanguage(ctx, lang) {
     this.app.i18n.locale = lang
-    ctx.commit('setLang', lang)
+    return ctx.dispatch('setLang', lang)
   },
   applyThemeDark(ctx, dark) {
     this.app.vuetify.framework.theme.isDark = dark
-    ctx.commit('setThemeDarkMode', dark)
+    return ctx.dispatch('setThemeDarkMode', dark)
   },
   setupCrypto(ctx, secret){
     this.$localStore.setupEncryptionModule(secret)

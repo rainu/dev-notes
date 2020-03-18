@@ -12,11 +12,9 @@ export const mutations = {
   },
   setSecret(state, {key, value}){
     Vue.set(state.secrets, key, value)
-    this.$localStore.setSecret(key, value)
   },
   removeSecret(state, key){
     Vue.delete(state.secrets, key)
-    this.$localStore.removeSecret(key)
   },
   setDropboxUser(state, user){
     Vue.set(state.secrets, 'dropbox.user', user)
@@ -63,30 +61,39 @@ export const actions = {
     }
   },
 
+  setSecret(store, {key, value}){
+    store.commit('setSecret', {key, value})
+    return this.$localStore.setSecret(key, value)
+  },
+  removeSecret(store, key){
+    store.commit('removeSecret', key)
+    return this.$localStore.removeSecret(key)
+  },
+
   setBackupPassword(store, password) {
-    store.commit('setSecret', {key: 'backup.password', value: password})
+    return store.dispatch('setSecret', {key: 'backup.password', value: password})
   },
   removeBackupPassword(store) {
-    store.commit('removeSecret', 'backup.password')
+    return store.dispatch('removeSecret', 'backup.password')
   },
 
   setAWSS3Settings(store, settings) {
-    store.commit('setSecret', {key: 'aws.s3', value: settings})
+    return store.dispatch('setSecret', {key: 'aws.s3', value: settings})
   },
 
   setGistSettings(store, settings) {
-    store.commit('setSecret', {key: 'gist', value: settings})
+    return store.dispatch('setSecret', {key: 'gist', value: settings})
   },
 
   setWebdavSettings(store, settings) {
-    store.commit('setSecret', {key: 'webdav', value: settings})
+    return store.dispatch('setSecret', {key: 'webdav', value: settings})
   },
 
   setDropboxAuth(store, settings) {
-    store.commit('setSecret', {key: 'dropbox.auth', value: settings})
+    return store.dispatch('setSecret', {key: 'dropbox.auth', value: settings})
   },
   setDropboxSettings(store, settings) {
-    store.commit('setSecret', {key: 'dropbox', value: settings})
+    return store.dispatch('setSecret', {key: 'dropbox', value: settings})
   },
   removeDropboxAuth(store){
     return Promise.all([

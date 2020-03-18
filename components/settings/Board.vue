@@ -118,7 +118,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   import uuid4 from 'uuid4'
   import draggable from 'vuedraggable'
   import BoardForm from "../board/Form";
@@ -168,12 +168,12 @@
           return this.$store.state.board.boardOrder
         },
         set(value) {
-          this.$store.commit('board/setBoardOrder', value)
+          this.$store.dispatch('board/setBoardOrder', value)
         }
       }
     },
     methods: {
-      ...mapMutations({
+      ...mapActions({
         addBoard: 'board/addBoard',
         editBoard: 'board/editBoard',
         deleteBoard: 'board/deleteBoard',

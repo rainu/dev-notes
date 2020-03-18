@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import uuid4 from 'uuid4';
 
 import NoteCardText from "../../../components/note/card/Text";
@@ -78,7 +78,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       addNote: 'note/addNote',
     }),
     onAbort(){

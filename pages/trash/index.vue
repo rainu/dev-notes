@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import copy from 'copy-to-clipboard';
 import NoteCardText from "../../components/note/card/Text";
 import NoteCardPicture from "../../components/note/card/Picture";
@@ -150,7 +150,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       deleteNote: 'note/deleteNote',
       deleteAllNotes: 'note/clearDeletedNotes',
       restoreNote: 'note/restoreDeletedNote',

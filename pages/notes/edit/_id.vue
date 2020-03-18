@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 import NoteCardText from "../../../components/note/card/Text";
 import NoteCardPicture from "../../../components/note/card/Picture";
@@ -69,7 +69,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       editNote: 'note/editNote',
     }),
     onAbort(){

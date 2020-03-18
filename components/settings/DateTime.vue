@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapState } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
 
   export default {
     name: "SettingsDateTime",
@@ -63,7 +63,7 @@
       })
     },
     methods: {
-      ...mapMutations({
+      ...mapActions({
         setDateTimeFormat: 'settings/setDateTimeFormat',
         setDateFirstDay: 'settings/setDateFirstDay'
       }),
