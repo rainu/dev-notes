@@ -14,7 +14,7 @@
       <!-- FILE  -->
       <v-row align="center">
         <v-col cols="12">
-          <v-expansion-panels accordion>
+          <v-expansion-panels v-model="panel" accordion focusable>
 
             <v-expansion-panel>
               <v-expansion-panel-header>{{$t('backup.file.title')}}</v-expansion-panel-header>
@@ -95,7 +95,8 @@
           encryption: {
             open: false
           }
-        }
+        },
+        panel: 0,
       }
     },
     computed: {

@@ -2,40 +2,46 @@
   <v-container fluid>
     <v-layout column justify-center>
       <v-row align="center">
-        <!-- Encryption -->
-        <v-col cols="12" >
-          <SettingsEncryption />
-        </v-col>
-
-        <!-- Other options -->
         <v-col cols="12">
-          <v-card class="elevation-12">
-            <v-toolbar color="primary" flat>
-              <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
-              <div class="flex-grow-1"></div>
-            </v-toolbar>
-            <v-card-text class="pb-0">
-              <v-row>
-                <v-col cols="12" >
-                  <SettingsNote />
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <SettingsTheme />
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <SettingsLanguage />
-                </v-col>
-                <v-col cols="12" >
-                  <SettingsDateTime />
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-col>
+          <v-expansion-panels v-model="panel" accordion focusable>
 
-        <!-- Board options -->
-        <v-col cols="12">
-          <SettingsBoard />
+            <!-- Encryption -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('settings.encryption.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <SettingsEncryption />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <!-- Other options -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('settings.others.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col cols="12" >
+                    <SettingsNote />
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <SettingsTheme />
+                  </v-col>
+                  <v-col cols="12" sm="6">
+                    <SettingsLanguage />
+                  </v-col>
+                  <v-col cols="12" >
+                    <SettingsDateTime />
+                  </v-col>
+                </v-row>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <!-- Board options -->
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{$t('settings.boards.title')}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <SettingsBoard />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-col>
       </v-row>
     </v-layout>
@@ -59,6 +65,11 @@
       SettingsLanguage,
       SettingsTheme
     },
+    data(){
+      return {
+        panel: 1
+      }
+    }
   }
 </script>
 
