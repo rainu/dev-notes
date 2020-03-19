@@ -65,6 +65,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## Changelog
 
 ### 0.9.17
+* preselect board tags on new notes [#31](https://github.com/rainu/dev-notes/issues/31)
 * UX: redesign themes
 
 ### 0.9.16

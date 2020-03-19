@@ -109,12 +109,17 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      initialTags: {
+        type: Array,
+        required: false,
+        default: () => []
       }
     },
     data() {
       let note = {
         title: "",
-        tags: [],
+        tags: this.initialTags,
         date: dateFN.addDays(new Date(), 1),
         content: "",
         markdown: false

@@ -38,12 +38,17 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      initialTags: {
+        type: Array,
+        required: false,
+        default: () => []
       }
     },
     data() {
       let note = {
         title: "",
-        tags: [],
+        tags: this.initialTags,
         content: "",
         markdown: false
       }

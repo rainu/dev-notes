@@ -13,12 +13,12 @@
         >
         </v-select>
 
-        <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" ></NoteFormText>
-        <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" ></NoteFormReminder>
-        <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" ></NoteFormPicture>
-        <NoteFormTemplate form-id="note-new-form" v-if="noteType === 'template'" @onSubmit="onSaveNewNote" ></NoteFormTemplate>
-        <NoteFormCredentials form-id="note-new-form" v-if="noteType === 'credentials'" @onSubmit="onSaveNewNote" ></NoteFormCredentials>
-        <NoteFormCamera form-id="note-new-form" v-if="noteType === 'camera'" @onSubmit="onSaveNewNote" ></NoteFormCamera>
+        <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormText>
+        <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormReminder>
+        <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormPicture>
+        <NoteFormTemplate form-id="note-new-form" v-if="noteType === 'template'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormTemplate>
+        <NoteFormCredentials form-id="note-new-form" v-if="noteType === 'credentials'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCredentials>
+        <NoteFormCamera form-id="note-new-form" v-if="noteType === 'camera'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCamera>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
@@ -32,6 +32,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { readBoardQuery } from '../../../common/boardQuery';
 import uuid4 from 'uuid4';
 
 import NoteCardText from "../../../components/note/card/Text";
@@ -76,6 +77,16 @@ export default {
     noteType(){
       return this.$route.params.type
     },
+    initialTags(){
+      const boardInfo = readBoardQuery(this.$route.query)
+      let activeTags = []
+      for(let tagName in boardInfo.tags) {
+        if(boardInfo.tags[tagName] === true) {
+          activeTags.push(tagName)
+        }
+      }
+      return activeTags
+    }
   },
   methods: {
     ...mapActions({

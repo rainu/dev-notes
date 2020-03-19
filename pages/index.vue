@@ -259,10 +259,10 @@ export default {
       deleteNoteSoft: 'note/deleteNoteSoft',
     }),
     onNewNote(type) {
-      this.$router.push("/notes/new/" + type.id)
+      this.$router.push({ path: "/notes/new/" + type.id, query: this.$route.query })
     },
     onNewDefaultNote(){
-      this.$router.push("/notes/new/" + this.noteDefaultType)
+      this.$router.push({ path: "/notes/new/" + this.noteDefaultType, query: this.$route.query })
     },
     onEditRequest(note) {
       this.$router.push("/notes/edit/" + note.id)
