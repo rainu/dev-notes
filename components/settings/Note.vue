@@ -3,7 +3,7 @@
     <v-card-text>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')" color="primary"></v-switch>
+          <v-switch v-model="notes.fixedSize" :label="$t('settings.notes.size.fixed')"></v-switch>
         </v-col>
         <v-col cols="12" sm="6" v-if="notes.fixedSize">
           <v-select
@@ -18,7 +18,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-switch v-model="notes.deleteFast" :label="$t('settings.notes.delete.fast')" color="primary"></v-switch>
+          <v-switch v-model="notes.deleteFast" :label="$t('settings.notes.delete.fast')"></v-switch>
         </v-col>
         <v-col cols="12" sm="6" >
           <v-select

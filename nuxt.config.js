@@ -106,26 +106,13 @@ export default {
     theme: {
       themes: {
         dark: {
-          primary: '#74B392',
-          accent: '#eaff00',
-          secondary: '#FFE7A2',
-          info: '#40f934',
-          warning: '#b8b11e',
-          error: '#FF6363',
-          success: '#74B392',
-        },
-        light: {
-          primary: '#74B392',
-          accent: '#eaff00',
-          secondary: '#FFE7A2',
-          info: '#40f934',
-          warning: '#FFE7A2',
-          error: '#FF6363',
-          success: '#74B392',
-
-          header: '#FFE7A2',
-          footer: '',
-          navigation: colors.grey.lighten3,
+          primary: '#78c2d2',
+          secondary: '#3a4253',
+          accent: '#4a566c',
+          info: '#88c2be',
+          warning: '#f1cb81',
+          error: '#cd5a68',
+          success: '#9bbf85',
         }
       }
     }

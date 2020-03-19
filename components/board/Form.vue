@@ -37,7 +37,7 @@
           </v-btn>
         </v-col>
         <v-col>
-          <v-btn block @click="dialog.open = true" class="primary">
+          <v-btn block @click="dialog.open = true" class="secondary">
             <v-icon>add</v-icon>
           </v-btn>
         </v-col>

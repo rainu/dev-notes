@@ -8,7 +8,7 @@
     <v-card>
       <v-col cols="12" v-for="iconGroupName of Object.keys(icons)" :key="'icon-chooser-' + iconGroupName">
         <v-card class="elevation-12">
-          <v-toolbar color="primary" flat>
+          <v-toolbar color="accent" flat>
             <v-toolbar-title>{{$t('common.form.icon.group.' + iconGroupName)}}</v-toolbar-title>
             <div class="flex-grow-1"></div>
           </v-toolbar>

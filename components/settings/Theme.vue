@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')" color="primary"></v-switch>
+      <v-switch v-model="darkModeSwitch" :label="$t('settings.theme.dark')"></v-switch>
     </v-card-text>
   </v-card>
 </template>

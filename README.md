@@ -64,6 +64,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.17
+* UX: redesign themes
+
 ### 0.9.16
 * UX: redesign the settings view
 * technical issue [#35](https://github.com/rainu/dev-notes/issues/35)

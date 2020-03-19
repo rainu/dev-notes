@@ -33,7 +33,7 @@
               <v-btn icon class="error" @click="onBoardDeleteRequest(boardId)">
                 <v-icon>delete</v-icon>
               </v-btn>
-              <v-btn icon class="primary" @click="onEditRequest(boardMap[boardId])">
+              <v-btn icon class="accent" @click="onEditRequest(boardMap[boardId])">
                 <v-icon>edit</v-icon>
               </v-btn>
             </v-card-actions>
@@ -42,7 +42,7 @@
       </draggable>
 
       <v-card-actions>
-        <v-btn block color="primary" @click="dialog.new.open = true">
+        <v-btn block color="secondary" @click="dialog.new.open = true">
           <v-icon left>dashboard</v-icon>
           {{$t('board.actions.new')}}
         </v-btn>
