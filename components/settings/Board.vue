@@ -9,7 +9,11 @@
       </v-toolbar>
 
       <!-- for each available board -->
-      <draggable v-model="boardOrder" handle=".handle">
+      <draggable v-model="boardOrder"
+                 handle=".handle"
+                 :scroll-sensitivity="200"
+                 :force-fallback="true">
+        
         <v-card-text v-for="boardId of boardOrder" :key="boardId">
           <v-card >
             <v-card-title>

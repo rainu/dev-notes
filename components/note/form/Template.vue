@@ -9,7 +9,11 @@
 
       <v-list dense v-if="note.placeholder.length > 0">
         <v-subheader class="pa-0">{{$t('note.template.placeholder.title')}}</v-subheader>
-        <draggable v-model="note.placeholder" handle=".handle">
+        <draggable v-model="note.placeholder"
+                   handle=".handle"
+                   :scroll-sensitivity="200"
+                   :force-fallback="true">
+
           <v-list-item v-for="placeholder of note.placeholder" :key="placeholder.id" class="pa-0">
             <v-list-item-content>
               <v-list-item-title>
