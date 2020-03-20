@@ -9,22 +9,28 @@
 
       <v-list dense v-if="note.placeholder.length > 0">
         <v-subheader class="pa-0">{{$t('note.template.placeholder.title')}}</v-subheader>
-        <v-list-item v-for="placeholder of note.placeholder" :key="placeholder.id" class="pa-0">
-          <v-list-item-content>
-            <v-list-item-title>
-              <v-btn block @click="insertPlaceholder(placeholder.name)" >{{placeholder.name}}</v-btn>
-            </v-list-item-title>
-          </v-list-item-content>
+        <draggable v-model="note.placeholder" handle=".handle">
+          <v-list-item v-for="placeholder of note.placeholder" :key="placeholder.id" class="pa-0">
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-btn block @click="insertPlaceholder(placeholder.name)">{{placeholder.name}}
+                </v-btn>
+              </v-list-item-title>
+            </v-list-item-content>
 
-          <v-list-item-icon>
-            <v-btn icon class="error mr-2" @click="deletePlaceholder(placeholder.id)">
-              <v-icon>delete</v-icon>
-            </v-btn>
-            <v-btn icon class="primary" @click="editPlaceholder(placeholder)">
-              <v-icon>edit</v-icon>
-            </v-btn>
-          </v-list-item-icon>
-        </v-list-item>
+            <v-list-item-icon>
+              <v-btn icon class="handle mr-2">
+                <v-icon>drag_indicator</v-icon>
+              </v-btn>
+              <v-btn icon class="error mr-2" @click="deletePlaceholder(placeholder.id)">
+                <v-icon>delete</v-icon>
+              </v-btn>
+              <v-btn icon class="primary" @click="editPlaceholder(placeholder)">
+                <v-icon>edit</v-icon>
+              </v-btn>
+            </v-list-item-icon>
+          </v-list-item>
+        </draggable>
       </v-list>
 
       <v-row>
@@ -411,4 +417,7 @@
 </script>
 
 <style scoped>
+  .handle {
+    cursor: grab;
+  }
 </style>

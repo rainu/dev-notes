@@ -1,9 +1,6 @@
 import Vue from 'vue'
-
 import shortkey from 'vue-shortkey'
+import draggable from 'vuedraggable'
 
 Vue.use(shortkey)
-
-export default ({ app, store }) => {
-
-}
+Vue.component('draggable', draggable)
