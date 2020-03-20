@@ -196,6 +196,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import uuid4 from 'uuid4';
   import {cloneDataObject} from "../../../common/copy";
   import TagPicker from "./TagPicker";
 
