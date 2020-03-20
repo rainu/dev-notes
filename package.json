@@ -26,6 +26,7 @@
     "uuid4": "^1.1.4",
     "vue-i18n": "^8.14.0",
     "vue-markdown": "^2.2.4",
+    "vue-shortkey": "^3.1.7",
     "vue-web-cam": "^1.8.0",
     "vuedraggable": "^2.23.1",
     "webdav": "^2.10.0"

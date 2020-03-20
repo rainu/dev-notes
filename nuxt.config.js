@@ -80,6 +80,7 @@ export default {
   plugins: [
     '~/plugins/localStore',
     '~/plugins/i18n',
+    '~/plugins/shortkey',
     '~/plugins/init',
     '~/plugins/style',
     '~/plugins/notification',

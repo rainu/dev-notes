@@ -22,7 +22,7 @@
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
-        <v-btn color="error" @click="onAbort">{{$t('note.actions.abort')}}</v-btn>
+        <v-btn color="error" @click="onAbort" v-shortkey="['esc']" @shortkey="onAbort">{{$t('note.actions.abort')}}</v-btn>
         <v-btn color="primary" type="submit" form="note-new-form">{{$t('note.actions.save')}}</v-btn>
       </v-card-actions>
     </v-card>
