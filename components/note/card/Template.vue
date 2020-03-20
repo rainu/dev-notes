@@ -34,7 +34,7 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="copyDialog" scrollable>
-      <TemplateCopyDialogContent :template="note.content.template" :placeholder="note.content.placeholder" @copy="onCopy"/>
+      <TemplateCopyDialogContent :template="note.content.template" :placeholder="note.content.placeholder" @copy="onCopy" v-if="copyDialog"/>
     </v-dialog>
 
     <v-card-text :class="viewClass">

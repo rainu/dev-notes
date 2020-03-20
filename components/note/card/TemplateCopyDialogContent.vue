@@ -9,6 +9,7 @@
         <v-row justify="center">
           <v-col cols="12" sm="4" v-for="placeholder of placeholderForm" :key="placeholder.name">
             <v-text-field
+              :ref="placeholder.name"
               v-if="placeholder.type === 'text'"
               v-model="placeholder.value"
               :label="placeholder.name"
@@ -120,6 +121,14 @@
         this.$emit('copy', copyText)
       },
     },
+    mounted() {
+      this.$nextTick(() => {
+        const firstInputElement = this.placeholderForm.find(e => e.type === 'text')
+        if(firstInputElement) {
+          this.$refs[firstInputElement.name][0].focus();
+        }
+      });
+    }
   }
 </script>
 
