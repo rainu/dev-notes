@@ -119,13 +119,12 @@
 <script>
   import { mapActions, mapState } from 'vuex';
   import uuid4 from 'uuid4'
-  import draggable from 'vuedraggable'
   import BoardForm from "../board/Form";
   import HelpBoard from "../help/Board";
 
   export default {
     name: "SettingsBoard",
-    components: {HelpBoard, BoardForm, draggable},
+    components: {HelpBoard, BoardForm},
     data(){
       return {
         showHelp: false,

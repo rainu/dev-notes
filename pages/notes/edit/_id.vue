@@ -31,7 +31,6 @@ import NoteFormPicture from "../../../components/note/form/Picture";
 import NoteFormTemplate from "../../../components/note/form/Template";
 import NoteCardTemplate from "../../../components/note/card/Template";
 import HelpFirstSteps from "../../../components/help/FirstSteps";
-import NoteOrderConfig from "../../../components/note/OrderConfig";
 import NoteFormCredentials from "../../../components/note/form/Credentials";
 import NoteCardCredentials from "../../../components/note/card/Credentials";
 import NoteFormCamera from "../../../components/note/form/Camera";
@@ -43,7 +42,6 @@ export default {
   components: {
     NoteCardReminder,
     NoteFormReminder,
-    NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
     NoteFormTemplate,

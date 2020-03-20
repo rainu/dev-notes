@@ -65,6 +65,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## Changelog
 
 ### 0.9.17
+* UX: redesign ordering of notes - now you can configure the order in wysiwyg-style
 * UX: make placeholder in template notes sortable
 * abort creation/edit of note while typing [ESC]
 * autofocus the first text element on copy dialog for template notes

@@ -6,9 +6,14 @@
       </v-col>
     </v-row>
 
-    <v-row align="center">
-      <v-col cols="12" sm="6" md="3" v-for="note of filteredNotes" :key="note.id">
+    <!-- the following class of draggable will mocks a <v-row align="center"> -->
+    <draggable v-model="filteredNoteOrder"
+               class="row align-center draggable"
+               handle=".v-toolbar"
+               :scroll-sensitivity="200"
+               :force-fallback="true">
 
+      <v-col cols="12" sm="6" md="3" v-for="note of filteredNotes" :key="note.id" >
         <NoteCardText v-if="note.type === 'text'" :note="note"
                       :show-tags="showTags"
                       @onCopy="onCopyNote"
@@ -39,9 +44,8 @@
                           @onCopy="onCopyNote"
                           @onEdit="onEditRequest(note)"
                           @onDelete="onDeleteRequest(note.id)" />
-
       </v-col>
-    </v-row>
+    </draggable>
 
     <v-dialog v-model="dialog.delete.open" max-width="290">
       <v-card>
@@ -75,9 +79,6 @@
 
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
-        <v-toolbar-items>
-          <NoteOrderConfig />
-        </v-toolbar-items>
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items>
@@ -138,7 +139,6 @@ import NoteFormPicture from "../components/note/form/Picture";
 import NoteFormTemplate from "../components/note/form/Template";
 import NoteCardTemplate from "../components/note/card/Template";
 import HelpFirstSteps from "../components/help/FirstSteps";
-import NoteOrderConfig from "../components/note/OrderConfig";
 import NoteFormCredentials from "../components/note/form/Credentials";
 import NoteCardCredentials from "../components/note/card/Credentials";
 import NoteFormCamera from "../components/note/form/Camera";
@@ -150,7 +150,6 @@ export default {
   components: {
     NoteCardReminder,
     NoteFormReminder,
-    NoteOrderConfig,
     HelpFirstSteps,
     NoteCardTemplate,
     NoteFormTemplate,
@@ -201,6 +200,29 @@ export default {
       noteDeleteHard: state => state.settings.notes.deleteHard,
       noteDefaultType: state => state.settings.notes.defaultType
     }),
+    filteredNoteOrder: {
+      get() {
+        return this.filteredNotes.map(n => n.id)
+      },
+      set(value) {
+        //the filteredNoteOrder array can be a subset of noteOrder
+        //so here we have to translate the new subset order to the whole noteOrder!
+        let valueOrdinal = {}
+        for(let i=0; i < value.length; i++) {
+          valueOrdinal[value[i]] = i
+        }
+
+        let newOrder = [...this.noteOrder]
+        newOrder.sort((a, b) => {
+          if(!valueOrdinal.hasOwnProperty(a)) return 0 //a is a note not included in the filteredNotes!
+          if(!valueOrdinal.hasOwnProperty(b)) return -1
+          if(valueOrdinal[a] > valueOrdinal[b]) return 1
+          if(valueOrdinal[a] < valueOrdinal[b]) return -1
+          return 0
+        })
+        this.$store.dispatch('note/setNoteOrder', newOrder)
+      }
+    },
     availableTags() {
       let tags = {}
       for(let tag of this.noteTags) tags[tag] = true
@@ -335,3 +357,9 @@ export default {
   },
 }
 </script>
+
+<style>
+  .draggable .v-toolbar {
+    cursor: grab;
+  }
+</style>
