@@ -18,32 +18,38 @@
                       :show-tags="showTags"
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
-                      @onDelete="onDeleteRequest(note.id)" />
+                      @onDelete="onDeleteRequest(note.id)"
+                      @onTitleChange="onTitleChange(note, $event)" />
         <NoteCardReminder v-if="note.type === 'reminder'" :note="note"
                       :show-tags="showTags"
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
-                      @onDelete="onDeleteRequest(note.id)" />
+                      @onDelete="onDeleteRequest(note.id)"
+                      @onTitleChange="onTitleChange(note, $event)"/>
         <NoteCardCredentials v-if="note.type === 'credentials'" :note="note"
                       :show-tags="showTags"
                       @onCopy="onCopyNote"
                       @onEdit="onEditRequest(note)"
-                      @onDelete="onDeleteRequest(note.id)" />
+                      @onDelete="onDeleteRequest(note.id)"
+                      @onTitleChange="onTitleChange(note, $event)"/>
         <NoteCardPicture v-if="note.type === 'picture'" :note="note"
                          :show-tags="showTags"
                          @onCopy="onCopyNote"
                          @onEdit="onEditRequest(note)"
-                         @onDelete="onDeleteRequest(note.id)" />
+                         @onDelete="onDeleteRequest(note.id)"
+                         @onTitleChange="onTitleChange(note, $event)"/>
         <NoteCardCamera v-if="note.type === 'camera'" :note="note"
                          :show-tags="showTags"
                          @onCopy="onCopyNote"
                          @onEdit="onEditRequest(note)"
-                         @onDelete="onDeleteRequest(note.id)" />
+                         @onDelete="onDeleteRequest(note.id)"
+                         @onTitleChange="onTitleChange(note, $event)"/>
         <NoteCardTemplate v-if="note.type === 'template'" :note="note"
                           :show-tags="showTags"
                           @onCopy="onCopyNote"
                           @onEdit="onEditRequest(note)"
-                          @onDelete="onDeleteRequest(note.id)" />
+                          @onDelete="onDeleteRequest(note.id)"
+                          @onTitleChange="onTitleChange(note, $event)"/>
       </v-col>
     </draggable>
 
@@ -311,6 +317,7 @@ export default {
     ...mapActions({
       deleteNote: 'note/deleteNote',
       deleteNoteSoft: 'note/deleteNoteSoft',
+      editNote: 'note/editNote',
     }),
     onNewNote(type) {
       this.$router.push({ path: "/notes/new/" + type.id, query: this.$route.query })
@@ -334,6 +341,10 @@ export default {
       this.deleteNote(this.dialog.delete.noteId)
       this.dialog.delete.open = false
       this.dialog.delete.noteId = null
+    },
+    onTitleChange(note, newTitle){
+      note.title = newTitle
+      this.editNote(note)
     },
     onCopyNote(content) {
       this.snackbar.copied = false

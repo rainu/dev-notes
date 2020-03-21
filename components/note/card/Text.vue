@@ -1,8 +1,9 @@
 <template>
   <v-card class="elevation-6">
     <v-toolbar color="primary" flat>
-      <v-toolbar-title>{{note.title}}</v-toolbar-title>
-      <div class="flex-grow-1"></div>
+      <v-toolbar-title class="flex-grow-1">
+        <ClickToEdit :value="note.title" @input="onTitleChange" />
+      </v-toolbar-title>
     </v-toolbar>
 
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
@@ -115,6 +116,9 @@
       }
     },
     methods: {
+      onTitleChange(value){
+        this.$emit('onTitleChange', value)
+      },
       onEdit(){
         this.$emit('onEdit')
       },
