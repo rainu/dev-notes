@@ -37,6 +37,15 @@
 /*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
 /*!
+ * Fuse.js v5.0.7-beta - Lightweight fuzzy-search (http://fusejs.io)
+ * 
+ * Copyright (c) 2012-2020 Kirollos Risk (http://kiro.me)
+ * All Rights Reserved. Apache Software License 2.0
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+/*!
  * vue-no-ssr v1.1.1
  * (c) 2018-present egoist <0x142857@gmail.com>
  * Released under the MIT License.
