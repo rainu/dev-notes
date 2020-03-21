@@ -36,13 +36,6 @@
 
 /*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
-/**!
- * Sortable 1.10.1
- * @author	RubaXa   <trash@rubaxa.org>
- * @author	owenm    <owen23355@gmail.com>
- * @license MIT
- */
-
 /*!
  * vue-no-ssr v1.1.1
  * (c) 2018-present egoist <0x142857@gmail.com>
@@ -77,3 +70,10 @@
 	 * derived from CryptoJS.mode.CTR
 	 * Jan Hruby jhruby.web@gmail.com
 	 */
+
+/**!
+ * Sortable 1.10.1
+ * @author	RubaXa   <trash@rubaxa.org>
+ * @author	owenm    <owen23355@gmail.com>
+ * @license MIT
+ */
