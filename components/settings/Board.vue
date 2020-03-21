@@ -13,12 +13,12 @@
                  handle=".handle"
                  :scroll-sensitivity="200"
                  :force-fallback="true">
-        
+
         <v-card-text v-for="boardId of boardOrder" :key="boardId">
           <v-card >
             <v-card-title>
               <v-icon left>{{boardMap[boardId].icon}}</v-icon>
-              {{boardMap[boardId].title}}
+              <ClickToEdit :value="boardMap[boardId].title" @input="onTitleChange(boardMap[boardId], $event)" />
             </v-card-title>
 
             <v-card-text class="pb-0">
@@ -180,6 +180,10 @@
         editBoard: 'board/editBoard',
         deleteBoard: 'board/deleteBoard',
       }),
+      onTitleChange(board, newTitle){
+        board.title = newTitle
+        this.editBoard(board)
+      },
       onSaveNewBoard(board){
         this.addBoard({
           id: uuid4(),
