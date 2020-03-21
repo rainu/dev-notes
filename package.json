@@ -1,6 +1,6 @@
 {
   "name": "DevNotes",
-  "version": "0.9.17",
+  "version": "0.9.18",
   "description": "A progressive web application (PWA) for notes.",
   "author": "rainu",
   "private": true,
@@ -18,6 +18,7 @@
     "copy-to-clipboard": "^3.2.0",
     "date-fns": "^2.6.0",
     "dropbox": "^4.0.30",
+    "fuse.js": "^5.0.7-beta",
     "localforage": "^1.7.3",
     "markdown-it": "^9.1.0",
     "material-design-icons-iconfont": "^5.0.1",

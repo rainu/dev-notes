@@ -64,6 +64,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.18
+* fulltext search filter for notes [#26](https://github.com/rainu/dev-notes/issues/26)
+
 ### 0.9.17
 * UX: redesign ordering of notes - now you can configure the order in wysiwyg-style
 * UX: make placeholder in template notes sortable

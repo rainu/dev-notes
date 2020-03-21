@@ -79,16 +79,22 @@
 
     <v-footer app class="pa-0">
       <v-toolbar dense color="footer">
-        <div class="flex-grow-1"></div>
-
         <v-toolbar-items>
           <v-btn @click="showTags = !showTags">
             <v-icon :color="showTags ? 'primary' : ''">flag</v-icon>
           </v-btn>
+        </v-toolbar-items>
 
+        <v-toolbar-items class="flex-grow-1">
+          <v-text-field v-model="filter.query"
+                        solo
+                        clearable/>
+        </v-toolbar-items>
+
+        <v-toolbar-items>
           <v-menu offset-y top max-height="50%" :close-on-content-click="false">
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" :color="filter.active ? 'primary' : ''">
+              <v-btn v-on="on" :color="filter.active || filter.query ? 'primary' : ''">
                 <v-icon>search</v-icon>
               </v-btn>
             </template>
@@ -130,6 +136,7 @@ import { mapGetters, mapState, mapActions } from 'vuex';
 import noteTypes from '../components/note/types'
 import Vue from 'vue'
 import copy from 'copy-to-clipboard';
+import Fuse from 'fuse.js'
 
 import { readBoardQuery } from '../common/boardQuery'
 import NoteCardText from "../components/note/card/Text";
@@ -176,6 +183,7 @@ export default {
       filter: {
         active: false,
         tags: {},
+        query: null,
       },
 
       snackbar: {
@@ -250,7 +258,7 @@ export default {
         else if(tagValue === false) blacklist[tagName] = true
       }
 
-      return this.noteOrder.map(nId => noteMap[nId]).filter(note => {
+      let filtered = this.noteOrder.map(nId => noteMap[nId]).filter(note => {
         let tagsMap = {}
         for(let tag of note.tags) tagsMap[tag] = true
 
@@ -270,6 +278,30 @@ export default {
 
         return true
       })
+
+      if(this.filter.query) {
+        let options = {
+          shouldSort: false,
+          threshold: 0.1,
+          location: 0,
+          distance: 100,
+          minMatchCharLength: 1,
+          keys: [
+            "title",
+            "content.text",
+            "content.markdown",
+            "content.template",
+            "content.date",
+            "content.url",
+            "content.description",
+            "content.username"
+          ]
+        }
+        let fuse = new Fuse(filtered, options)
+        filtered = fuse.search(this.filter.query).map(f => f.item)
+      }
+
+      return filtered
     },
     existNotes() {
       return this.notes.length > 0
