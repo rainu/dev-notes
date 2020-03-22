@@ -64,6 +64,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.19
+* use a dedicated icon for draggable elements
+
 ### 0.9.18
 * edit board title directly on click on them
 * edit note title directly on click on them

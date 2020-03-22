@@ -9,7 +9,7 @@
     <!-- the following class of draggable will mocks a <v-row align="center"> -->
     <draggable v-model="filteredNoteOrder"
                class="row align-center draggable"
-               handle=".v-toolbar"
+               handle=".handle"
                :scroll-sensitivity="200"
                :force-fallback="true">
 
@@ -402,7 +402,7 @@ export default {
 </script>
 
 <style>
-  .draggable .v-toolbar {
+  .draggable .handle {
     cursor: grab;
   }
 </style>

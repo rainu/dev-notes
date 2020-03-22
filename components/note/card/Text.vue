@@ -1,9 +1,13 @@
 <template>
   <v-card class="elevation-6">
     <v-toolbar color="primary" flat>
-      <v-toolbar-title class="flex-grow-1">
-        <ClickToEdit :value="note.title" @input="onTitleChange" />
+      <v-toolbar-title>
+        <ClickToEdit slot="header" :value="note.title" @input="onTitleChange"/>
       </v-toolbar-title>
+      <div class="flex-grow-1"></div>
+      <v-btn icon class="handle">
+        <v-icon>drag_indicator</v-icon>
+      </v-btn>
     </v-toolbar>
 
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">

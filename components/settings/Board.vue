@@ -18,7 +18,10 @@
           <v-card >
             <v-card-title>
               <v-icon left>{{boardMap[boardId].icon}}</v-icon>
-              <ClickToEdit :value="boardMap[boardId].title" @input="onTitleChange(boardMap[boardId], $event)" />
+              <ClickToEdit :value="boardMap[boardId].title" @input="onTitleChange(boardMap[boardId], $event)" class="flex-grow-1"/>
+              <v-btn icon class="handle">
+                <v-icon>drag_indicator</v-icon>
+              </v-btn>
             </v-card-title>
 
             <v-card-text class="pb-0">
@@ -30,9 +33,6 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn icon class="handle">
-                <v-icon>drag_indicator</v-icon>
-              </v-btn>
               <div class="flex-grow-1"></div>
               <v-btn icon class="error" @click="onBoardDeleteRequest(boardId)">
                 <v-icon>delete</v-icon>
