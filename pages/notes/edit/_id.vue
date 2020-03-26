@@ -11,6 +11,7 @@
         <NoteFormTemplate form-id="note-edit-form" v-if="note.type === 'template'" :data="note" @onSubmit="onSaveNote" ></NoteFormTemplate>
         <NoteFormCredentials form-id="note-edit-form" v-if="note.type === 'credentials'" :data="note" @onSubmit="onSaveNote" ></NoteFormCredentials>
         <NoteFormCamera form-id="note-edit-form" v-if="note.type === 'camera'" :data="note" @onSubmit="onSaveNote" ></NoteFormCamera>
+        <NoteFormRecord form-id="note-edit-form" v-if="note.type === 'record'" :data="note" @onSubmit="onSaveNote" ></NoteFormRecord>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
@@ -24,35 +25,25 @@
 <script>
 import { mapActions } from 'vuex';
 
-import NoteCardText from "../../../components/note/card/Text";
-import NoteCardPicture from "../../../components/note/card/Picture";
 import NoteFormText from "../../../components/note/form/Text";
 import NoteFormPicture from "../../../components/note/form/Picture";
 import NoteFormTemplate from "../../../components/note/form/Template";
-import NoteCardTemplate from "../../../components/note/card/Template";
 import HelpFirstSteps from "../../../components/help/FirstSteps";
 import NoteFormCredentials from "../../../components/note/form/Credentials";
-import NoteCardCredentials from "../../../components/note/card/Credentials";
 import NoteFormCamera from "../../../components/note/form/Camera";
-import NoteCardCamera from "../../../components/note/card/Camera";
 import NoteFormReminder from "../../../components/note/form/Reminder";
-import NoteCardReminder from "../../../components/note/card/Reminder";
+import NoteFormRecord from "../../../components/note/form/Record";
 
 export default {
   components: {
-    NoteCardReminder,
     NoteFormReminder,
     HelpFirstSteps,
-    NoteCardTemplate,
     NoteFormTemplate,
-    NoteCardText,
     NoteFormText,
-    NoteCardPicture,
     NoteFormPicture,
-    NoteCardCredentials,
     NoteFormCredentials,
-    NoteCardCamera,
-    NoteFormCamera
+    NoteFormCamera,
+    NoteFormRecord
   },
   data(){
     return {

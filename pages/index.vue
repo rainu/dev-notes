@@ -50,6 +50,12 @@
                           @onEdit="onEditRequest(note)"
                           @onDelete="onDeleteRequest(note.id)"
                           @onTitleChange="onTitleChange(note, $event)"/>
+        <NoteCardRecord v-if="note.type === 'record'" :note="note"
+                        :show-tags="showTags"
+                        @onCopy="onCopyNote"
+                        @onEdit="onEditRequest(note)"
+                        @onDelete="onDeleteRequest(note.id)"
+                        @onTitleChange="onTitleChange(note, $event)"/>
       </v-col>
     </draggable>
 
@@ -147,33 +153,23 @@ import Fuse from 'fuse.js'
 import { readBoardQuery } from '../common/boardQuery'
 import NoteCardText from "../components/note/card/Text";
 import NoteCardPicture from "../components/note/card/Picture";
-import NoteFormText from "../components/note/form/Text";
-import NoteFormPicture from "../components/note/form/Picture";
-import NoteFormTemplate from "../components/note/form/Template";
 import NoteCardTemplate from "../components/note/card/Template";
 import HelpFirstSteps from "../components/help/FirstSteps";
-import NoteFormCredentials from "../components/note/form/Credentials";
 import NoteCardCredentials from "../components/note/card/Credentials";
-import NoteFormCamera from "../components/note/form/Camera";
 import NoteCardCamera from "../components/note/card/Camera";
-import NoteFormReminder from "../components/note/form/Reminder";
 import NoteCardReminder from "../components/note/card/Reminder";
+import NoteCardRecord from "../components/note/card/Record";
 
 export default {
   components: {
     NoteCardReminder,
-    NoteFormReminder,
     HelpFirstSteps,
     NoteCardTemplate,
-    NoteFormTemplate,
     NoteCardText,
-    NoteFormText,
     NoteCardPicture,
-    NoteFormPicture,
     NoteCardCredentials,
-    NoteFormCredentials,
     NoteCardCamera,
-    NoteFormCamera
+    NoteCardRecord
   },
   data(){
     return {

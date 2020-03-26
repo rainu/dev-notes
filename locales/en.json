@@ -139,6 +139,12 @@
       "description": "Description",
       "device": "Device"
     },
+    "record": {
+      "title": "Record",
+      "help": "This is a note in which you can save a voice recording and a corresponding description.",
+      "description": "Description",
+      "device": "Device"
+    },
     "credentials": {
       "title": "Credentials",
       "help": "This is a note for credentials. Here you can save username and password. It is recommended to do this only if **encryption is enabled**! Encryption can be enabled in the settings area.",

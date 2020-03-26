@@ -19,6 +19,7 @@
         <NoteFormTemplate form-id="note-new-form" v-if="noteType === 'template'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormTemplate>
         <NoteFormCredentials form-id="note-new-form" v-if="noteType === 'credentials'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCredentials>
         <NoteFormCamera form-id="note-new-form" v-if="noteType === 'camera'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCamera>
+        <NoteFormRecord form-id="note-new-form" v-if="noteType === 'record'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormRecord>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
@@ -35,36 +36,26 @@ import { mapActions } from 'vuex';
 import { readBoardQuery } from '../../../common/boardQuery';
 import uuid4 from 'uuid4';
 
-import NoteCardText from "../../../components/note/card/Text";
-import NoteCardPicture from "../../../components/note/card/Picture";
 import NoteFormText from "../../../components/note/form/Text";
 import NoteFormPicture from "../../../components/note/form/Picture";
 import NoteFormTemplate from "../../../components/note/form/Template";
-import NoteCardTemplate from "../../../components/note/card/Template";
 import HelpFirstSteps from "../../../components/help/FirstSteps";
 import NoteFormCredentials from "../../../components/note/form/Credentials";
-import NoteCardCredentials from "../../../components/note/card/Credentials";
 import NoteFormCamera from "../../../components/note/form/Camera";
-import NoteCardCamera from "../../../components/note/card/Camera";
+import NoteFormRecord from "../../../components/note/form/Record";
 import NoteFormReminder from "../../../components/note/form/Reminder";
-import NoteCardReminder from "../../../components/note/card/Reminder";
 import noteTypes from "../../../components/note/types";
 
 export default {
   components: {
-    NoteCardReminder,
     NoteFormReminder,
     HelpFirstSteps,
-    NoteCardTemplate,
     NoteFormTemplate,
-    NoteCardText,
     NoteFormText,
-    NoteCardPicture,
     NoteFormPicture,
-    NoteCardCredentials,
     NoteFormCredentials,
-    NoteCardCamera,
-    NoteFormCamera
+    NoteFormCamera,
+    NoteFormRecord
   },
   data(){
     return {
