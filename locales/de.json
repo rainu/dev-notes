@@ -82,6 +82,7 @@
     },
     "reminder": {
       "title": "Erinnerung",
+      "help": "Dies ist eine Notiz mit einem Datum. Ist dieses Datum abgelaufen, werden Sie darüber banachrichtigt.",
       "date": "Datum",
       "time": "Uhrzeit",
       "content": "Inhalt",

@@ -7,12 +7,12 @@
 
     <v-card-text>
       <vue-markdown :source="$t('note.help.first-steps.preamble', textArgs)" />
-      <div v-for="type of types" :key="type.name">
+      <div v-for="type of types" :key="type.id">
         <h3>
           <v-icon>{{type.icon}}</v-icon>
-          {{$t(`note.${type.name}.title`, textArgs)}}
+          {{$t(`note.${type.id}.title`, textArgs)}}
         </h3>
-        <vue-markdown :source="$t(`note.${type.name}.help`, textArgs)" />
+        <vue-markdown :source="$t(`note.${type.id}.help`, textArgs)" />
       </div>
     </v-card-text>
   </v-card>
@@ -20,6 +20,7 @@
 
 <script>
   import VueMarkdown from 'vue-markdown'
+  import noteTypes from '../../components/note/types'
 
   export default {
     name: "HelpFirstSteps",
@@ -28,22 +29,7 @@
     },
     data(){
       return{
-        types: [{
-          name: 'text',
-          icon: 'notes'
-        }, {
-          name: 'credentials',
-          icon: 'fingerprint'
-        }, {
-          name: 'picture',
-          icon: 'photo'
-        }, {
-          name: 'camera',
-          icon: 'camera'
-        }, {
-          name: 'template',
-          icon: 'ballot'
-        }]
+        types: noteTypes
       }
     },
     computed: {

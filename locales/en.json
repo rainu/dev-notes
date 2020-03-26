@@ -82,6 +82,7 @@
     },
     "reminder": {
       "title": "Reminder",
+      "help": "This is a note with a date. When this date expires, you will be notified.",
       "date": "Date",
       "time": "Time",
       "content": "Content",
