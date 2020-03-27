@@ -246,7 +246,7 @@ export default {
         noteMap[note.id] = note
       }
 
-      if(!this.availableTags || this.availableTags.length === 0){
+      if((!this.availableTags || this.availableTags.length === 0) && !this.filter.query){
         return this.noteOrder.map(nId => noteMap[nId])
       }
 
