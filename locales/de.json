@@ -494,5 +494,8 @@
     "others":{
       "title": "Andere"
     }
+  },
+  "recall": {
+    "progress": "Einstellungen werden vorgenommen ..."
   }
 }

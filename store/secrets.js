@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {Dropbox} from "dropbox";
 
 export const state = () => ({
   secrets: {
@@ -100,6 +101,20 @@ export const actions = {
       store.dispatch('setDropboxAuth', {}),
       store.commit('setDropboxUser', {})
     ])
+  },
+  refreshDropboxToken(store){
+    let dpxAuth = store.getters.getDropboxAuth
+    if(dpxAuth && dpxAuth.access_token) {
+      let dbx = new Dropbox({
+        fetch: fetch,
+        accessToken: dpxAuth.access_token,
+        clientId: process.env.dropbox.clientId,
+      })
+
+      return dbx.usersGetCurrentAccount()
+        .then(user => store.commit('setDropboxUser', user))
+        .catch(() => store.dispatch('removeDropboxAuth'))
+    }
   }
 }
 

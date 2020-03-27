@@ -10,7 +10,8 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
     base: '/'
   }
 }
-routerBase.router.middleware = ['encryption', 'dropbox']
+routerBase.router.middleware = ['recall', 'encryption', 'dropbox']
+routerBase.router.mode = 'hash'
 
 export default {
   ...routerBase,

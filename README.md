@@ -64,6 +64,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ## Changelog
 
+### 0.9.21
+* use hashed-urls - now you can share links to subpages without error [#38](https://github.com/rainu/dev-notes/issues/38)
+
 ### 0.9.19
 * implements new note type: record [#5](https://github.com/rainu/dev-notes/issues/5)
 * use a dedicated icon for draggable elements

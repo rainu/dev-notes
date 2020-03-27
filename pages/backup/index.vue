@@ -113,6 +113,9 @@
       if (this.persistedPassword) {
         this.password = this.persistedPassword
       }
+      if(this.$route.query.selected) {
+        this.panel = parseInt(this.$route.query.selected)
+      }
     }
   }
 </script>
