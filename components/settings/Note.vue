@@ -81,7 +81,9 @@
       },
       updateNoteSettings(settings){
         this.notes.fixedSize = settings.fixed
-        this.notes.size = settings.size
+        if(settings.fixed) {
+          this.notes.size = settings.size
+        }
         this.notes.deleteFast = !settings.deleteHard
         this.notes.defaultType = settings.defaultType
       },
