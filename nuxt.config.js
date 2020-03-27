@@ -57,7 +57,7 @@ export default {
     "display": "standalone",
     "orientation": "portrait-primary",
     "background_color": "#3a4253",
-    "theme_color": "#78c2d2",
+    "theme_color": "#3a4253",
     "dir": "ltr",
     "lang": "de-DE"
   },
