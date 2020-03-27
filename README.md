@@ -6,6 +6,10 @@
 
 [Try it out!](https://rainu.github.io/dev-notes/)
 
+[![types_1](preview/cards_2.png)](https://rainu.github.io/dev-notes/) [![types_2](preview/cards_1.png)](https://rainu.github.io/dev-notes/) [![types_1](preview/cards_0.png)](https://rainu.github.io/dev-notes/)
+
+[![new](preview/new.png)](https://rainu.github.io/dev-notes/#/notes/new/text) [![backups](preview/backups.png)](https://rainu.github.io/dev-notes/#/backup/)
+
 ## Features
 * **Serverless** note app (no server or database required)
     * The whole content will be **stored locally**
