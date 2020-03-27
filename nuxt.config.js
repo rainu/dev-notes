@@ -56,8 +56,8 @@ export default {
     "scope": routerBase.router.base + ".",
     "display": "standalone",
     "orientation": "portrait-primary",
-    "background_color": "#FFE7A2",
-    "theme_color": "#74B392",
+    "background_color": "#3a4253",
+    "theme_color": "#78c2d2",
     "dir": "ltr",
     "lang": "de-DE"
   },
@@ -69,7 +69,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#4a566c' },
   /*
   ** Global CSS
   */
