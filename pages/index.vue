@@ -99,6 +99,7 @@
 
         <v-toolbar-items class="flex-grow-1">
           <v-text-field v-model="filter.query"
+                        :placeholder="$t('note.filter.query')"
                         solo
                         clearable/>
         </v-toolbar-items>

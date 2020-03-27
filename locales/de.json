@@ -195,6 +195,9 @@
       },
       "trash": "Die Notiz wurde in den Papierkorb verschoben.",
       "confirmation": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?"
+    },
+    "filter": {
+      "query": "Suche"
     }
   },
   "board": {
