@@ -101,3 +101,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  div.v-menu__content.menuable__content__active {
+    max-height: 400px !important;
+  }
+</style>
