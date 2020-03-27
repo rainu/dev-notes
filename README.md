@@ -64,3 +64,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 ## Changelog
 
 Have a look at the [changelog](CHANGELOG.md)
+
+## License
+
+MIT, see [LICENSE](LICENSE).
