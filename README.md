@@ -46,6 +46,19 @@
 
 ¹ These services will work if CORS is correctly configured to return the proper headers. This may not work by default.
 
+## How to install application
+
+### Desktop
+1. Open Chrome
+1. Navigate to [DevNotes](https://rainu.github.io/dev-notes/)
+1. Tap Add to home screen
+
+### Android
+1. Open Chrome
+1. Navigate to [DevNotes](https://rainu.github.io/dev-notes/)
+1. At the top right, click More (three dots)
+1. Click "Install DevNotes ..."
+
 ## Quickstart for developer
 
 ``` bash
