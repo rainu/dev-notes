@@ -56,8 +56,8 @@ export default {
     "scope": routerBase.router.base + ".",
     "display": "standalone",
     "orientation": "portrait-primary",
-    "background_color": "#3a4253",
-    "theme_color": "#3a4253",
+    "background_color": "#303030",
+    "theme_color": "#424242",
     "dir": "ltr",
     "lang": "de-DE"
   },
