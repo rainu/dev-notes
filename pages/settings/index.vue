@@ -21,10 +21,13 @@
                   <v-col cols="12" >
                     <SettingsNote />
                   </v-col>
-                  <v-col cols="12" sm="6">
+                  <v-col cols="12" sm="4">
                     <SettingsTheme />
                   </v-col>
-                  <v-col cols="12" sm="6">
+                  <v-col cols="12" sm="4">
+                    <SettingsTagDelimiter />
+                  </v-col>
+                  <v-col cols="12" sm="4">
                     <SettingsLanguage />
                   </v-col>
                   <v-col cols="12" >
@@ -55,6 +58,7 @@
   import SettingsBoard from "../../components/settings/Board";
   import SettingsEncryption from "../../components/settings/Encryption";
   import SettingsDateTime from "../../components/settings/DateTime";
+  import SettingsTagDelimiter from "../../components/settings/TagDelimiter";
 
   export default {
     components: {
@@ -62,6 +66,7 @@
       SettingsEncryption,
       SettingsBoard,
       SettingsNote,
+      SettingsTagDelimiter,
       SettingsLanguage,
       SettingsTheme
     },

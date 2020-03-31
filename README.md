@@ -21,6 +21,7 @@
     * Reminder
     * Image
     * Photo
+    * Record
     * Credentials
     * Template - text with customizable placeholder
 * Filter your notes easily by using **tags**

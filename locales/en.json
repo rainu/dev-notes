@@ -471,6 +471,9 @@
         "default": "Default note type"
       }
     },
+    "tags": {
+      "delimiter": "Tag delimiter"
+    },
     "theme": {
       "dark": "Darkmode"
     },

@@ -1,23 +1,5 @@
 <template>
   <span>
-    <v-dialog v-model="dialog.open">
-      <v-card>
-        <v-card-title>
-          <span class="headline">{{$t('note.tags.action.add.title')}}</span>
-        </v-card-title>
-        <v-card-text>
-          <v-form @submit.prevent="addTag()">
-            <v-text-field autofocus v-model="dialog.tag" :label="$t('note.tags.action.add.tag')"></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <div class="flex-grow-1"></div>
-          <v-btn color="error" @click="dialog.open = false">{{$t('note.tags.action.add.cancel')}}</v-btn>
-          <v-btn color="primary" @click="addTag()">{{$t('note.tags.action.add.ok')}}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
     <v-autocomplete
       v-model="chosenTags"
       :items="availableTags"
@@ -28,16 +10,18 @@
       clearable
       multiple
       dense
+      :search-input.sync="tagInput"
+      @update:search-input="onInputChange"
+      @blur="onBlur"
       @change="onChange"
     >
-    <v-btn slot="append-outer" @click="dialog.open = true">
-      <v-icon>add_circle</v-icon>
-    </v-btn>
   </v-autocomplete>
   </span>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   let arraysEqual = (a, b) => {
     if (a === b) return true;
     if (a == null || b == null) return false;
@@ -74,22 +58,40 @@
       return {
         availableTags: availableTags,
         chosenTags: chosenTags,
-        dialog: {
-          open: false,
-          tag: null
-        },
+        tagInput: null,
       }
     },
+    computed: {
+      ...mapState({
+        delimiter: state => state.settings.tag.delimiter,
+      })
+    },
     methods: {
-      addTag(){
-        this.dialog.open = false
-        this.availableTags.push(this.dialog.tag)
-        this.availableTags.sort()
+      addTag(tag){
+        if(!this.availableTags.includes(tag)) {
+          this.availableTags.push(tag)
+          this.availableTags.sort()
+        }
 
-        this.chosenTags.push(this.dialog.tag)
-        this.onChange()
-
-        this.dialog.tag = null
+        if(!this.chosenTags.includes(tag)) {
+          this.chosenTags.push(tag)
+          this.onChange()
+        }
+      },
+      onInputChange(text){
+        if(text && text.trim() && text.includes(this.delimiter)) {
+          let tagValue = text.substring(0, text.indexOf(this.delimiter)).trim()
+          if(tagValue) {
+            let newTag = text.substring(0, text.indexOf(this.delimiter)).trim()
+            this.addTag(newTag)
+          }
+          this.tagInput = null
+        }
+      },
+      onBlur(){
+        if(this.tagInput && this.tagInput.trim()) {
+          this.addTag(this.tagInput.trim())
+        }
       },
       onChange(){
         this.$emit("input", this.chosenTags)

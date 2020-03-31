@@ -204,6 +204,12 @@ export function newLocalStore() {
     setNoteDefaultType(type){
       return store.settings.setItem('note.defaultType', type)
     },
+    getTagDelimiter(){
+      return store.settings.getItem('tag.delimiter')
+    },
+    setTagDelimiter(delimiter){
+      return store.settings.setItem('tag.delimiter', delimiter)
+    },
     getNote(id) {
       return store.notes.getItem(id)
         .then(note => store.cryptoModule.decrypt(note))

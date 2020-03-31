@@ -1,3 +1,6 @@
+### 0.9.23
+* redesign tag picker
+
 ### 0.9.22
 * selects a default size if fixed size was chosen
 * query filter can now be used when no tags are given

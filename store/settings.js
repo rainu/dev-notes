@@ -15,6 +15,9 @@ export const state = () => ({
     deleteHard: false,
     defaultType: 'text'
   },
+  tag: {
+    delimiter: ','
+  },
   theme: {
     dark: true,
   },
@@ -60,6 +63,9 @@ export const mutations = {
   },
   setNoteDefaultType(state, type) {
     state.notes.defaultType = type
+  },
+  setTagDelimiter(state, delimiter){
+    state.tag.delimiter = delimiter
   }
 }
 
@@ -123,6 +129,12 @@ export const actions = {
             return ctx.commit('setNoteDefaultType', mode)
           }
         }),
+      this.$localStore.getTagDelimiter()
+        .then(delimiter => {
+          if(delimiter) {
+            return ctx.commit('setTagDelimiter', delimiter)
+          }
+        }),
     ])
   },
 
@@ -153,6 +165,10 @@ export const actions = {
   setNoteDefaultType(ctx, type) {
     ctx.commit('setNoteDefaultType', type)
     return this.$localStore.setNoteDefaultType(type)
+  },
+  setTagDelimiter(ctx, delimiter) {
+    ctx.commit('setTagDelimiter', delimiter)
+    return this.$localStore.setTagDelimiter(delimiter)
   },
 
   applyLanguage(ctx, lang) {

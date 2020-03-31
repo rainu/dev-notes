@@ -471,6 +471,9 @@
         "default": "Standard Notizart"
       }
     },
+    "tags": {
+      "delimiter": "Schlagwort Trennzeichen"
+    },
     "theme": {
       "dark": "Nachtmodus"
     },
