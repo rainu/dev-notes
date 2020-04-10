@@ -20,10 +20,13 @@
 
     <v-container>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="9" sm="11">
           <v-text-field v-model="board.title" :label="$t('board.title')" :rules="ruleRequired" required>
             <IconChooser v-model="board.icon" slot="prepend"/>
           </v-text-field>
+        </v-col>
+        <v-col cols="3" sm="1">
+          <ColorPicker v-model="board.color" />
         </v-col>
       </v-row>
       <v-row>
@@ -51,10 +54,11 @@
   import {cloneDataObject} from "../../common/copy";
   import Vue from 'vue'
   import IconChooser from "../IconChooser";
+  import ColorPicker from "../note/form/ColorPicker";
 
   export default {
     name: "BoardForm",
-    components: {IconChooser},
+    components: {ColorPicker, IconChooser},
     props: {
       formId: {
         type: String,
@@ -78,6 +82,7 @@
     data() {
       let board = {
         title: "",
+        color: null,
         icon: this.defaultIcon,
         filter: {
           tags: {}
@@ -86,6 +91,7 @@
 
       if(this.data) {
         board.title = this.data.title
+        board.color = this.data.color
         board.icon = this.data.icon
         board.filter = cloneDataObject(this.data.filter)
       }
@@ -143,6 +149,7 @@
 
         let data = {}
         data.title = this.board.title
+        data.color = this.board.color
         data.icon = this.board.icon
         data.filter = cloneDataObject(this.board.filter)
 
@@ -170,12 +177,14 @@
       data(newData) {
         if(!newData) {
           this.board.title = ""
+          this.board.color = null
           this.board.icon = this.defaultIcon
           this.board.filter.tags = {}
           return
         }
 
         this.board.title = newData.title
+        this.board.color = newData.color
         this.board.icon = newData.icon
 
         //it is IMPORTANT to COPY the filter data!

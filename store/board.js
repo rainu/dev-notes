@@ -64,6 +64,16 @@ export const getters = {
     }
 
     return Object.keys(tagMap).sort()
+  },
+  getUsedColors(state) {
+    let colors = {}
+    for(let board of state.boards) {
+      if(board.color) {
+        colors[board.color.toUpperCase()] = ""
+      }
+    }
+
+    return Object.keys(colors).sort()
   }
 }
 

@@ -1,4 +1,5 @@
 ### 0.9.23
+* note colors can now be configured
 * redesign tag picker
 
 ### 0.9.22

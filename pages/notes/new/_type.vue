@@ -13,13 +13,13 @@
         >
         </v-select>
 
-        <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormText>
-        <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormReminder>
-        <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormPicture>
-        <NoteFormTemplate form-id="note-new-form" v-if="noteType === 'template'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormTemplate>
-        <NoteFormCredentials form-id="note-new-form" v-if="noteType === 'credentials'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCredentials>
-        <NoteFormCamera form-id="note-new-form" v-if="noteType === 'camera'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormCamera>
-        <NoteFormRecord form-id="note-new-form" v-if="noteType === 'record'" @onSubmit="onSaveNewNote" :initial-tags="initialTags"></NoteFormRecord>
+        <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormText>
+        <NoteFormReminder form-id="note-new-form" v-if="noteType === 'reminder'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormReminder>
+        <NoteFormPicture form-id="note-new-form" v-if="noteType === 'picture'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormPicture>
+        <NoteFormTemplate form-id="note-new-form" v-if="noteType === 'template'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormTemplate>
+        <NoteFormCredentials form-id="note-new-form" v-if="noteType === 'credentials'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormCredentials>
+        <NoteFormCamera form-id="note-new-form" v-if="noteType === 'camera'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormCamera>
+        <NoteFormRecord form-id="note-new-form" v-if="noteType === 'record'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormRecord>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
@@ -75,6 +75,10 @@ export default {
         }
       }
       return activeTags
+    },
+    initialColor(){
+      const boardInfo = readBoardQuery(this.$route.query)
+      return boardInfo.color
     }
   },
   methods: {

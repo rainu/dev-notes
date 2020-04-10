@@ -2,8 +2,11 @@
   <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId" ref="form">
     <v-container>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="9" sm="11">
           <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
+        </v-col>
+        <v-col cols="3" sm="1">
+          <ColorPicker v-model="note.color" />
         </v-col>
       </v-row>
 
@@ -209,10 +212,11 @@
   import uuid4 from 'uuid4';
   import {cloneDataObject} from "../../../common/copy";
   import TagPicker from "./TagPicker";
+  import ColorPicker from "./ColorPicker";
 
   export default {
     name: "NoteFormTemplate",
-    components: {TagPicker},
+    components: {ColorPicker, TagPicker},
     props: {
       formId: {
         type: String,
@@ -235,11 +239,16 @@
         type: Array,
         required: false,
         default: () => []
+      },
+      initialColor: {
+        type: String,
+        required: false,
       }
     },
     data() {
       let note = {
         title: "",
+        color: this.initialColor,
         tags: this.initialTags,
         placeholder: [],
         template: ""
@@ -248,6 +257,7 @@
       if(this.data) {
         note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
+        note.color = this.data.color
         note.template = this.data.content.template
         note.placeholder = cloneDataObject(this.data.content.placeholder)
 
@@ -377,6 +387,7 @@
         }
         data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
+        data.color = this.note.color
         data.content.template = this.note.template
         data.content.placeholder = cloneDataObject(this.note.placeholder)
 
@@ -411,6 +422,7 @@
       data(newData) {
         this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
+        this.note.color = newData.color
         this.note.template = newData.content.template
 
         //it is IMPORTANT to COPY the filter data!

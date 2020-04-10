@@ -2,8 +2,11 @@
   <v-form v-model="valid" @submit.prevent="onSubmit()" :id="formId" ref="form">
     <v-container>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="9" sm="11">
           <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
+        </v-col>
+        <v-col cols="3" sm="1">
+          <ColorPicker v-model="note.color" />
         </v-col>
       </v-row>
 
@@ -91,11 +94,12 @@
   import { mapGetters, mapState } from 'vuex';
   import * as dateFN from 'date-fns'
   import TagPicker from "./TagPicker";
+  import ColorPicker from "./ColorPicker";
 
 
   export default {
     name: "NoteFormReminder",
-    components: {TagPicker},
+    components: {ColorPicker, TagPicker},
     props: {
       formId: {
         type: String,
@@ -114,11 +118,16 @@
         type: Array,
         required: false,
         default: () => []
+      },
+      initialColor: {
+        type: String,
+        required: false,
       }
     },
     data() {
       let note = {
         title: "",
+        color: this.initialColor,
         tags: this.initialTags,
         date: dateFN.addDays(new Date(), 1),
         content: "",
@@ -128,6 +137,7 @@
       if(this.data) {
         note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
+        note.color = this.data.color
         note.date = this.data.content.date
         note.markdown = !!this.data.content.markdown
         note.content = note.markdown ? this.data.content.markdown : this.data.content.text
@@ -188,6 +198,7 @@
         let data = {}
         data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
+        data.color = this.note.color
         data.content = {}
         data.content.date = this.note.date
         data.content.noticed = false
@@ -200,6 +211,7 @@
           this.$refs.form.resetValidation()
 
           this.note.title = ""
+          this.note.color = null
           this.note.tags = []
           this.note.content = ""
           this.note.markdown = false
@@ -216,6 +228,7 @@
       data(newData) {
         this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
+        this.note.color = newData.color
         this.note.date = newData.content.date
         this.note.markdown = !!newData.content.markdown
         this.note.content = this.note.markdown ? newData.content.markdown : newData.content.text

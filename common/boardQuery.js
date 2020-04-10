@@ -1,10 +1,15 @@
 const qpFilter = "f_"
 const qBoard = "b"
+const qColor = "c"
 const inactiveValue = "0"
 const activeValue = "1"
 
 export const generateBoardQuery = (board) => {
   let q = `${qBoard}=${board.title}`
+
+  if(board.color) {
+    q += `&${qColor}=${board.color.substring(1)}`
+  }
 
   if(board.filter.tags) for(let filterTagName of Object.keys(board.filter.tags)) {
     let tagValue = board.filter.tags[filterTagName].value ? activeValue : inactiveValue
@@ -27,6 +32,7 @@ export const readBoardQuery = (queryParams) => {
 
   return {
     title: queryParams[qBoard],
+    color: queryParams[qColor] ? `#${queryParams[qColor]}` : null,
     tags,
   }
 }

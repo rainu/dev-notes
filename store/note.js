@@ -123,6 +123,21 @@ export const getters = {
   },
   hasDeletedNotes: (state) => {
     return state.deletedNotes.length > 0
+  },
+  getUsedColors(state) {
+    let colors = {}
+    for(let note of state.notes) {
+      if(note.color) {
+        colors[note.color.toUpperCase()] = ""
+      }
+    }
+    for(let note of state.deletedNotes) {
+      if(note.color) {
+        colors[note.color.toUpperCase()] = ""
+      }
+    }
+
+    return Object.keys(colors).sort()
   }
 }
 

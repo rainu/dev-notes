@@ -51,8 +51,11 @@
       </v-row>
 
       <v-row>
-        <v-col cols="12">
+        <v-col cols="9" sm="11">
           <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')"></v-text-field>
+        </v-col>
+        <v-col cols="3" sm="1">
+          <ColorPicker v-model="note.color" />
         </v-col>
       </v-row>
 
@@ -75,10 +78,12 @@
   import { mapGetters } from 'vuex';
   import { WebCam } from "vue-web-cam";
   import TagPicker from "./TagPicker";
+  import ColorPicker from "./ColorPicker";
 
   export default {
     name: "NoteFormCamera",
     components: {
+      ColorPicker,
       TagPicker,
       "vue-web-cam": WebCam
     },
@@ -104,11 +109,16 @@
         type: Array,
         required: false,
         default: () => []
+      },
+      initialColor: {
+        type: String,
+        required: false,
       }
     },
     data() {
       let note = {
         title: "",
+        color: this.initialColor,
         tags: this.initialTags,
         image: null,
         description: ""
@@ -117,6 +127,7 @@
       if(this.data) {
         note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
+        note.color = this.data.color
         note.description = this.data.content.description
         note.image = this.data.content.image
       }
@@ -189,6 +200,7 @@
         }
         data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
+        data.color = this.note.color
         data.content.description = this.note.description
         data.content.image = this.note.image
 
@@ -216,6 +228,7 @@
       data(newData) {
         this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
+        this.note.color = newData.color
         this.note.description = newData.content.description
         this.note.image = newData.content.image
       }

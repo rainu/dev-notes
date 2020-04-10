@@ -7,8 +7,11 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="9" sm="11">
           <v-text-field v-model="note.title" :label="$t('note.title')" :placeholder="$t('note.untitled')" ></v-text-field>
+        </v-col>
+        <v-col cols="3" sm="1">
+          <ColorPicker v-model="note.color" />
         </v-col>
       </v-row>
       <v-row>
@@ -47,10 +50,11 @@
 <script>
   import { mapGetters, mapState } from 'vuex';
   import TagPicker from "./TagPicker";
+  import ColorPicker from "./ColorPicker";
 
   export default {
     name: "NoteFormCredentials",
-    components: {TagPicker},
+    components: {ColorPicker, TagPicker},
     props: {
       formId: {
         type: String,
@@ -73,11 +77,16 @@
         type: Array,
         required: false,
         default: () => []
+      },
+      initialColor: {
+        type: String,
+        required: false,
       }
     },
     data() {
       let note = {
         title: "",
+        color: this.initialColor,
         tags: this.initialTags,
         url: "",
         description: "",
@@ -88,6 +97,7 @@
       if(this.data) {
         note.title = this.data.title === this.$t('note.untitled') ? null : this.data.title
         note.tags = this.data.tags
+        note.color = this.data.color
         note.url = this.data.content.url
         note.description = this.data.content.description
         note.username = this.data.content.username
@@ -131,6 +141,7 @@
         }
         data.title = this.note.title ? this.note.title : this.$t('note.untitled')
         data.tags = this.note.tags
+        data.color = this.note.color
         data.content.url = this.note.url
         data.content.description = this.note.description
         data.content.username = this.note.username
@@ -147,6 +158,7 @@
       data(newData) {
         this.note.title = newData.title === this.$t('note.untitled') ? null : newData.title
         this.note.tags = newData.tags
+        this.note.color = newData.color
         this.note.url = newData.content.url
         this.note.description = newData.content.description
         this.note.username = newData.content.username

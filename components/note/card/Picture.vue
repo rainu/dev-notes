@@ -1,6 +1,6 @@
 <template>
   <v-card class="elevation-6">
-    <v-toolbar color="primary" flat>
+    <v-toolbar :color="titleColor" flat>
       <v-toolbar-title>
         <ClickToEdit :value="note.title" @input="onTitleChange" />
       </v-toolbar-title>
@@ -12,7 +12,7 @@
 
     <v-dialog v-model="fullscreen" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
-        <v-toolbar color="primary" flat>
+        <v-toolbar :color="titleColor" flat>
           <v-toolbar-title>{{note.title}}</v-toolbar-title>
           <div class="flex-grow-1"></div>
           <v-btn icon @click="fullscreen = false">
@@ -109,6 +109,9 @@
       viewClass(){
         if(!this.noteSettings.fixed) return ""
         return `card-view-${this.noteSettings.size}`
+      },
+      titleColor(){
+        return this.note.color || 'primary'
       }
     },
     methods: {

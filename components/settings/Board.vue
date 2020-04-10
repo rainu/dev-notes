@@ -59,7 +59,12 @@
           <span class="headline">{{$t('board.new.title')}}</span>
         </v-card-title>
         <v-card-text>
-          <BoardForm form-id="board-new-form" @onSubmit="onSaveNewBoard"></BoardForm>
+          <!-- v-if cause re-creation of BoardForm - this is needed for color-picker (but i dont know why) -->
+          <BoardForm
+              v-if="dialog.new.open"
+              form-id="board-new-form"
+              @onSubmit="onSaveNewBoard">
+          </BoardForm>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -75,7 +80,13 @@
           <span class="headline">{{$t('board.edit.title')}}</span>
         </v-card-title>
         <v-card-text>
-          <BoardForm form-id="board-edit-form" :data="dialog.edit.board" @onSubmit="onSaveBoard"></BoardForm>
+          <!-- v-if cause re-creation of BoardForm - this is needed for color-picker (but i dont know why) -->
+          <BoardForm
+              v-if="dialog.edit.open"
+              form-id="board-edit-form"
+              :data="dialog.edit.board"
+              @onSubmit="onSaveBoard">
+          </BoardForm>
         </v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
