@@ -8,7 +8,7 @@
           :item-text="getNoteTypeLabel"
           item-value="id"
           :value="noteType"
-          @change="onNewNote"
+          @change="onChangeNoteType"
           solo
         >
         </v-select>
@@ -99,8 +99,9 @@ export default {
     getNoteTypeLabel(item){
       return this.$t(`note.${item.id}.title`)
     },
-    onNewNote(type) {
-      this.$router.replace("/notes/new/" + type)
+    onChangeNoteType(type) {
+      let newFullPath = this.$route.fullPath.replace(`/new/${this.noteType}`, `/new/${type}`)
+      this.$router.replace(newFullPath)
     },
   }
 }
