@@ -1,4 +1,5 @@
 ### 0.9.23
+* show note type icons at new-note-page
 * keep the board information when changing the note-type
 * note colors can now be configured
 * redesign tag picker

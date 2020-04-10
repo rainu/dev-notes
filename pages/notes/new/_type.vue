@@ -5,12 +5,17 @@
       <v-card-text>
         <v-select
           :items="noteTypes"
-          :item-text="getNoteTypeLabel"
           item-value="id"
           :value="noteType"
           @change="onChangeNoteType"
           solo
         >
+          <template v-slot:item="slotProps">
+            <v-icon class="pr-2">{{slotProps.item.icon}}</v-icon> <span>{{$t(`note.${slotProps.item.id}.title`)}}</span>
+          </template>
+          <template v-slot:selection="slotProps">
+            <v-icon class="pr-2">{{slotProps.item.icon}}</v-icon> <span>{{$t(`note.${slotProps.item.id}.title`)}}</span>
+          </template>
         </v-select>
 
         <NoteFormText form-id="note-new-form" v-if="noteType === 'text'" @onSubmit="onSaveNewNote" :initial-color="initialColor" :initial-tags="initialTags"></NoteFormText>
@@ -95,9 +100,6 @@ export default {
         ...note
       })
       this.$router.back()
-    },
-    getNoteTypeLabel(item){
-      return this.$t(`note.${item.id}.title`)
     },
     onChangeNoteType(type) {
       let newFullPath = this.$route.fullPath.replace(`/new/${this.noteType}`, `/new/${type}`)
