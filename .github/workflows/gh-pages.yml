@@ -15,7 +15,7 @@ jobs:
       - name: Build and generate application
         run: |
           npm install
-          npm run generate
+          npm run generate:gh
       - name: Configure git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

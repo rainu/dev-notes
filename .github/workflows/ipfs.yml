@@ -1,0 +1,28 @@
+name: Deploy on IPFS
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      - name: Build and generate application
+        run: |
+          npm install
+          npm run generate:ipfs
+      - name: Set env
+        run: echo "RELEASE_VERSION=$(git describe --tags)" >> $GITHUB_ENV
+      - name: Upload to IPFS
+        uses: aquiladev/ipfs-action@v0.1.5
+        with:
+          path: ./docs
+          service: pinata
+          pinataPinName: DevNotes${{ env.RELEASE_VERSION }}
+          pinataKey: ${{ secrets.PINATA_KEY }}
+          pinataSecret: ${{ secrets.PINATA_SECRET }}

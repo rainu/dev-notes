@@ -1,17 +1,19 @@
 import colors from 'vuetify/es5/util/colors'
 
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+const routerBase = {
   router: {
-    base: '/dev-notes/'
-  }
-} : {
-  router: {
-    base: '/'
+    base: '/',
+    middleware: ['recall', 'encryption', 'dropbox'],
+    mode: 'hash'
   }
 }
-routerBase.router.middleware = ['recall', 'encryption', 'dropbox']
-routerBase.router.mode = 'hash'
+
+if(process.env.DEPLOY_ENV === 'GH_PAGES') {
+  routerBase.router.base = '/dev-notes/'
+} else if(process.env.DEPLOY_ENV === 'IPFS') {
+  routerBase.router.base = '/ipns/k51qzi5uqu5dlu8cdctlw88zrzf2af1m7oq14tisjwieuc0fm4luadarc6rs00/'
+}
 
 export default {
   ...routerBase,

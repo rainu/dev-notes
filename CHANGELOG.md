@@ -1,3 +1,6 @@
+### 0.9.24
+* deploy app on ipfs
+
 ### 0.9.23
 * show note type icons at new-note-page
 * keep the board information when changing the note-type

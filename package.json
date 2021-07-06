@@ -1,13 +1,15 @@
 {
   "name": "DevNotes",
-  "version": "0.9.23",
+  "version": "0.9.24",
   "description": "A progressive web application (PWA) for notes.",
   "author": "rainu",
   "private": true,
   "scripts": {
     "dev": "COMMIT_HASH=$(git rev-parse HEAD) nuxt",
     "start": "COMMIT_HASH=$(git rev-parse HEAD) nuxt start",
-    "generate": "DEPLOY_ENV=GH_PAGES COMMIT_HASH=$(git rev-parse HEAD) nuxt generate"
+    "generate": "COMMIT_HASH=$(git rev-parse HEAD) nuxt generate",
+    "generate:gh": "DEPLOY_ENV=GH_PAGES COMMIT_HASH=$(git rev-parse HEAD) nuxt generate",
+    "generate:ipfs": "DEPLOY_ENV=IPFS COMMIT_HASH=$(git rev-parse HEAD) nuxt generate"
   },
   "dependencies": {
     "@mdi/font": "^4.2.95",
