@@ -4,7 +4,10 @@
 
 ## DEMO
 
-[Try it out!](https://rainu.github.io/dev-notes/)
+Try it out:
+  * [Github](https://rainu.github.io/dev-notes/)
+  * [cloudflare-ipfs](https://cloudflare-ipfs.com/ipns/k51qzi5uqu5dlu8cdctlw88zrzf2af1m7oq14tisjwieuc0fm4luadarc6rs00/)
+  * [IPFS.io](http://gateway.ipfs.io/ipns/k51qzi5uqu5dlu8cdctlw88zrzf2af1m7oq14tisjwieuc0fm4luadarc6rs00/)
 
 [![types_1](preview/cards_2.png)](https://rainu.github.io/dev-notes/) [![types_2](preview/cards_1.png)](https://rainu.github.io/dev-notes/) [![types_1](preview/cards_0.png)](https://rainu.github.io/dev-notes/)
 
