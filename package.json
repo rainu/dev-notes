@@ -15,7 +15,7 @@
     "@mdi/font": "^4.2.95",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/vuetify": "^1.0.0",
-    "aws-sdk": "^2.547.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.19.0",
     "copy-to-clipboard": "^3.2.0",
     "date-fns": "^2.6.0",
