@@ -22,7 +22,7 @@
     "dropbox": "^4.0.30",
     "fuse.js": "^5.0.7-beta",
     "localforage": "^1.7.3",
-    "markdown-it": "^9.1.0",
+    "markdown-it": "^12.3.2",
     "material-design-icons-iconfont": "^5.0.1",
     "nuxt": "^2.10.2",
     "recordrtc": "^5.5.9",
