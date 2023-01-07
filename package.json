@@ -24,7 +24,7 @@
     "localforage": "^1.7.3",
     "markdown-it": "^9.1.0",
     "material-design-icons-iconfont": "^5.0.1",
-    "nuxt": "^2.10.2",
+    "nuxt": "^2.15.8",
     "recordrtc": "^5.5.9",
     "simple-crypto-js": "^2.2.0",
     "uuid4": "^1.1.4",
